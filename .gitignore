@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Folders
+data/*
+!data/.gitignore
+output/*
+!output/.gitignore
+
+
+# Branch
+.gitlab 
+
+
+# IDEs
+
+## vscode
+.vscode
+
+## emacs
+*~
+\#*\#
+*.elc
+.\#*
+
