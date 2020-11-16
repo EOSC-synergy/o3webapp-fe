@@ -1,7 +1,7 @@
 # Dockerfile has three Arguments: base, tag, branch
-# base - base image (default: debian, optional: ubuntu)
-# tag - tag for base mage (default: stable-slim)
-# branch - user repository branch to clone (default: master, other option: test)
+# base - base image (default: ubuntu, optional: debian)
+# tag - tag for base mage (default: 20.04)
+# branch - user repository branch to clone (default: master)
 #
 # To build the image:
 # $ docker build -t <dockerhub_user>/<dockerhub_repo> --build-arg arg=value .
@@ -51,11 +51,10 @@ RUN git clone --depth 1 -b $branch https://git.scc.kit.edu/synergy.o3as/o3webapp
 WORKDIR /srv/o3webapp
 
 # Set environments
-ENV PYTHONPATH=/srv/o3webapp
 ENV LANG C.UTF-8
 
 # Expose a port, if needed
-# EXPOSE 5005
+# EXPOSE 8080
 
 # Start default script
 # CMD ["/bin/bash", "/srv/o3as/start.sh"]
