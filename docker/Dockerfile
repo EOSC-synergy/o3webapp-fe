@@ -17,7 +17,7 @@ ARG tag=20.04
 FROM ${base}:${tag}
 
 LABEL maintainer='XXX'
-# o3webap as a component of the Ozone assessment service
+# o3webapp as a component of the Ozone assessment service
 
 # What user branch to clone (!)
 ARG branch=master
@@ -57,4 +57,4 @@ ENV LANG C.UTF-8
 # EXPOSE 8080
 
 # Start default script
-# CMD ["/bin/bash", "/srv/o3as/start.sh"]
+# CMD ["/bin/bash", "/srv/o3webapp/start.sh"]
