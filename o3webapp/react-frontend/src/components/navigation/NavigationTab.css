@@ -1,0 +1,21 @@
+.NavBarLink {
+    text-decoration: none;
+    color: #fff;
+}
+
+.NavBarLink:hover {
+    color: #fed136;
+}
+
+.NavBar li {
+    list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 3px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

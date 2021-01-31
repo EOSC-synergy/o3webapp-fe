@@ -42,15 +42,6 @@ class App extends Component {
     return (
       <Router>
           <Navigation />
-          
-          <Authenticate         
-          OidcSettings={OidcSettings} 
-          userLoaded={this.userLoaded} 
-          userunLoaded={this.userUnLoaded} 
-          renderNotAuthenticated={this.NotAuthenticated}
-          >
-            <div>If you see this you are authenticated.</div>
-          </Authenticate>
           <Switch>
             <Route path='/generation'>
               <Generation />
