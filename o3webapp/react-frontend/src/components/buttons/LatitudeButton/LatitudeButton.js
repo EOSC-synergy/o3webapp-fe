@@ -134,19 +134,19 @@ class LatitudeButton extends React.Component {
         const customSelected = this.state.latitude[7].selected;
 
         return (
-            <div>
+            <div className="latitude-button-wrapper">
                 <Dropdown 
                 title="Select a Latitude Band!"
                 list={this.state.latitude}
                 resetThenSet={this.resetThenSet} />
                 {customSelected && (
-                    <div>
+                    <div className="custom-input-wrapper">
                         <fieldset>
                             <legend>Enter Latitude!</legend>
                             <input
                                 placeholder="-90, 0"
                                 onChange={this.handleCustomMonths} />
-            </fieldset>
+                        </fieldset>
                     </div>
                 )}
             </div>

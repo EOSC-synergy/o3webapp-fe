@@ -15,12 +15,14 @@ class YearButton extends React.Component {
         const year = this.props.year;
         const bound = this.props.bound;
         return (
-            <fieldset>
-                <legend>Enter {bound} Year!</legend>
-                <input
-                    value={year}
-                    onChange={this.handleChange} />
-            </fieldset>
+            <div className="year-button-wrapper">
+                <fieldset>
+                    <legend>Enter {bound} Year!</legend>
+                    <input
+                        value={year}
+                        onChange={this.handleChange} />
+                </fieldset>
+            </div>
         );
     }
 }

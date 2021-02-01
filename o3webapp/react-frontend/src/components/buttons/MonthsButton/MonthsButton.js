@@ -126,13 +126,13 @@ class MonthsButton extends React.Component {
         const customSelected = this.state.season[4].selected;
 
         return (
-            <div>
+            <div className="month-button-wrapper">
                 <Dropdown 
                 title="Select a season!"
                 list={this.state.season}
                 resetThenSet={this.resetThenSet} />
                 {customSelected && (
-                    <div>
+                    <div className="custom-input-wrapper">
                         <fieldset>
                             <legend>Enter Months!</legend>
                             <input

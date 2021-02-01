@@ -95,8 +95,10 @@ class Radio extends React.Component {
                             key={item.id}
                             onClick={() => this.selectItem(item)}
                         >
+                            <div className="radio-icon-wrapper">
+                                {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
+                            </div>
                             {item.type}
-                            {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
                         </button>
                     ))}
                 </div>
