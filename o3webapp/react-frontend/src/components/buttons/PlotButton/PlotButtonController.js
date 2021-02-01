@@ -1,6 +1,6 @@
 import React from 'react';
 
-class PlotButton extends React.Component {
+class PlotButtonController extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isToggledOn: true};
@@ -22,6 +22,8 @@ class PlotButton extends React.Component {
         );
     }
 }
+
+export default PlotButtonController;
 
 /*  
 code for a basic radio button, no styling of any kind
