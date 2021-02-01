@@ -1,6 +1,6 @@
 import './Navigation.css'
 import NavigationTab from './NavigationTab'
-import LoginButton from '../buttons/LoginButton'
+import LoginButton from '../buttons/LoginButton/LoginButton'
 
 import { Component } from 'react'
 
