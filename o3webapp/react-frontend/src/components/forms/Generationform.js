@@ -1,19 +1,24 @@
 import React from 'react';
-import YearButton from '../buttons/YearButton'
+import MonthsButton from '../buttons/MonthsButton/MonthsButton';
+import YearButton from '../buttons/YearButton/YearButton'
 
 const plotTypes = {
     one: 'plot1',
     two: 'plot2',
-    three: 'someShit!',
+    three: 'plot3',
 };
 
 class GenerationForm extends React.Component {
+    /**
+     * @constructor
+     */
     constructor(props) {
         super(props);
         this.state = {
             //plotType: 'plot1',
             // models: [],
             years: [1970, 2100],
+            months: [1, 2, 3],
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,49 +27,82 @@ class GenerationForm extends React.Component {
 
         this.handleLowerYearChange = this.handleLowerYearChange.bind(this);
         this.handleUpperYearChange = this.handleUpperYearChange.bind(this);
+        this.handleMonthChange = this.handleMonthChange.bind(this);
+    }
+
+
+    handleMonthChange(new_months) {
+        this.setState({
+            months: new_months
+        })
     }
 
     /**
-     * 
-     * @param {*} year 
+     * Handles updating the state for the lower year
+     * @param {number} year - entered year
      */
     handleLowerYearChange(year) {
         const oldState = this.state.years;
+
+
+        /* validate input,
+            TODO: implement
+            year needs to be smaller than upper entry
+            year needs to be a number
+            year needs to be in predefined region (1970-2100) or something 
+        */
+
         this.setState({
             years: [year, oldState[1]]
         })
     }
 
+    /**
+     * Handles updating the state for the upper year
+     * @param {number} year - entered year
+     */
     handleUpperYearChange(year) {
         const oldState = this.state.years;
+
+        /* validate input,
+            TODO: Implement
+            year needs to be bigger than lower entry
+            year needs to be a number
+            year needs to be in predefined region (1970-2100) or something 
+        */
+
         this.setState({
             years: [oldState[0], year]
         })
     }
     
+
+    //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
+    /**
+     * handles the submit of the request
+     *  calls the API with the submitted values and redirects
+     * @param event 
+     */
     handleSubmit(event) {
         alert('this was submitted: ' + this.state.years[0] + " and this: " + this.state.years[1]);
         event.preventDefault();
     }
 
-    // handleInputChange(event) {
-    //     const target = event.target;
-    //     const value = target.type === 'plotSelector' ? target.plot : target.models;
-    //     const name = target.name;
-
-    //     this.setState({
-    //         [name]: value
-    //     })
-    //     this.setState({
-    //         plotType: event.taget.value
-    //     })
-    // }
-
+    /**
+     * renders the form
+     */
     render() {
-        const years = this.state.years
+        const years = this.state.years;
+        const months = this.state.months;
 
         return (
             <form onSubmit={this.handleSubmit}>
+                <div>
+                    {/* <PlotButton /> */}
+                </div>
+
+
+
                 <div>
                     <YearButton 
                     year={years[0]}
@@ -77,20 +115,15 @@ class GenerationForm extends React.Component {
                 </div>
                 <br />
 
-                
-                <label>
-                    Select the models:
-                    <input 
-                        name='models'
-                        type='modelsSelector'
-                        models={this.state.models}
-                        onChange={this.handleInputChange}
-                    />
-                </label> 
+                <div>
+                    <MonthsButton
+                    months={months}
+                    handleChange={this.handleMonthChange} />
+                </div>
                 <br />
                 <input type='submit' value="Submit" />
             </form>
-        )
+        );
     }
 }
 
