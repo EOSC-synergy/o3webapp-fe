@@ -32,6 +32,7 @@ class GenerationForm extends React.Component {
 
 
     handleMonthChange(new_months) {
+        console.log(new_months)
         this.setState({
             months: new_months
         })
@@ -84,7 +85,9 @@ class GenerationForm extends React.Component {
      * @param event 
      */
     handleSubmit(event) {
-        alert('this was submitted: ' + this.state.years[0] + " and this: " + this.state.years[1]);
+        alert('this was submitted: ' 
+                + "\nyears: " + this.state.years[0] + " to " + this.state.years[1]
+                + "\nmonths: " + this.state.months);
         event.preventDefault();
     }
 
