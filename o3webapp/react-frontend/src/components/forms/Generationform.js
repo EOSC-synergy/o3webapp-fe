@@ -122,39 +122,41 @@ class GenerationForm extends React.Component {
         const latitude = this.state.latitude;
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <PlotButtonController
-                        handleChange={this.handlePlotTypeChange} />
-                </div>
-
-
-
-                <div>
-                    <YearButton 
-                        year={years[0]}
-                        bound="lower"
-                        handleYearChange={this.handleLowerYearChange} />
-                    <YearButton
-                        year={years[1]}
-                        bound="upper"
-                        handleYearChange={this.handleUpperYearChange} />
-                </div>
-                <br />
-
-                <div>
-                    <MonthsButton
-                        months={months}
-                        handleChange={this.handleMonthChange} />
-                </div>
-                <div>
-                    <LatitudeButton
-                        latitude={latitude}
-                        handleChange={this.handleLatitudeChange} />
-                </div>
-                <br />
-                <input type='submit' value="Submit" />
-            </form>
+            <div className="generation-form-wrapper">
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <PlotButtonController
+                            handleChange={this.handlePlotTypeChange} />
+                    </div>
+    
+    
+    
+                    <div>
+                        <YearButton 
+                            year={years[0]}
+                            bound="lower"
+                            handleYearChange={this.handleLowerYearChange} />
+                        <YearButton
+                            year={years[1]}
+                            bound="upper"
+                            handleYearChange={this.handleUpperYearChange} />
+                    </div>
+                    <br />
+    
+                    <div>
+                        <MonthsButton
+                            months={months}
+                            handleChange={this.handleMonthChange} />
+                    </div>
+                    <div>
+                        <LatitudeButton
+                            latitude={latitude}
+                            handleChange={this.handleLatitudeChange} />
+                    </div>
+                    <br />
+                    <input type='submit' value="Submit" />
+                </form>
+            </div>
         );
     }
 }
