@@ -1,8 +1,9 @@
 import GenerationForm from '../components/forms/Generationform'
+import './Generation.css'
 
 function Generation() {
     return (
-        <div>
+        <div className="GenerationFormContainer">
             <GenerationForm />
         </div>
     );

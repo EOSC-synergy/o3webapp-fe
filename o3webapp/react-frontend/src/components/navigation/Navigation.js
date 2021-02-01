@@ -14,26 +14,11 @@ class Navigation extends Component {
       activeTab: "Home"
     }
 
-    this.homeActive = this.homeActive.bind(this);
-    this.generationActive = this.generationActive.bind(this);
-    this.manipulationActive = this.manipulationActive.bind(this);
-    this.aboutActive = this.aboutActive.bind(this);
+    this.handleTabClick = this.handleTabClick.bind(this);
   }
 
-  homeActive () {
-    this.setState({activeTab: "Home"})
-  }
-
-  generationActive () {
-    this.setState({activeTab: "Generation"})
-  }
-
-  manipulationActive () {
-    this.setState({activeTab: "Manipulation"})
-  }
-
-  aboutActive () {
-    this.setState({activeTab: "About"})
+  handleTabClick(tabName) {
+    this.setState({activeTab: tabName})
   }
 
   getActiveState(tabName) {
@@ -50,25 +35,25 @@ class Navigation extends Component {
             name="Home" 
             pageLink="/"
             state={this.getActiveState("Home")}
-            handleClick = {this.homeActive}
+            handleClick = {this.handleTabClick}
           />        
           <NavigationTab 
             name="Generation" 
             pageLink="/generation"
             state={this.getActiveState("Generation")}
-            handleClick = {this.generationActive}
+            handleClick = {this.handleTabClick}
           />
           <NavigationTab 
             name="Manipulation" 
             pageLink="/manipulation"
             state={this.getActiveState("Manipulation")}
-            handleClick = {this.manipulationActive}
+            handleClick = {this.handleTabClick}
           />
           <NavigationTab 
             name="About" 
             pageLink="/about"
             state={this.getActiveState("About")}
-            handleClick = {this.aboutActive}
+            handleClick = {this.handleTabClick}
           />
           <LoginButton/>
         </u1>
