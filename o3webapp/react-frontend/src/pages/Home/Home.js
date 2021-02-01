@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import './Home.css'
-import StartGeneratingButton from '../../components/buttons/StartGeneratingButton'
+import StartGeneratingButton from '../../components/buttons/StartGeneratingButton/StartGeneratingButton'
 
 function Home() {
     return (
