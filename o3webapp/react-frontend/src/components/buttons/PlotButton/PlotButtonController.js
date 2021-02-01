@@ -1,29 +1,110 @@
 import React from 'react';
+import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
 
 class PlotButtonController extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isToggledOn: true};
+        this.state = {
+            plotTypes: [
+                {
+                    id: 0,
+                    type: "tco3_zm",
+                    selected: true,
+                    key: "plotTypes",
+                },
+                {
+                    id: 1,
+                    type: "tco3_return",
+                    selected: false,
+                    key: "plotTypes",
+                },
+                {
+                    id: 2,
+                    type: "vmro3_zm",
+                    selected: false,
+                    key: "plotTypes",
+                }
+            ]
+        };
     
-        this.handleClick = this.handleClick.bind(this);
+        this.resetThenSet = this.resetThenSet.bind(this);
     }
 
-    handleClick() {
-        this.setState( state => ({
-          isToggledOn: !state.isToggledOn
-        }));
-      }
+    /**
+     * callback function that updates the state here
+     * @param {number} id 
+     * @param {string} key 
+     */
+    resetThenSet(id, key) {
+        const temp = [...this.state[key]];
+        
+        temp.forEach((item) => item.selected = false);
+        temp[id].selected = true;
+
+        this.setState({
+            [key]: temp,
+        })
+
+        const type = this.state[key][id].type;
+
+        //update form
+        this.props.handleChange(type);
+    }
+  
 
     render() {
         return (
-            <button>
-                {this.props.name}
-            </button>
+            <div className="plotbutton-wrapper">
+                <Radio 
+                    title="Select a plot"
+                    list={this.state.plotTypes}
+                    resetThenSet={this.resetThenSet} />
+            </div>
         );
     }
 }
 
 export default PlotButtonController;
+
+class Radio extends React.Component {
+    constructor(props) {
+        super(props);
+        this.selectItem = this.selectItem.bind(this);
+    }
+
+
+    /**
+     * Set the
+     * @param item as active when clicked 
+     */
+    selectItem(item) {
+        const { resetThenSet } = this.props;
+        const { id, key } = item;
+        resetThenSet(id, key);
+    }
+
+    render() {
+        const { list } = this.props;
+        return(
+            <div className="radio-wrapper">
+                <div role="list" className="radio-list">
+                    {list.map((item) => (
+                        <button
+                            type="button"
+                            className="radio-list-item"
+                            key={item.id}
+                            onClick={() => this.selectItem(item)}
+                        >
+                            {item.type}
+                            {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+}
+
 
 /*  
 code for a basic radio button, no styling of any kind

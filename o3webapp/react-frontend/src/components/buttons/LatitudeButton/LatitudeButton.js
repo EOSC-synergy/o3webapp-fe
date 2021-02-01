@@ -1,62 +1,68 @@
-/*
-TODO implement button
-
-have 2 states, 
-one for the chosen months, eg [1,2,3] for the first three months of the year
-    this state gets managed by the form, cause its the single source of truth for this
-
-second one for the currently choosen card/setting.
-    available settings are: Spring, Summer, Autumn, Winter and Custom
-    when the user selects custom an input field appears where he can enter custom numbers.
-        this can be controller by checking with an if clause if the current state is custom and only then show this.
-
-    when the user selects anything else the months corresponding to these settings get selected (eg [1,2,3] for Spring)
-
-
-
-*/
-
 import React from 'react';
 
-class MonthsButton extends React.Component {
+/**
+ * Represents the latitude selection
+ */
+class LatitudeButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            season: [
+            latitude: [
                 {
                     id: 0,
-                    title: "Spring",
-                    value: [3, 4, 5],
+                    title: "SH polar",
+                    value: [-90, -60],
                     selected: false,
-                    key: "season",
+                    key: "latitude",
                 },
                 {
                     id: 1,
-                    title: "Summer",
-                    value: [6, 7, 8],
+                    title: "SH mid-latitudes",
+                    value: [-60, -35],
                     selected: false,
-                    key: "season",
+                    key: "latitude",
                 },
                 {
                     id: 2,
-                    title: "Autumn",
-                    value: [9, 10, 11],
+                    title: "tropics",
+                    value: [-20, 20],
                     selected: false,
-                    key: "season",
+                    key: "latitude",
                 },
                 {
                     id: 3,
-                    title: "Winter",
-                    value: [1, 2, 12],
+                    title: "NH mid-latitudes",
+                    value: [35, 60],
                     selected: false,
-                    key: "season",
+                    key: "latitude",
                 },
                 {
                     id: 4,
+                    title: "NH polar",
+                    value: [60, 90],
+                    selected: false,
+                    key: "latitude",
+                },
+                {
+                    id: 5,
+                    title: "near global",
+                    value: [-60, 60],
+                    selected: false,
+                    key: "latitude",
+                },
+                {
+                    id: 6,
+                    title: "global",
+                    value: [-90, 90],
+                    selected: false,
+                    key: "latitude",
+                },
+                {
+                    id: 7,
                     title: "Custom",
                     value: [],
                     selected: false,
-                    key: "season",
+                    key: "latitude",
                 },
             ],
         };
@@ -97,7 +103,9 @@ class MonthsButton extends React.Component {
             return parseInt(item, 10);
         });
 
-        //TODO check if entered values are in allowed range (1 to 12)
+        //TODO check if entered values are in allowed range (-90 to 90)
+
+        //TODO check if exactly two numbers have been entered
 
         //check if array only includes numbers
         if (inputNumber.includes(NaN)) {
@@ -107,38 +115,38 @@ class MonthsButton extends React.Component {
 
         } else {
             //! Magic String
-            const key = "season"
+            const key = "latitude"
             const temp = [...this.state[key]]
 
             //! Magic Number
-            temp[4].value = inputNumber;
+            temp[7].value = inputNumber;
             
             this.setState({
                 [key]: temp
             })
 
-            //! Magic number
-            this.resetThenSet(4, key)
+            //! Magic Number
+            this.resetThenSet(7, key)
         }
     }
 
     render() {
-        const customSelected = this.state.season[4].selected;
+        const customSelected = this.state.latitude[7].selected;
 
         return (
             <div>
                 <Dropdown 
-                title="Select a season!"
-                list={this.state.season}
+                title="Select a Latitude Band!"
+                list={this.state.latitude}
                 resetThenSet={this.resetThenSet} />
                 {customSelected && (
                     <div>
                         <fieldset>
-                            <legend>Enter Months!</legend>
+                            <legend>Enter Latitude!</legend>
                             <input
-                                placeholder="1, 2, 3"
+                                placeholder="-90, 0"
                                 onChange={this.handleCustomMonths} />
-                        </fieldset>
+            </fieldset>
                     </div>
                 )}
             </div>
@@ -219,4 +227,4 @@ class Dropdown extends React.Component {
     }
 }
 
-export default MonthsButton;
+export default LatitudeButton;

@@ -1,5 +1,7 @@
 import React from 'react';
+import LatitudeButton from '../buttons/LatitudeButton/LatitudeButton';
 import MonthsButton from '../buttons/MonthsButton/MonthsButton';
+import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
 
 const plotTypes = {
@@ -15,10 +17,11 @@ class GenerationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //plotType: 'plot1',
+            plotType: "tco3_zm",
             // models: [],
             years: [1970, 2100],
             months: [1, 2, 3],
+            latitude: [-90, 0],
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,14 +31,30 @@ class GenerationForm extends React.Component {
         this.handleLowerYearChange = this.handleLowerYearChange.bind(this);
         this.handleUpperYearChange = this.handleUpperYearChange.bind(this);
         this.handleMonthChange = this.handleMonthChange.bind(this);
+        this.handleLatitudeChange = this.handleLatitudeChange.bind(this);
+        this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
     }
 
 
+    handlePlotTypeChange(plotType) {
+        console.log(plotType);
+        this.setState({
+            plotType: plotType
+        })
+    }
+
+    handleLatitudeChange(new_latitude) {
+        console.log(new_latitude);
+        this.setState({
+            latitude: new_latitude
+        })
+    }
+
     handleMonthChange(new_months) {
-        console.log(new_months)
+        console.log(new_months);
         this.setState({
             months: new_months
-        })
+        });
     }
 
     /**
@@ -86,8 +105,11 @@ class GenerationForm extends React.Component {
      */
     handleSubmit(event) {
         alert('this was submitted: ' 
+                + "\nPlottype: " + this.state.plotType
                 + "\nyears: " + this.state.years[0] + " to " + this.state.years[1]
-                + "\nmonths: " + this.state.months);
+                + "\nmonths: " + this.state.months
+                + "\nlatitude:" + this.state.latitude
+                );
         event.preventDefault();
     }
 
@@ -97,31 +119,38 @@ class GenerationForm extends React.Component {
     render() {
         const years = this.state.years;
         const months = this.state.months;
+        const latitude = this.state.latitude;
 
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
-                    {/* <PlotButton /> */}
+                    <PlotButtonController
+                        handleChange={this.handlePlotTypeChange} />
                 </div>
 
 
 
                 <div>
                     <YearButton 
-                    year={years[0]}
-                    bound="lower"
-                    handleYearChange={this.handleLowerYearChange} />
+                        year={years[0]}
+                        bound="lower"
+                        handleYearChange={this.handleLowerYearChange} />
                     <YearButton
-                    year={years[1]}
-                    bound="upper"
-                    handleYearChange={this.handleUpperYearChange} />
+                        year={years[1]}
+                        bound="upper"
+                        handleYearChange={this.handleUpperYearChange} />
                 </div>
                 <br />
 
                 <div>
                     <MonthsButton
-                    months={months}
-                    handleChange={this.handleMonthChange} />
+                        months={months}
+                        handleChange={this.handleMonthChange} />
+                </div>
+                <div>
+                    <LatitudeButton
+                        latitude={latitude}
+                        handleChange={this.handleLatitudeChange} />
                 </div>
                 <br />
                 <input type='submit' value="Submit" />
