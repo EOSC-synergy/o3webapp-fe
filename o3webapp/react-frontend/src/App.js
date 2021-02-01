@@ -6,11 +6,11 @@ import {
   Route,
   //Link,
 } from 'react-router-dom';
-import Generation from './pages/Generation';
-import Manipulation from './pages/Manipulation';
-import About from './pages/About';
+import Generation from './pages/Generation/Generation.js';
+import Manipulation from './pages/Manipulation/Manipulation.js';
+import About from './pages/About/About.js';
 import Home from './pages/Home/Home.js';
-import Navigation from './components/navigation/Navigation';
+import Navigation from './components/navigation/Navigation.js';
 
 import Authenticate from 'react-openidconnect';
 import OidcSettings from './login/oidcsettings';
