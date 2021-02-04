@@ -4,9 +4,14 @@ import LoginButton from '../buttons/LoginButton/LoginButton'
 
 import { Component } from 'react'
 
+
+/* This controls all the Tabs in the Navigation bar
+ * @name: Name to be displayed
+ * @path: Path to be linked to
+ */
 let Tabs = [
   {name: "Home", path: "/"},
-  {name: "Generation", path: "/generation"},
+  {name: "Plot Generation", path: "/generation"},
   {name: "Manipulation", path: "/manipulation"}, 
   {name: "About", path: "/about"}
 ]
@@ -21,14 +26,14 @@ class Navigation extends Component {
     let currentPath = window.location.pathname
     let currentTab = Tabs.find(currentTab => currentTab.path === currentPath)
 
-    //Catch any errors, if path is not matching any tabs
+    //Catch any errors, if path is not matching any tabs, activate home tab
     try {
       this.state = {
         activeTab: currentTab.name
       }
     } catch (e) {
       this.state = {
-        activeTab: "Home"
+        activeTab: Tabs[0].name
       }
     }
     
@@ -53,36 +58,23 @@ class Navigation extends Component {
     if (this.state.activeTab == tabName) {return "active"}
     else {return "inactive"}
   }
-
   
   render() {
     return (
       <nav className="NavBar">
         <u1 className="NavBarContainer">
-          <NavigationTab 
-            name="Home" 
-            pageLink="/"
-            state={this.getActiveState("Home")}
-            handleClick = {this.handleTabClick}
-          />        
-          <NavigationTab 
-            name="Generation" 
-            pageLink="/generation"
-            state={this.getActiveState("Generation")}
-            handleClick = {this.handleTabClick}
-          />
-          <NavigationTab 
-            name="Manipulation" 
-            pageLink="/manipulation"
-            state={this.getActiveState("Manipulation")}
-            handleClick = {this.handleTabClick}
-          />
-          <NavigationTab 
-            name="About" 
-            pageLink="/about"
-            state={this.getActiveState("About")}
-            handleClick = {this.handleTabClick}
-          />
+
+          {Tabs.map((element, index) => {
+            return (
+              <NavigationTab 
+              key={index}
+              name={element.name}
+              pageLink={element.path}
+              state={this.getActiveState(element.name)}
+              handleClick = {this.handleTabClick}
+              />
+            )
+          })}
           <LoginButton/>
         </u1>
 
