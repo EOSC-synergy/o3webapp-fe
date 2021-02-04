@@ -12,12 +12,12 @@ class LoginButton extends Component {
     render() {
         return (
             <li>
-                <Link className='NavBarLink'>
-                    <div className='LoginButton' onClick={startLogin}>
+                <div className='NavBarLink'>
+                    <a className='LoginButton' onClick={startLogin}>
                         <p>Login</p> 
                         <i><MdAccountCircle size="30px"/></i>
-                    </div>
-                </Link>
+                    </a>
+                </div>
             </li>
         )
     }
