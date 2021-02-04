@@ -7,6 +7,10 @@
     color: #fed136;
 }
 
+.NavBarLink:active {
+    color: #fff;
+}
+
 .NavBar li {
     list-style-type: none;
     padding-top: 5px;

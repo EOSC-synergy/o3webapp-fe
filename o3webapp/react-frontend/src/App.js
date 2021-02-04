@@ -12,31 +12,13 @@ import About from './pages/About/About.js';
 import Home from './pages/Home/Home.js';
 import Navigation from './components/navigation/Navigation.js';
 
-import Authenticate from 'react-openidconnect';
-import OidcSettings from './login/oidcsettings';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.userLoaded = this.userLoaded.bind(this); 
-    this.userUnLoaded = this.userUnLoaded.bind(this);
- 
-    this.state = { user: undefined };
-  }  
-
-  userLoaded(user) {
-    if (user)
-      this.setState({ "user": user });
+    this.state = { };
   } 
-  
-  userUnLoaded() {
-    this.setState({ "user": undefined });
-  } 
-  
-  NotAuthenticated() {
-    return <div>You are not authenticated, please click here to authenticate.</div>;
-  }
   
   render() {
     return (
@@ -54,6 +36,9 @@ class App extends Component {
             </Route>
             <Route path='/'>
               <Home />
+            </Route>
+            <Route path='/redirect_url'>
+              {console.log("Hello there brotha")}
             </Route>
           </Switch>
       </Router>

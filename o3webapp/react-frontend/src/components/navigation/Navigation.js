@@ -4,23 +4,51 @@ import LoginButton from '../buttons/LoginButton/LoginButton'
 
 import { Component } from 'react'
 
-let Tabs = ["Home", "Generation", "Manipulation", "About"]
+let Tabs = [
+  {name: "Home", path: "/"},
+  {name: "Generation", path: "/generation"},
+  {name: "Manipulation", path: "/manipulation"}, 
+  {name: "About", path: "/about"}
+]
+
 
 class Navigation extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      activeTab: "Home"
-    }
 
+    //Get current Tab to activate the right tab button on initialization
+    let currentPath = window.location.pathname
+    let currentTab = Tabs.find(currentTab => currentTab.path === currentPath)
+
+    //Catch any errors, if path is not matching any tabs
+    try {
+      this.state = {
+        activeTab: currentTab.name
+      }
+    } catch (e) {
+      this.state = {
+        activeTab: "Home"
+      }
+    }
+    
     this.handleTabClick = this.handleTabClick.bind(this);
   }
 
+  
+  /**
+   * Callback function that updates the state with the active tab
+   * @param {string} tabName Name of the clicked tab, that is now active
+   */
   handleTabClick(tabName) {
     this.setState({activeTab: tabName})
   }
 
+  /**
+   * Helper function checks if the passed tab is active or not
+   * @param {string} tabName Name of the tab to be checked
+   * @returns {string} Returns the state of the tab ("active" or "inactive")
+   */
   getActiveState(tabName) {
     if (this.state.activeTab == tabName) {return "active"}
     else {return "inactive"}

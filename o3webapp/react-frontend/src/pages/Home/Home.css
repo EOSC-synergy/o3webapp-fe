@@ -1,6 +1,18 @@
+.FirstPageHome {
+    height: 100vh;
+}
+
+.HomePageContainer {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200vh;
+    background-color: #222;
+}
 
 .background-picture {
-    height: 100%;
+    height: 100vh;
     /* background-image: url("/background-clouds.jpg"); */
     background-position: center;
     background-repeat: no-repeat;
@@ -10,11 +22,28 @@
     top: 0px;
     width: 100%;
 
+    overflow: auto;
+
     display: flex;
     flex-direction: row;
     justify-content: center;
 
     z-index: 1;
+}
+
+.moreInfoSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(0, 0, 0, 0.4);
+    border-radius: 3px;
+    margin: auto;
+    padding: 3%;
+    color: white;
+    vertical-align: middle;
 }
 
 h1 {
@@ -33,7 +62,7 @@ h2 {
     color: white;
 }
 
-.HomeContainer {
+.SplashScreen {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,4 +73,11 @@ h2 {
     border-radius: 3px;
     margin: auto;
     padding: 3%;
+}
+
+.scrollButton {
+    color:  #fed136;
+    position: absolute;
+    bottom: 20px;
+    cursor: pointer;
 }

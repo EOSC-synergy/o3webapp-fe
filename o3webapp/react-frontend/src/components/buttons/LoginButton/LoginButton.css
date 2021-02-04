@@ -4,3 +4,7 @@ i {
     flex-direction: column;
     justify-content: center;
 }
+
+.LoginButton {
+    cursor: pointer;
+}
