@@ -17,6 +17,8 @@
     color: #fff;
 
     z-index: 2;
+
+    user-select: none;
 }
 
 .LoginButton {
