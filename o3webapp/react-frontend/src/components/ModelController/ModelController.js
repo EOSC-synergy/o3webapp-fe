@@ -1,8 +1,10 @@
 import React from 'react';
 import ModelButton from '../buttons/ModelButton/ModelButton'
 
-//const api_url = 'http://Jonas-MacBook-Air.local:8081'
-const model_list_url = 'http://Jonas-MacBook-Air.local:8081/api/list_models';
+//*change this to the production api for production builds
+//currently this runs with
+const model_list_url = 'http://localhost:8081/api/list-models';
+//const model_list_url = 'http://o3api.test.fedcloud.eu:30505/api/list_models';
 
 
 /**
@@ -55,9 +57,10 @@ class ModelController extends React.Component {
         return (
             <div>
                 <div className="model-button-wrapper">
-                    {models.map((model) => (
+                    {models.map((model, i) => (
                         <ModelButton 
                             title={model}
+                            key={i}
                             selected={this.props.selectedModels.includes(model)} 
                             handleModelClick={this.handleModelButtonClick}
                         />
