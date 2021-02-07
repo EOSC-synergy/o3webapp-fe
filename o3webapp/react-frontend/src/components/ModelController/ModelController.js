@@ -16,10 +16,12 @@ class ModelController extends React.Component {
         super(props);
         this.state = {
             availableModels: [],
-            keywords: []
-        }
+            keywords: [],
+            searchTerm: '',
+        };
 
-        this.handleModelButtonClick = this.handleModelButtonClick.bind(this)
+        this.handleModelButtonClick = this.handleModelButtonClick.bind(this);
+        this.modelSearchOnChange = this.modelSearchOnChange.bind(this);
     }
 
     componentDidMount() {
@@ -38,9 +40,18 @@ class ModelController extends React.Component {
             .catch(console.log);
     }
 
+    /**
+     * Callback for passing the state up
+     * @param model the model that changed
+     */
     handleModelButtonClick(model) {
         this.props.handleChange(model);
-        //callback
+    }
+
+    modelSearchOnChange(event) {
+        this.setState({
+            searchTerm: event.target.value,
+        })
     }
 
     removeChip(keyword) {
@@ -52,12 +63,26 @@ class ModelController extends React.Component {
     }
 
     render() {
-        console.log(this.props.selectedModels)
+        //const keywords = this.state.keywords;   //all keywords for chips
+        const inputValue = this.state.searchTerm;
+
         const models = this.state.availableModels;
+        const filteredModels = models.filter( (model) => {
+            return model.toLowerCase().includes(inputValue.toLowerCase());
+        })
+        console.log(filteredModels)
+
+
+
         return (
             <div>
-                <div className="model-button-wrapper">
-                    {models.map((model, i) => (
+                <div className="seach-area-wrapper">
+                    <label htmlFor="search">Enter for keywords</label>
+                    <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>
+                </div>
+
+                <div className="model-button-section-wrapper">
+                    {filteredModels.map((model, i) => (
                         <ModelButton 
                             title={model}
                             key={i}

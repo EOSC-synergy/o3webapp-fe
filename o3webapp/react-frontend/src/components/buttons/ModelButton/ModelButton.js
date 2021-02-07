@@ -1,6 +1,9 @@
 import React from 'react'
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
 
+/**
+ * Button for selecting a model. Allow the user to select the model
+ */
 class ModelButton extends React.Component {
     constructor(props) {
         super(props)
@@ -9,7 +12,9 @@ class ModelButton extends React.Component {
     }
 
 
-
+    /**
+     * updates the state by passing it to the callback of the parent element
+     */
     handleModelClick() {
         this.props.handleModelClick(this.props.title)
     }
