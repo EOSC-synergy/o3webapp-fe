@@ -14,7 +14,7 @@ https://aai-dev.egi.eu/oidc/authorize
 
 const egi_endpoint = 'https://aai-dev.egi.eu/oidc/authorize'
 const client_id = 'o3webapp'
-const redirect_uri = 'http://localhost:3000/redirect_url'
+const redirect_uri = 'https://localhost/redirect_url'
 const scope = 'openid'
 const response_type = 'id_token'
 const response_mode = 'query'

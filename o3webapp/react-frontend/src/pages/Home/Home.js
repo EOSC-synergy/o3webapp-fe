@@ -22,12 +22,12 @@ class Home extends Component {
                             <StartGeneratingButton/>
                         </div>
                         
-                        <a className="scrollButton">
+                        <a className="scrollButton" href="#moreInfoSection">
                             <RiArrowDropDownLine size="80px"/>
                         </a>
                     </div>
                 </div>
-                <div className="moreInfoSection">
+                <div className="moreInfoSection" id="moreInfoSection">
                     <h2>This is some more info</h2>
                     <h3>Analyse the ozone layer with customizable plots! Analyse the ozone layer with customizable plots!</h3>
                 </div>
