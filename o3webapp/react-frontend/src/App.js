@@ -19,26 +19,31 @@ class App extends Component {
     super(props);
     this.state = { };
   } 
+
   
   render() {
     return (
       <Router>
-          <Navigation />
           <Switch>
             <Route path='/generation'>
+              <Navigation key='/generation'/>
               <Generation />
             </Route>
             <Route path='/manipulation'>
+              <Navigation key='/manipulation'/>
               <Manipulation />
             </Route>
             <Route path="/about">
+              <Navigation key='/about'/>
               <About />
             </Route>
-            <Route path='/'>
-              <Home />
-            </Route>
             <Route path='/redirect_url'>
-              {console.log("Hello there brotha")}
+              <Navigation key='/' loginRedirect={true}/>
+              <Home loginRedirect={true}/>
+            </Route>
+            <Route path='/'>
+              <Navigation key='/'/>
+              <Home loginRedirect={false}/>
             </Route>
           </Switch>
       </Router>

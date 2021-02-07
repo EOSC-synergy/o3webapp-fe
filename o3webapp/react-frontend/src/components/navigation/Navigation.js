@@ -1,21 +1,24 @@
 import './Navigation.css'
 import NavigationTab from './NavigationTab'
 import LoginButton from '../buttons/LoginButton/LoginButton'
-
+import LogoutButton from '../buttons/LogoutButton/LogoutButton'
 import { Component } from 'react'
+import Cookies from 'universal-cookie';
 
 
-/* This controls all the Tabs in the Navigation bar
+
+/** This controls all the Tabs in the Navigation bar
  * @name: Name to be displayed
  * @path: Path to be linked to
  */
 let Tabs = [
   {name: "Home", path: "/"},
   {name: "Plot Generation", path: "/generation"},
-  {name: "Manipulation", path: "/manipulation"}, 
+  //{name: "Manipulation", path: "/manipulation"}, 
   {name: "About", path: "/about"}
 ]
 
+let loggedIn = false
 
 class Navigation extends Component {
 
@@ -29,24 +32,71 @@ class Navigation extends Component {
     //Catch any errors, if path is not matching any tabs, activate home tab
     try {
       this.state = {
-        activeTab: currentTab.name
+        activeTab: currentTab.name,
+        loggedIn: false
       }
     } catch (e) {
       this.state = {
-        activeTab: Tabs[0].name
+        activeTab: Tabs[0].name,
+        loggedIn: false
       }
     }
-    
+
+    //Call the loginCallback() if the user just logged in
+    if (this.props.loginRedirect) {
+      this.loginCallback()
+    }
+
+    //Checks if the user is logged in, by checking the cookies
+    const cookies = new Cookies();
+    if (cookies.get('userID') == undefined) {
+      loggedIn = false
+    } else {
+      loggedIn = true
+    }
+
     this.handleTabClick = this.handleTabClick.bind(this);
+    this.loggedOut = this.loggedOut.bind(this);
   }
 
+  /**
+   * Function that handles the login callback. It parses the ID token and sets the cookie
+   */
+  loginCallback() {
+
+    //Token parsing out of the URL
+    let currentURL = window.location.href
+    let id_token = currentURL.slice(currentURL.indexOf('#id_token=') + 10)
+
+    //Sets the cookie
+    const cookies = new Cookies();
+    cookies.set('userID', id_token, { path: '/' });
+
+    //Updates the state of the component
+    this.setState({
+      loggedIn: true
+    })
+  }
   
   /**
    * Callback function that updates the state with the active tab
    * @param {string} tabName Name of the clicked tab, that is now active
    */
   handleTabClick(tabName) {
-    this.setState({activeTab: tabName})
+    this.setState({
+      activeTab: tabName
+    })
+  }
+
+  /**
+   * Callback function that updates the state when user logs out
+   */
+  loggedOut() {
+    loggedIn = false
+    this.setState({
+      loggedIn: false
+    })
+    console.log('Logged out')
   }
 
   /**
@@ -60,50 +110,47 @@ class Navigation extends Component {
   }
   
   render() {
-    return (
-      <nav className="NavBar">
-        <u1 className="NavBarContainer">
+    if (loggedIn) {
+      return (
+        <nav className="NavBar">
+          <u1 className="NavBarContainer">
 
-          {Tabs.map((element, index) => {
-            return (
-              <NavigationTab 
-              key={index}
-              name={element.name}
-              pageLink={element.path}
-              state={this.getActiveState(element.name)}
-              handleClick = {this.handleTabClick}
-              />
-            )
-          })}
-          <LoginButton/>
-        </u1>
+            {Tabs.map((element, index) => {
+              return (
+                <NavigationTab 
+                key={index}
+                name={element.name}
+                pageLink={element.path}
+                state={this.getActiveState(element.name)}
+                handleClick = {this.handleTabClick}
+                />
+              )
+            })}
+            <LogoutButton loggedOut = {this.loggedOut}/>
+          </u1>
+        </nav>
+      );
+    } else {
+      return (
+        <nav className="NavBar">
+          <u1 className="NavBarContainer">
 
-        {/* 
-        <ul>
-          <li className='active'>
-            <Link to='/' className='NavBarLink'>Home</Link>
-          </li>
-          <li>
-            <Link to='/generation' className='NavBarLink'>Generation</Link>
-          </li>
-          <li>
-            <Link to='/manipulation' className='NavBarLink'>Manipulation</Link>
-          </li>
-          <li>
-            <Link to='/about' className='NavBarLink'>About</Link>
-          </li>
-          <li>
-            <Link to='/about' className='NavBarLink'>
-              <div className='LoginButton'>
-                <p>Login</p> 
-                <i><MdAccountCircle size="30px"/></i>
-              </div>
-            </Link>
-          </li>
-        </ul>
-        */}
-      </nav>
-    );
+            {Tabs.map((element, index) => {
+              return (
+                <NavigationTab 
+                key={index}
+                name={element.name}
+                pageLink={element.path}
+                state={this.getActiveState(element.name)}
+                handleClick = {this.handleTabClick}
+                />
+              )
+            })}
+            <LoginButton/>
+          </u1>
+        </nav>
+      );
+    }
   }
 }
 

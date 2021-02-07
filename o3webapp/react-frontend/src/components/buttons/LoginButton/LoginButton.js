@@ -1,7 +1,26 @@
 import './LoginButton.css';
 import { MdAccountCircle } from 'react-icons/md'
-import { Link } from 'react-router-dom';
 import { Component } from 'react';
+
+/*
+https://aai-dev.egi.eu/oidc/authorize
+?client_id=o3webapp
+&redirect_uri=https://localhost/redirect_url
+&scope=openid
+&response_type=token
+&response_mode=query
+&nonce=ozmw60kqwi
+*/
+
+const egi_endpoint = 'https://aai-dev.egi.eu/oidc/authorize'
+const client_id = 'o3webapp'
+const redirect_uri = 'http://localhost:3000/redirect_url'
+const scope = 'openid'
+const response_type = 'id_token'
+const response_mode = 'query'
+const client_secret = ''
+let nonce = null
+let requestURL = null
 
 class LoginButton extends Component {
 
@@ -23,9 +42,23 @@ class LoginButton extends Component {
     }
 }
 
+/**
+ * Starts the login flow
+ */
 function startLogin() {
-    //TODO
-    console.log("test")
+    buildRequestURL()
+    window.location.href = requestURL
 }
+
+function buildRequestURL() {
+    requestURL = egi_endpoint + 
+    '?client_id=' + client_id +
+    '&redirect_uri=' + redirect_uri +
+    '&scope=' + scope +
+    '&response_type=' + response_type +
+    '&response_mode=' + response_mode +
+    '&nonce=' + nonce
+}
+
 
 export default LoginButton;
