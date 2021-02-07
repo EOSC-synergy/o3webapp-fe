@@ -3,6 +3,7 @@ import LatitudeButton from '../buttons/LatitudeButton/LatitudeButton';
 import MonthsButton from '../buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
+import ModelController from '../ModelController/ModelController';
 
 const plotTypes = {
     one: 'plot1',
@@ -18,7 +19,7 @@ class GenerationForm extends React.Component {
         super(props);
         this.state = {
             plotType: "tco3_zm",
-            // models: [],
+            models: [],
             years: [1970, 2100],
             months: [1, 2, 3],
             latitude: [-90, 0],
@@ -33,6 +34,7 @@ class GenerationForm extends React.Component {
         this.handleMonthChange = this.handleMonthChange.bind(this);
         this.handleLatitudeChange = this.handleLatitudeChange.bind(this);
         this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
+        this.handleModelChange = this.handleModelChange.bind(this);
     }
 
 
@@ -95,6 +97,23 @@ class GenerationForm extends React.Component {
             years: [oldState[0], year]
         })
     }
+
+    handleModelChange(model) {
+        var oldmodels = this.state.models;
+
+        if (oldmodels.includes(model)) {
+            //removes the model from the list
+            const index = oldmodels.indexOf(model);
+            oldmodels.splice(index, 1);
+        } else {
+            //add model to list
+            oldmodels.push(model);
+        }
+
+        this.setState({
+            models: oldmodels
+        })
+    }
     
 
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
@@ -109,8 +128,14 @@ class GenerationForm extends React.Component {
                 + "\nyears: " + this.state.years[0] + " to " + this.state.years[1]
                 + "\nmonths: " + this.state.months
                 + "\nlatitude:" + this.state.latitude
+                + "\nmodels:" + this.state.models
                 );
         event.preventDefault();
+
+        //convert state to json
+        const currState = this.state;
+        const jsonState = JSON.stringify(currState);
+        console.log(jsonState)
     }
 
     /**
@@ -120,6 +145,7 @@ class GenerationForm extends React.Component {
         const years = this.state.years;
         const months = this.state.months;
         const latitude = this.state.latitude;
+        const models = this.state.models
 
         return (
             <div className="generation-form-wrapper">
@@ -129,6 +155,11 @@ class GenerationForm extends React.Component {
                             handleChange={this.handlePlotTypeChange} />
                     </div>
     
+                    <div>
+                        <ModelController
+                            handleChange={this.handleModelChange}
+                            selectedModels={models} />
+                    </div>
     
     
                     <div>
