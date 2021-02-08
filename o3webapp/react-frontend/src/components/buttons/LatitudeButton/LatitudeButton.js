@@ -71,9 +71,9 @@ class LatitudeButton extends React.Component {
     }
 
     /**
-     * callback function that updates the state here
-     * @param {number} id 
-     * @param {string} key 
+     * updates the state
+     * @param {number} id - id of the selected field 
+     * @param {string} key - key of the list
      */
     resetThenSet(id, key) {
         const temp = [...this.state[key]];
@@ -91,6 +91,10 @@ class LatitudeButton extends React.Component {
         this.props.handleChange(value);
     }
 
+    /**
+     * handles input in the custom field
+     * @param event 
+     */
     handleCustomMonths(event) {
 
         const inputString = event.target.value;
