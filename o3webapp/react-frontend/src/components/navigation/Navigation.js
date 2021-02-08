@@ -4,7 +4,7 @@ import LoginButton from '../buttons/LoginButton/LoginButton'
 import LogoutButton from '../buttons/LogoutButton/LogoutButton'
 import { Component } from 'react'
 import Cookies from 'universal-cookie';
-import { useHistory } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
 
@@ -50,7 +50,7 @@ class Navigation extends Component {
 
     //Checks if the user is logged in, by checking the cookies
     const cookies = new Cookies();
-    if (cookies.get('userID') == undefined) {
+    if (cookies.get('userID') === undefined) {
       loggedIn = false
     } else {
       loggedIn = true
@@ -70,15 +70,20 @@ class Navigation extends Component {
     let currentURL = window.location.href
     let id_token = currentURL.slice(currentURL.indexOf('#id_token=') + 10)
 
+    //Decode JWT
+    let token_decoded = jwt_decode(id_token)
+    let subject_ID = token_decoded.sub
+
     //Sets the cookie
     const cookies = new Cookies();
-    cookies.set('userID', id_token, { path: '/' });
+    cookies.set('userID', subject_ID, { path: '/' });
+    console.log(cookies.get('userID'))
 
     //Reads the cookie for last path before login
     let previousPath = cookies.get('o3webappPreviousPath')
 
     //Redirect to previous Path
-    window.location.href= previousPath;
+    //window.location.href= previousPath;
 
     //Updates the state of the component
     this.setState({
@@ -104,7 +109,6 @@ class Navigation extends Component {
     this.setState({
       loggedIn: false
     })
-    console.log('Logged out')
   }
 
   /**
@@ -113,7 +117,7 @@ class Navigation extends Component {
    * @returns {string} Returns the state of the tab ("active" or "inactive")
    */
   getActiveState(tabName) {
-    if (this.state.activeTab == tabName) {return "active"}
+    if (this.state.activeTab === tabName) {return "active"}
     else {return "inactive"}
   }
   
@@ -121,7 +125,7 @@ class Navigation extends Component {
     if (loggedIn) {
       return (
         <nav className="NavBar">
-          <u1 className="NavBarContainer">
+          <ul className="NavBarContainer">
 
             {Tabs.map((element, index) => {
               return (
@@ -135,13 +139,13 @@ class Navigation extends Component {
               )
             })}
             <LogoutButton loggedOut = {this.loggedOut}/>
-          </u1>
+          </ul>
         </nav>
       );
     } else {
       return (
         <nav className="NavBar">
-          <u1 className="NavBarContainer">
+          <ul className="NavBarContainer">
 
             {Tabs.map((element, index) => {
               return (
@@ -155,7 +159,7 @@ class Navigation extends Component {
               )
             })}
             <LoginButton/>
-          </u1>
+          </ul>
         </nav>
       );
     }

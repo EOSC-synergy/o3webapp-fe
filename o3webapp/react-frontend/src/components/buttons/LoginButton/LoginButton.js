@@ -16,19 +16,15 @@ https://aai-dev.egi.eu/oidc/authorize
 const egi_endpoint = 'https://aai-dev.egi.eu/oidc/authorize'
 const client_id = 'o3webapp'
 const redirect_uri = 'http://localhost:3000/redirect_url'
-const scope = 'openid'
+const scope = 'openid%20profile%20email'
 const response_type = 'id_token'
 const response_mode = 'query'
-const client_secret = ''
+//const client_secret = ''
 let nonce = null
 let requestURL = null
 
 class LoginButton extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
+    
     render() {
         return (
             <li>

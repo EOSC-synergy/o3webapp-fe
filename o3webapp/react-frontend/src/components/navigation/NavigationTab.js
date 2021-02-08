@@ -7,10 +7,6 @@ import './NavigationTab.css'
 
 class NavigationTab extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <li className={this.props.state}>

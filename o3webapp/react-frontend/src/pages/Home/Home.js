@@ -2,14 +2,8 @@ import { Component } from 'react';
 import './Home.css'
 import StartGeneratingButton from '../../components/buttons/StartGeneratingButton/StartGeneratingButton'
 import { RiArrowDropDownLine } from 'react-icons/ri'
-import Cookies from 'universal-cookie';
 
 class Home extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
 
     render() {
         return (

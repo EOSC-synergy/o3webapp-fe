@@ -4,9 +4,6 @@ import './StartGeneratingButton.css'
 
 
 class StartGeneratingButton extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
