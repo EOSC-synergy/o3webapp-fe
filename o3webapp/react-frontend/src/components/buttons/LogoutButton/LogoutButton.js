@@ -4,16 +4,6 @@ import { Component } from 'react';
 import Cookies from 'universal-cookie';
 
 
-const egi_endpoint = 'https://aai-dev.egi.eu/oidc/authorize'
-const client_id = 'o3webapp'
-const redirect_uri = 'https://localhost/redirect_url'
-const scope = 'openid'
-const response_type = 'id_token'
-const response_mode = 'query'
-const client_secret = ''
-let nonce = null
-let requestURL = null
-
 class LogoutButton extends Component {
 
     constructor(props) {
@@ -23,7 +13,7 @@ class LogoutButton extends Component {
     }
 
     /**
-     * Redirects to the Account page
+     * Handles the logout
      */
     handleLogOut() {
         //Remove the cookie
