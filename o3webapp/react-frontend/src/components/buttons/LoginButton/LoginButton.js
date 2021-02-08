@@ -50,7 +50,20 @@ function startLogin() {
     window.location.href = requestURL
 }
 
+function makeNonce(length) {
+    var result           = '';
+    var characters       = 'abcdefghijklmnopqrstuvwxyz123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
 function buildRequestURL() {
+
+    nonce = makeNonce(9)
+
     requestURL = egi_endpoint + 
     '?client_id=' + client_id +
     '&redirect_uri=' + redirect_uri +
