@@ -1,6 +1,7 @@
 import './LoginButton.css';
 import { MdAccountCircle } from 'react-icons/md'
 import { Component } from 'react';
+import Cookies from 'universal-cookie';
 
 /*
 https://aai-dev.egi.eu/oidc/authorize
@@ -46,6 +47,9 @@ class LoginButton extends Component {
  * Starts the login flow
  */
 function startLogin() {
+    const cookies = new Cookies();
+    let currentPath = window.location.pathname
+    cookies.set('o3webappPreviousPath', currentPath, { path: '/' });
     buildRequestURL()
     window.location.href = requestURL
 }

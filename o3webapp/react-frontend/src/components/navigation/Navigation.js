@@ -4,6 +4,7 @@ import LoginButton from '../buttons/LoginButton/LoginButton'
 import LogoutButton from '../buttons/LogoutButton/LogoutButton'
 import { Component } from 'react'
 import Cookies from 'universal-cookie';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -57,6 +58,7 @@ class Navigation extends Component {
 
     this.handleTabClick = this.handleTabClick.bind(this);
     this.loggedOut = this.loggedOut.bind(this);
+    this.loginCallback = this.loginCallback.bind(this)
   }
 
   /**
@@ -71,6 +73,12 @@ class Navigation extends Component {
     //Sets the cookie
     const cookies = new Cookies();
     cookies.set('userID', id_token, { path: '/' });
+
+    //Reads the cookie for last path before login
+    let previousPath = cookies.get('o3webappPreviousPath')
+
+    //Redirect to previous Path
+    window.location.href= previousPath;
 
     //Updates the state of the component
     this.setState({
