@@ -3,7 +3,7 @@ import './Generation.css'
 
 function Generation() {
     return (
-        <div className="GenerationFormContainer">
+        <div className="generation-container">
             <GenerationForm />
         </div>
     );

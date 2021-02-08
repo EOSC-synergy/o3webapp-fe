@@ -5,11 +5,8 @@ import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
 import ModelController from '../ModelController/ModelController';
 
-const plotTypes = {
-    one: 'plot1',
-    two: 'plot2',
-    three: 'plot3',
-};
+import './Generationform.css'
+
 
 class GenerationForm extends React.Component {
     /**
@@ -149,20 +146,15 @@ class GenerationForm extends React.Component {
 
         return (
             <div className="generation-form-wrapper">
-                <form onSubmit={this.handleSubmit}>
-                    <div>
+                <form onSubmit={this.handleSubmit} className="generation-form">
                         <PlotButtonController
                             handleChange={this.handlePlotTypeChange} />
-                    </div>
     
-                    <div>
                         <ModelController
                             handleChange={this.handleModelChange}
                             selectedModels={models} />
-                    </div>
     
     
-                    <div>
                         <YearButton 
                             year={years[0]}
                             bound="lower"
@@ -171,25 +163,23 @@ class GenerationForm extends React.Component {
                             year={years[1]}
                             bound="upper"
                             handleYearChange={this.handleUpperYearChange} />
-                    </div>
                     <br />
     
-                    <div>
                         <MonthsButton
                             months={months}
                             handleChange={this.handleMonthChange} />
-                    </div>
-                    <div>
+                   
                         <LatitudeButton
                             latitude={latitude}
                             handleChange={this.handleLatitudeChange} />
-                    </div>
+                   
                     <br />
-                    <input type='submit' value="Submit" />
+                    <input type='submit' value="Submit" className="submit-button"/>
                 </form>
             </div>
         );
     }
 }
+
 
 export default GenerationForm;

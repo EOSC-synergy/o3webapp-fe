@@ -1,0 +1,31 @@
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.dropdown-header {
+    width: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 20px;
+    
+}
+
+.dropdown-list-item {
+    padding: 5px;
+    width: 20%;
+    margin: 0px;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 0%;
+    font-size: 20px;
+}

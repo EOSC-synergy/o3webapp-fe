@@ -18,6 +18,9 @@ second one for the currently choosen card/setting.
 
 import React from 'react';
 
+import './MonthsButton.css'
+import './Dropdown.css'
+
 class MonthsButton extends React.Component {
     constructor(props) {
         super(props);

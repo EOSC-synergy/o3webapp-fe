@@ -1,0 +1,17 @@
+.year-button-wrapper {
+    height: 40%;
+    margin: 10px 20% 10px 20%;
+    padding: 30px 5% 30px 5%;
+}
+
+.year-button-wrapper > fieldset {
+    padding: 15px;
+}
+
+.year-button-wrapper > fieldset > input {
+    background: transparent;
+    border: white;
+    line-height: 30px;
+    font-size: 25px;
+    width: 100%;
+}

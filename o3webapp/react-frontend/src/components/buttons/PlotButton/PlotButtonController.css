@@ -1,0 +1,17 @@
+.plot-selection-wrapper {
+    width: 100%;
+}
+
+.radio-list {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    align-items: center;
+}
+
+.radio-list-item {
+    margin: 10px;
+    padding: 5px;
+    width: 10%;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './LatitudeButton.css'
 
 /**
  * Represents the latitude selection

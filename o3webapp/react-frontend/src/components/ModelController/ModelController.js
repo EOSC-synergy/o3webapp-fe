@@ -1,5 +1,6 @@
 import React from 'react';
 import ModelButton from '../buttons/ModelButton/ModelButton'
+import './ModelController.css'
 
 //*change this to the production api for production builds
 //currently this runs with
@@ -62,6 +63,7 @@ class ModelController extends React.Component {
 
     }
 
+    
     render() {
         //const keywords = this.state.keywords;   //all keywords for chips
         const inputValue = this.state.searchTerm;
@@ -70,14 +72,13 @@ class ModelController extends React.Component {
         const filteredModels = models.filter( (model) => {
             return model.toLowerCase().includes(inputValue.toLowerCase());
         })
-        console.log(filteredModels)
 
 
 
         return (
-            <div>
-                <div className="seach-area-wrapper">
-                    <label htmlFor="search">Enter for keywords</label>
+            <div className="model-section-wrapper">
+                <div className="search-area-wrapper">
+                    <label htmlFor="search">Enter a keyword</label>
                     <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>
                 </div>
 

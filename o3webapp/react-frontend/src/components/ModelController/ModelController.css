@@ -1,0 +1,20 @@
+.model-section-wrapper {
+    margin: 20px;
+}
+
+.search-area-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.search-area-wrapper > label {
+    margin-bottom: 10px;
+}
+
+/* Not scrollable right now */
+.model-button-section-wrapper {
+    max-height: 40%;
+    overflow: hidden;
+}
