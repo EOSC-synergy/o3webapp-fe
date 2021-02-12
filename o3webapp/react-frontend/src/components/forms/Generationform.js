@@ -4,12 +4,9 @@ import MonthsButton from '../buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
 import ModelController from '../ModelController/ModelController';
+import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
-const plotTypes = {
-    one: 'plot1',
-    two: 'plot2',
-    three: 'plot3',
-};
 
 class GenerationForm extends React.Component {
     /**
@@ -132,10 +129,13 @@ class GenerationForm extends React.Component {
                 );
         event.preventDefault();
 
-        //convert state to json
+        //
+        const cookie = new Cookies()
+        const expDate = new Date(Date.now()+2592000)
         const currState = this.state;
         const jsonState = JSON.stringify(currState);
-        console.log(jsonState)
+        cookie.set('plotValues', jsonState, {path: '/', expires: expDate});
+
     }
 
     /**
@@ -186,6 +186,11 @@ class GenerationForm extends React.Component {
                     </div>
                     <br />
                     <input type='submit' value="Submit" />
+                    <Link to={{
+                        pathname: '/manipulation',
+                    }}>
+                        Generate my plot!
+                    </Link>
                 </form>
             </div>
         );

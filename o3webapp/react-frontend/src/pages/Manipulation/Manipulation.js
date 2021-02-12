@@ -1,29 +1,37 @@
 import React from 'react';
 import './Manipulation.css';
-import { embed } from '@bokeh/bokehjs';
+import Axios from 'axios';
+import Cookies from 'universal-cookie';
 
+//url from fake backend for testing local
 const plot_api_url = 'http://localhost:8081/api/plot';
 
 class Manipulation extends React.Component {
 
     componentDidMount() {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                //'Accept': 'application/json' 
-            },
-        };
-        // const response = await fetch(plot_api_url, requestOptions)
-        // const item = await response.json()
-        // embed.embed_item(item, 'test-plot')
-        console.log("calling api")
-        fetch(plot_api_url, requestOptions)
-            .then(response => response.json())
-            .then(data => embed.embed_item(data, 'test-plot'))
-            .then(console.log("called api"))
+        //retrieve the plot data from a cookie
+        const cookie = new Cookies()
+        const plotCookie = cookie.get('plotValues')
+        if (plotCookie === null || plotCookie === undefined) {
+            //if no cookie was set with values for the plot do ...
+            //TODO add default behaviour, should it send the user back? Get a plot with default values?
+            console.log("no cookie was set");
+        } else {
+            console.log(plotCookie)
+        }
+
+
+        //receives the plot from the api and inserts the plot
+        console.log('fetching from api')
+        Axios.post(plot_api_url, {
+            'Content-Type': 'application/json',
+        })
+            .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'))
+
     }
 
+
+    // }
 
     render() {
         return (
