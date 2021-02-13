@@ -15,7 +15,7 @@ import jwt_decode from "jwt-decode";
 let Tabs = [
   {name: "Home", path: "/"},
   {name: "Plot Generation", path: "/generation"},
-  //{name: "Manipulation", path: "/manipulation"}, 
+  {name: "Manipulation", path: "/manipulation"}, 
   {name: "About", path: "/about"}
 ]
 
@@ -83,7 +83,7 @@ class Navigation extends Component {
     let previousPath = cookies.get('o3webappPreviousPath')
 
     //Redirect to previous Path
-    //window.location.href= previousPath;
+    window.location.href= previousPath;
 
     //Updates the state of the component
     this.setState({
