@@ -25,6 +25,7 @@ class ModelController extends React.Component {
     }
 
     componentDidMount() {
+        const currplotType = this.props.plotType;
         
         //gets the models from the backend
         const requestOptions = {
@@ -70,7 +71,6 @@ class ModelController extends React.Component {
         const filteredModels = models.filter( (model) => {
             return model.toLowerCase().includes(inputValue.toLowerCase());
         })
-        console.log(filteredModels)
 
 
 
