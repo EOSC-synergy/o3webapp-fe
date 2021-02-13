@@ -23,10 +23,17 @@ class Manipulation extends React.Component {
 
         //receives the plot from the api and inserts the plot
         console.log('fetching from api')
-        Axios.post(plot_api_url, {
-            'Content-Type': 'application/json',
-        })
+        const headersConfig = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        const request_url = plot_api_url + "/" + plotCookie.pType;
+        console.log(request_url)
+        //! on production change plot_api_url to request_url!
+        Axios.post(plot_api_url, plotCookie, headersConfig)
             .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'))
+            .catch(console.log("didnt get an answer"))  //TODO Implement error when api doenst answer 
 
     }
 
