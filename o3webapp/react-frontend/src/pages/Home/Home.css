@@ -81,3 +81,11 @@
     bottom: 20px;
     cursor: pointer;
 }
+
+.moreInfoSection h3 {
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
