@@ -162,7 +162,8 @@ class GenerationForm extends React.Component {
         const cookie = new Cookies()
         const currDate = new Date();
         const expDate = new Date().setFullYear(currDate.getFullYear() +1);
-        const currState = this.state;
+        let currState = this.state;
+        currState['output'] = "json";
         const jsonState = JSON.stringify(currState);
         cookie.set('plotValues', jsonState, {path: '/', maxAge: expDate});
     }
