@@ -77,6 +77,7 @@ class ModelController extends React.Component {
 
         return (
             <div className="model-section-wrapper">
+                <p className="section-label">Models</p>
                 <div className="search-area-wrapper">
                     <label htmlFor="search">Enter a keyword</label>
                     <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>

@@ -87,21 +87,24 @@ class Radio extends React.Component {
         const { list } = this.props;
         return(
             <div className="plot-selection-wrapper">
-                    <div role="list" className="radio-list">
-                        {list.map((item) => (
-                            <button
-                                type="button"
-                                className="radio-list-item"
-                                key={item.id}
-                                onClick={() => this.selectItem(item)}
-                            >
-                                <div className="radio-icon-wrapper">
-                                    {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
-                                </div>
+                <p className="section-label">Plot type</p>
+                <div role="list" className="radio-list">
+                    {list.map((item) => (
+                        <button
+                            type="button"
+                            className="radio-list-item"
+                            key={item.id}
+                            onClick={() => this.selectItem(item)}
+                        >
+                            <div className="radio-icon-wrapper">
+                                {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
+                            </div>
+                            <p className="radio-item-label">
                                 {item.type}
-                            </button>
-                        ))}
-                    </div>
+                            </p>
+                        </button>
+                    ))}
+                </div>
             </div>
         );
     }

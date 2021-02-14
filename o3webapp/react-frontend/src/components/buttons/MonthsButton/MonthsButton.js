@@ -130,6 +130,7 @@ class MonthsButton extends React.Component {
 
         return (
             <div className="month-button-wrapper">
+                <p className="section-label">Season</p>
                 <Dropdown 
                 title="Select a season!"
                 list={this.state.season}

@@ -154,15 +154,18 @@ class GenerationForm extends React.Component {
                             handleChange={this.handleModelChange}
                             selectedModels={models} />
     
-    
-                        <YearButton 
-                            year={years[0]}
-                            bound="lower"
-                            handleYearChange={this.handleLowerYearChange} />
-                        <YearButton
-                            year={years[1]}
-                            bound="upper"
-                            handleYearChange={this.handleUpperYearChange} />
+
+                        <div className="year-section-wrapper">
+                            <p className="section-label">Years to plot</p>
+                            <YearButton 
+                                year={years[0]}
+                                bound="lower"
+                                handleYearChange={this.handleLowerYearChange} />
+                            <YearButton
+                                year={years[1]}
+                                bound="upper"
+                                handleYearChange={this.handleUpperYearChange} />
+                        </div>
                     <br />
     
                         <MonthsButton

@@ -1,5 +1,8 @@
 .plot-selection-wrapper {
-    width: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 20px;
+    width: 70%;
 }
 
 .radio-list {
@@ -11,7 +14,20 @@
 }
 
 .radio-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     padding: 5px;
-    width: 10%;
+    width: 30%;
+}
+
+.radio-item-label{
+    margin: 2px;
+}
+
+.radio-icon-wrapper {
+    margin: 2px;
+    display: flex;
 }

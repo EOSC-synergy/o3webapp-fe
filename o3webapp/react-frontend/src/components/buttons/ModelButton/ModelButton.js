@@ -1,5 +1,6 @@
 import React from 'react'
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
+import './ModelButton.css'
 
 /**
  * Button for selecting a model. Allow the user to select the model
@@ -29,7 +30,9 @@ class ModelButton extends React.Component {
                 <div className="radio-icon-wrapper">
                     {selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
                 </div>
-                {title}
+                <p className="model-button-label">
+                    {title}
+                </p>
             </button>
                 
         )
