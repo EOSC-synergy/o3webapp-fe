@@ -1,13 +1,16 @@
 .month-button-wrapper {
-    background-color: rgb(0, 0, 0, 0.5);
+    
     padding: 20px;
+
+    /*
+    background-color: rgb(0, 0, 0, 0.5);
     margin: 20px;
     width: 70%;
+    */
 }
 
 .custom-input-wrapper {
     padding-top: 10px;
-    width: 20%;
     margin: auto;
 }
 

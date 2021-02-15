@@ -139,7 +139,7 @@ class LatitudeButton extends React.Component {
         const customSelected = this.state.latitude[7].selected;
 
         return (
-            <div className="latitude-button-wrapper">
+            <div className="latitude-button-wrapper section-wrapper">
                 <p className="section-label">Latitude Band</p>
                 <Dropdown 
                 title="Select a Latitude Band!"

@@ -129,7 +129,7 @@ class MonthsButton extends React.Component {
         const customSelected = this.state.season[4].selected;
 
         return (
-            <div className="month-button-wrapper">
+            <div className="month-button-wrapper section-wrapper">
                 <p className="section-label">Season</p>
                 <Dropdown 
                 title="Select a season!"

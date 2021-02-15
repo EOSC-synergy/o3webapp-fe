@@ -154,29 +154,29 @@ class GenerationForm extends React.Component {
                             handleChange={this.handleModelChange}
                             selectedModels={models} />
     
+                        <div className="settings-section-wrapper section-wrapper">
+                            <div className="year-section-wrapper section-wrapper">
+                                <p className="section-label">Years to plot</p>
+                                <YearButton 
+                                    year={years[0]}
+                                    bound="lower"
+                                    handleYearChange={this.handleLowerYearChange} />
+                                <YearButton
+                                    year={years[1]}
+                                    bound="upper"
+                                    handleYearChange={this.handleUpperYearChange} />
+                            </div>
+                            <br />
+        
+                            <MonthsButton
+                                months={months}
+                                handleChange={this.handleMonthChange} />
+                    
+                            <LatitudeButton
+                                latitude={latitude}
+                                handleChange={this.handleLatitudeChange} />
 
-                        <div className="year-section-wrapper">
-                            <p className="section-label">Years to plot</p>
-                            <YearButton 
-                                year={years[0]}
-                                bound="lower"
-                                handleYearChange={this.handleLowerYearChange} />
-                            <YearButton
-                                year={years[1]}
-                                bound="upper"
-                                handleYearChange={this.handleUpperYearChange} />
-                        </div>
-                    <br />
-    
-                        <MonthsButton
-                            months={months}
-                            handleChange={this.handleMonthChange} />
-                   
-                        <LatitudeButton
-                            latitude={latitude}
-                            handleChange={this.handleLatitudeChange} />
-                   
-                    <br />
+                         </div>
                     <input type='submit' value="Submit" className="submit-button mat-style"/>
                 </form>
             </div>

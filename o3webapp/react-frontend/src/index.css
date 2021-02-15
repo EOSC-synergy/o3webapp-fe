@@ -29,7 +29,7 @@ body, html, #root {
 }
 
 .mat-style:hover {
-  background-color: rgb(255, 255, 255, .2);
+  background-color: rgb(56, 56, 56);
 }
 
 [data-md-tooltip] {
