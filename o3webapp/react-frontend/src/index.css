@@ -17,3 +17,38 @@ body, html, #root {
   height: 100%;
   scroll-behavior: smooth;
 }
+
+.mat-style {
+    font-family: Trebuchet, Arial, sans-serif;
+    color: white;
+    background-color: rgb(78, 78, 78);
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .9);
+}
+
+[data-md-tooltip] {
+  position: relative;
+}
+
+[data-md-tooltip]:before {
+    content: attr(data-md-tooltip);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    padding: 8px;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: top;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    font-size: 10px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip]:hover:before {
+  transform: translateX(-50%) scale(1); 
+}

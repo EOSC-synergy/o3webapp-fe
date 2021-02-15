@@ -10,3 +10,20 @@
     width: 20%;
     margin: auto;
 }
+
+.custom-input-wrapper > fieldset {
+    border-radius: 4px;
+}
+
+.custom-input-wrapper > fieldset > input {
+    background: transparent;
+    border-width: 0;
+}
+
+.dropdown-header-title {
+    cursor: pointer;
+}
+
+.dropdown-list-item {
+    cursor: pointer;
+}

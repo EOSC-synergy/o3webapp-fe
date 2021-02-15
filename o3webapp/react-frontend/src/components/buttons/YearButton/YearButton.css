@@ -6,6 +6,7 @@
 
 .year-button-wrapper > fieldset {
     padding: 15px;
+    border-radius: 7px;
 }
 
 .year-button-wrapper > fieldset > input {
@@ -14,4 +15,5 @@
     line-height: 30px;
     font-size: 25px;
     width: 100%;
+    color: white;
 }

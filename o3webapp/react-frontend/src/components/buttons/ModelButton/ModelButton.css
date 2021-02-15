@@ -10,6 +10,17 @@
     margin: 10px;
     padding: 5px;
     width: 500px;
+    height: 40px;
+    cursor: pointer;
+    
+    /*
+    color: white;
+    background-color: rgb(78, 78, 78);
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6); 
+    */
 }
 
 .model-button-label{
@@ -19,4 +30,11 @@
 .radio-icon-wrapper {
     margin: 2px;
     display: flex;
+    /*
+    color: #fed136;
+    */
+}
+
+.more-info-button {
+    margin-left: auto;
 }

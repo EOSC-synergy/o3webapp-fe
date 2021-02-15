@@ -177,7 +177,7 @@ class GenerationForm extends React.Component {
                             handleChange={this.handleLatitudeChange} />
                    
                     <br />
-                    <input type='submit' value="Submit" className="submit-button"/>
+                    <input type='submit' value="Submit" className="submit-button mat-style"/>
                 </form>
             </div>
         );

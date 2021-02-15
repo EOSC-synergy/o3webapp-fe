@@ -92,12 +92,12 @@ class Radio extends React.Component {
                     {list.map((item) => (
                         <button
                             type="button"
-                            className="radio-list-item"
+                            className="radio-list-item mat-style"
                             key={item.id}
                             onClick={() => this.selectItem(item)}
                         >
                             <div className="radio-icon-wrapper">
-                                {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
+                                {item.selected ? <MdRadioButtonChecked color="#fed136" size="20px"/> : <MdRadioButtonUnchecked size="20px"/>}
                             </div>
                             <p className="radio-item-label">
                                 {item.type}

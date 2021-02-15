@@ -23,9 +23,13 @@
 .dropdown-list-item {
     padding: 5px;
     width: 20%;
-    margin: 0px;
-    border-width: 2px;
-    border-color: black;
-    border-radius: 0%;
-    font-size: 20px;
+    margin: 2px;
+    font-size: 18px;
+
+    color: white;
+    background-color: rgb(105, 105, 105);
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .9);
 }
