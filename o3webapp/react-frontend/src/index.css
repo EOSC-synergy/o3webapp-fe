@@ -28,6 +28,10 @@ body, html, #root {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .9);
 }
 
+.mat-style:hover {
+  background-color: rgb(255, 255, 255, .2);
+}
+
 [data-md-tooltip] {
   position: relative;
 }
@@ -35,15 +39,16 @@ body, html, #root {
 [data-md-tooltip]:before {
     content: attr(data-md-tooltip);
     position: absolute;
-    bottom: -35px;
-    left: 50%;
+    bottom: 0px;
+    left: -150%;
     padding: 8px;
     transform: translateX(-50%) scale(0);
     transition: transform 0.3s ease-in-out;
-    transform-origin: top;
+    transform-origin: right;
     background: #616161e6;
     color: white;
     border-radius: 2px;
+    width: 50px;
     font-size: 10px;
     font-family: Roboto,sans-serif;
     font-weight: 400;

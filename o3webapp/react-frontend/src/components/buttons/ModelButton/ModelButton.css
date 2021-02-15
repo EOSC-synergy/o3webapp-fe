@@ -37,4 +37,11 @@
 
 .more-info-button {
     margin-left: auto;
+    height: 23px;
+    width: 23px;
+}
+
+.more-info-button:hover {
+    border-radius: 100%;
+    background-color: rgb(255, 255, 255, .2);
 }
