@@ -19,7 +19,7 @@ class GenerationForm extends React.Component {
             models: [],
             begin: 1970,
             end: 2100,
-            months: [1, 2, 3],
+            month: [1, 2, 3],
             lat_min: -90,
             lat_max: 0,
         }
@@ -122,8 +122,8 @@ class GenerationForm extends React.Component {
             const newmodel = {
                 model: model,
                 style: {
-                    color: "",
-                    highlighted: "",
+                    color: "#000000",
+                    highlighted: "0",
                 }
             }
 
@@ -163,8 +163,29 @@ class GenerationForm extends React.Component {
         const currDate = new Date();
         const expDate = new Date().setFullYear(currDate.getFullYear() +1);
         let currState = this.state;
-        currState['output'] = "json";
-        const jsonState = JSON.stringify(currState);
+
+        // pType: "tco3_zm",
+        //     models: [],
+        //     begin: 1970,
+        //     end: 2100,
+        //     month: [1, 2, 3],
+        //     lat_min: -90,
+        //     lat_max: 0,
+
+
+        let saveState = {
+            pType: currState.pType,
+            models: currState.models,
+            begin: currState.begin.toString(),
+            end: currState.end.toString(),
+            month: currState.month.map(String),
+            lat_min: currState.lat_min.toString(),
+            lat_max: currState.lat_max.toString(),
+            output: "json",
+        }
+        console.log(saveState);
+        //currState['output'] = "json";
+        const jsonState = JSON.stringify(saveState);
         cookie.set('plotValues', jsonState, {path: '/', maxAge: expDate});
     }
 
