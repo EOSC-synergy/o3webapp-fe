@@ -1,0 +1,5 @@
+{
+    "SERVER_URL": "http://localhost:5000",
+    "MODEL_LIST_PATH": "/model_list",
+    "PLOT_PATH": "/plot"
+}

@@ -2,3 +2,10 @@
     position: relative;
     top: 84px;
 }
+
+.bk-root {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    padding-top: 50px;
+}

@@ -3,8 +3,10 @@ import './Manipulation.css';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 
+import configData from '../../config.json'
+
 //url from fake backend for testing local
-const plot_api_url = 'http://localhost:5000/plot';
+const plot_api_url = configData.SERVER_URL + configData.PLOT_PATH;
 
 class Manipulation extends React.Component {
 
@@ -30,7 +32,6 @@ class Manipulation extends React.Component {
         }
         const request_url = plot_api_url + "/" + plotCookie.pType;
         console.log(request_url)
-        //! on production change plot_api_url to request_url!
         Axios.post(request_url, plotCookie, headersConfig)
             .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'))
             .catch(console.log("didnt get an answer"))  //TODO Implement error when api doenst answer 
