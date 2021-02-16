@@ -86,7 +86,7 @@ class Radio extends React.Component {
     render() {
         const { list } = this.props;
         return(
-            <div className="plot-selection-wrapper">
+            <div className="plot-selection-wrapper section-wrapper">
                 <p className="section-label">Plot type</p>
                 <div role="list" className="radio-list">
                     {list.map((item) => (
