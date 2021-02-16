@@ -7,6 +7,8 @@ import ModelController from '../ModelController/ModelController';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+import './Generationform.css'
+
 
 class GenerationForm extends React.Component {
     /**

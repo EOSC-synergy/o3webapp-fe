@@ -1,6 +1,8 @@
 import React from 'react';
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
 
+import './PlotButtonController.css'
+
 class PlotButtonController extends React.Component {
     constructor(props) {
         super(props);
@@ -54,12 +56,10 @@ class PlotButtonController extends React.Component {
 
     render() {
         return (
-            <div className="plotbutton-wrapper">
                 <Radio 
                     title="Select a plot"
                     list={this.state.plotTypes}
                     resetThenSet={this.resetThenSet} />
-            </div>
         );
     }
 }
@@ -86,19 +86,22 @@ class Radio extends React.Component {
     render() {
         const { list } = this.props;
         return(
-            <div className="radio-wrapper">
+            <div className="plot-selection-wrapper section-wrapper">
+                <p className="section-label">Plot type</p>
                 <div role="list" className="radio-list">
                     {list.map((item) => (
                         <button
                             type="button"
-                            className="radio-list-item"
+                            className="radio-list-item mat-style"
                             key={item.id}
                             onClick={() => this.selectItem(item)}
                         >
                             <div className="radio-icon-wrapper">
-                                {item.selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
+                                {item.selected ? <MdRadioButtonChecked color="#fed136" size="20px"/> : <MdRadioButtonUnchecked size="20px"/>}
                             </div>
-                            {item.type}
+                            <p className="radio-item-label">
+                                {item.type}
+                            </p>
                         </button>
                     ))}
                 </div>

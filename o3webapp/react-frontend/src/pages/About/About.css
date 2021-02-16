@@ -1,32 +1,4 @@
 .AboutPageContainer {
     position: relative;
-    top: 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    vertical-align: middle;
-    height: 100%;
-}
-
-.AboutSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 60%;
-    height: fit-content;
-    background-color: rgb(0, 0, 0, 0.4);
-    border-radius: 3px;
-    margin: auto;
-    padding: 3%;
-    color: white;
-    vertical-align: middle;
-}
-
-.AboutSection h3 {
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 10px;
-    font-size: 14px;
-    font-weight: normal;
-    color: white;
+    top: 100px;
 }

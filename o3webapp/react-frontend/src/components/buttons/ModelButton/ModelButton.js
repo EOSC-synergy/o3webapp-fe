@@ -1,5 +1,7 @@
 import React from 'react'
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
+import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import './ModelButton.css'
 
 /**
  * Button for selecting a model. Allow the user to select the model
@@ -25,11 +27,16 @@ class ModelButton extends React.Component {
         const selected = this.props.selected;
 
         return (
-            <button className="model-button" onClick={this.handleModelClick} type="button">
+            <button className="model-button mat-style" onClick={this.handleModelClick} type="button">
                 <div className="radio-icon-wrapper">
-                    {selected ? <MdRadioButtonChecked /> : <MdRadioButtonUnchecked />}
+                    {selected ? <MdCheckBox color="#fed136" size="20px"/> : <MdCheckBoxOutlineBlank size="20px"/>}
                 </div>
-                {title}
+                <p className="model-button-label">
+                    {title}
+                </p>
+                <div className="more-info-button" data-md-tooltip="More Info">
+                    {selected ? <IoMdArrowDropup size="23px"/> : <IoMdArrowDropdown size="23px"/>}
+                </div>
             </button>
                 
         )

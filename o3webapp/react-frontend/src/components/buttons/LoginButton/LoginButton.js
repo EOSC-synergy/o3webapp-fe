@@ -16,10 +16,10 @@ https://aai-dev.egi.eu/oidc/authorize
 const egi_endpoint = 'https://aai-dev.egi.eu/oidc/authorize'
 const client_id = 'o3webapp'
 const redirect_uri = 'http://localhost:3000/redirect_url'
-const scope = 'openid%20profile%20email'
+const scope = 'openid'
 const response_type = 'id_token'
 const response_mode = 'query'
-//const client_secret = ''
+const client_secret = ''
 let nonce = null
 let requestURL = null
 

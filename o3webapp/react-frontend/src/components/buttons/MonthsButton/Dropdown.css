@@ -1,0 +1,35 @@
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.dropdown-header {
+    width: fit-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 20px;
+    
+}
+
+.dropdown-list-item {
+    padding: 5px;
+    width: 150px;
+    margin: 2px;
+    font-size: 18px;
+
+    color: white;
+    background-color: rgb(105, 105, 105);
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .9);
+}

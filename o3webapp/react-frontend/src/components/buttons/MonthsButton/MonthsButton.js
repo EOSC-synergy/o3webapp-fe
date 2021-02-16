@@ -18,6 +18,9 @@ second one for the currently choosen card/setting.
 
 import React from 'react';
 
+import './MonthsButton.css'
+import './Dropdown.css'
+
 class MonthsButton extends React.Component {
     constructor(props) {
         super(props);
@@ -126,7 +129,8 @@ class MonthsButton extends React.Component {
         const customSelected = this.state.season[4].selected;
 
         return (
-            <div className="month-button-wrapper">
+            <div className="month-button-wrapper section-wrapper">
+                <p className="section-label">Season</p>
                 <Dropdown 
                 title="Select a season!"
                 list={this.state.season}
@@ -191,7 +195,7 @@ class Dropdown extends React.Component {
             <div className="dropdown-wrapper">
                 <button
                 type="button"
-                className="dropdown-header"
+                className="dropdown-header mat-style"
                 onClick={this.toggleList}
                 >
                     <div className="dropdown-header-title">

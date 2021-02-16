@@ -15,7 +15,7 @@ import jwt_decode from "jwt-decode";
 let Tabs = [
   {name: "Home", path: "/"},
   {name: "Plot Generation", path: "/generation"},
-  {name: "Manipulation", path: "/manipulation"}, 
+  //{name: "Manipulation", path: "/manipulation"}, 
   {name: "About", path: "/about"}
 ]
 
@@ -125,7 +125,7 @@ class Navigation extends Component {
     if (loggedIn) {
       return (
         <nav className="NavBar">
-          <ul className="NavBarContainer">
+          <u1 className="NavBarContainer">
 
             {Tabs.map((element, index) => {
               return (
@@ -139,13 +139,13 @@ class Navigation extends Component {
               )
             })}
             <LogoutButton loggedOut = {this.loggedOut}/>
-          </ul>
+          </u1>
         </nav>
       );
     } else {
       return (
         <nav className="NavBar">
-          <ul className="NavBarContainer">
+          <u1 className="NavBarContainer">
 
             {Tabs.map((element, index) => {
               return (
@@ -159,7 +159,7 @@ class Navigation extends Component {
               )
             })}
             <LoginButton/>
-          </ul>
+          </u1>
         </nav>
       );
     }

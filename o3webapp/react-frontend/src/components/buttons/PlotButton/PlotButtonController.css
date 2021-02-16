@@ -1,0 +1,45 @@
+.plot-selection-wrapper {
+    background-color: rgb(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 20px;
+    width: 70%;
+    border-radius: 20px;
+}
+
+.radio-list {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-basis: 100%;
+    align-items: center;
+}
+
+.radio-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 5px;
+    width: fit-content;
+    cursor: pointer;
+
+    /*
+    color: white;
+    background-color: rgb(78, 78, 78);
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    */
+}
+
+.radio-item-label{
+    margin: 2px;
+}
+
+.radio-icon-wrapper {
+    margin: 2px;
+    display: flex;
+}
