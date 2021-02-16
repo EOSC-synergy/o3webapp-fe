@@ -9,6 +9,8 @@ import Cookies from 'universal-cookie';
 
 import './Generationform.css'
 
+import configData from '../../config.json'
+
 
 class GenerationForm extends React.Component {
     /**
@@ -17,13 +19,13 @@ class GenerationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pType: "tco3_zm",
-            models: [],
-            begin: 1970,
-            end: 2100,
-            month: [1, 2, 3],
-            lat_min: -90,
-            lat_max: 0,
+            pType: configData.GENERATION_DEFAULTS.PLOT_TYPE,
+            models: configData.GENERATION_DEFAULTS.MODELS,
+            begin: configData.GENERATION_DEFAULTS.BEGIN,
+            end: configData.GENERATION_DEFAULTS.END,
+            month: configData.GENERATION_DEFAULTS.MONTH,
+            lat_min: configData.GENERATION_DEFAULTS.LAT_MIN,
+            lat_max: configData.GENERATION_DEFAULTS.LAT_MAX,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
