@@ -199,7 +199,7 @@ class GenerationForm extends React.Component {
 
         return (
             <div className="generation-form-wrapper">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="generation-form">
                     <div>
                         <PlotButtonController
                             handleChange={this.handlePlotTypeChange} />
@@ -213,30 +213,27 @@ class GenerationForm extends React.Component {
                     </div>
     
     
-                    <div>
-                        <YearButton 
-                            year={begin}
-                            bound="lower"
-                            handleYearChange={this.handleLowerYearChange} />
-                        <YearButton
-                            year={end}
-                            bound="upper"
-                            handleYearChange={this.handleUpperYearChange} />
+                    <div className="settings-section-wrapper section-wrapper">
+                        <div className="year-section-wrapper section-wrapper">
+                            <p className="section-label">Years to plot</p>
+                            <YearButton 
+                                year={begin}
+                                bound="lower"
+                                handleYearChange={this.handleLowerYearChange} />
+                            <YearButton
+                                year={end}
+                                bound="upper"
+                                handleYearChange={this.handleUpperYearChange} />
+                        </div>
+                            <MonthsButton
+                                months={months}
+                                handleChange={this.handleMonthChange} />
+                        
+                            <LatitudeButton
+                                latitude={[lat_min, lat_max]}
+                                handleChange={this.handleLatitudeChange} />
                     </div>
-                    <br />
-    
-                    <div>
-                        <MonthsButton
-                            months={months}
-                            handleChange={this.handleMonthChange} />
-                    </div>
-                    <div>
-                        <LatitudeButton
-                            latitude={[lat_min, lat_max]}
-                            handleChange={this.handleLatitudeChange} />
-                    </div>
-                    <br />
-                    <input type='submit' value="Submit" />
+                    <input type='submit' value="Submit" className="submit-button mat-style" />
                 </form>
             </div>
         );

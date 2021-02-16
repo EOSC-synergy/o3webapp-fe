@@ -34,7 +34,6 @@ class Manipulation extends React.Component {
         console.log(request_url)
         Axios.post(request_url, plotCookie, headersConfig)
             .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'))
-            .catch(console.log("didnt get an answer"))  //TODO Implement error when api doenst answer 
 
     }
 
