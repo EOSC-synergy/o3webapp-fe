@@ -119,7 +119,7 @@ class GenerationForm extends React.Component {
 
         if (oldmodels.find(_model => _model.model === model)) {
             //removes the model from the list
-            const index = oldmodels.indexOf(model);
+            const index = oldmodels.findIndex(__model => __model.model === model)
             oldmodels.splice(index, 1);
         } else {
             //create new model object with no special color and no highlighing
