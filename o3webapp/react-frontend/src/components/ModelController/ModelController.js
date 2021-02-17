@@ -1,6 +1,7 @@
 import React from 'react';
 import ModelButton from '../buttons/ModelButton/ModelButton'
 import configData from '../../config.json'
+import './ModelController.css'
 
 //get path from Config file
 const model_list_url = configData.SERVER_URL + configData.MODEL_LIST_PATH;

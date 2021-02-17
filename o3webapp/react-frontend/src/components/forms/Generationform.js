@@ -202,17 +202,13 @@ class GenerationForm extends React.Component {
         return (
             <div className="generation-form-wrapper">
                 <form onSubmit={this.handleSubmit} className="generation-form">
-                    <div>
                         <PlotButtonController
                             handleChange={this.handlePlotTypeChange} />
-                    </div>
     
-                    <div>
                         <ModelController
                             handleChange={this.handleModelChange}
                             selectedModels={models.map(model => {return model.model})}
                             plotType={pType} />
-                    </div>
     
     
                     <div className="settings-section-wrapper section-wrapper">
