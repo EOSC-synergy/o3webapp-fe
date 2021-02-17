@@ -1,10 +1,9 @@
 import React from 'react';
 import ModelButton from '../buttons/ModelButton/ModelButton'
+import configData from '../../config.json'
 
-//*change this to the production api for production builds
-//currently this runs with
-const model_list_url = 'http://localhost:8081/api/list-models';
-//const model_list_url = 'http://o3api.test.fedcloud.eu:30505/api/list_models';
+//get path from Config file
+const model_list_url = configData.SERVER_URL + configData.MODEL_LIST_PATH;
 
 
 /**
@@ -25,6 +24,11 @@ class ModelController extends React.Component {
     }
 
     componentDidMount() {
+        const currplotType = this.props.plotType;
+        console.log(currplotType);
+        
+        const request_url = model_list_url + '/' + currplotType;
+        console.log(request_url)
         
         //gets the models from the backend
         const requestOptions = {
@@ -34,7 +38,7 @@ class ModelController extends React.Component {
                 //'Accept': 'application/json' 
             },
         };
-        fetch(model_list_url, requestOptions)
+        fetch(request_url, requestOptions)
             .then(response => response.json())
             .then(data => this.setState({ availableModels: data.models }))
             .catch(console.log);
@@ -70,14 +74,14 @@ class ModelController extends React.Component {
         const filteredModels = models.filter( (model) => {
             return model.toLowerCase().includes(inputValue.toLowerCase());
         })
-        console.log(filteredModels)
 
 
 
         return (
-            <div>
-                <div className="seach-area-wrapper">
-                    <label htmlFor="search">Enter for keywords</label>
+            <div className="model-section-wrapper section-wrapper">
+                <p className="section-label">Models</p>
+                <div className="search-area-wrapper">
+                    <label htmlFor="search">Enter a keyword</label>
                     <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>
                 </div>
 

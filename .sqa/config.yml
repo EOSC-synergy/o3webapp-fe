@@ -1,0 +1,35 @@
+config:
+  project_repos:
+    o3webapp:
+      repo: 'https://git.scc.kit.edu/synergy.o3as/o3webapp.git'
+      branch: master
+#environment:
+#  JPL_DOCKERPUSH: "o3webapp"
+sqa_criteria:
+  qc_style:
+    repos:
+      o3webapp:
+        container: o3webapp-testing
+        tox:
+          tox_file: /o3webapp-testing/tox.ini
+          testenv:
+            - pep8
+  qc_coverage:
+    repos:
+      o3webapp:
+        container: o3webapp-testing
+        tox:
+          tox_file: /o3webapp-testing/tox.ini
+          testenv: 
+            - cover
+            - cobertura
+  qc_security:
+    repos:
+      o3webapp:
+        container: o3webapp-testing
+        tox:
+          tox_file: /o3webapp-testing/tox.ini
+          testenv:
+            - bandit
+
+timeout: 900

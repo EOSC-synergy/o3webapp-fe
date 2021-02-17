@@ -1,0 +1,36 @@
+{
+    "SERVER_URL": "http://localhost:5000",
+    "MODEL_LIST_PATH": "/model_list",
+    "PLOT_PATH": "/plot",
+    "GENERATION_DEFAULTS": {
+        "PLOT_TYPE": "tco3_zm",
+        "MODELS": [
+            {
+                "model": "CCMI-1_ACCESS-refC2",
+                "style": {
+                    "color": "#000000",
+                    "highlighted": "0"
+                }
+            },
+            {
+                "model": "CCMI-1_CCCma-CMAM-refC2",
+                "style": {
+                    "color": "#ff0000",
+                    "highlighted": "0"
+                }
+            },
+            {
+                "model": "CCMI-1_CHASER-MIROC-ESM-refC2",
+                "style": {
+                    "color": "#ffdd00",
+                    "highlighted": "0"
+                }
+            }
+        ],
+        "BEGIN": 1970,
+        "END": 2000,
+        "MONTH": [1,2,3],
+        "LAT_MIN": -90,
+        "LAT_MAX": 0
+    }
+}

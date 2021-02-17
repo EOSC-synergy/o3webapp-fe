@@ -1,10 +1,10 @@
-import GenerationForm from '../../components/forms/Generationform'
+import GenerationFormWithRouter from '../../components/forms/Generationform'
 import './Generation.css'
 
 function Generation() {
     return (
-        <div className="GenerationFormContainer">
-            <GenerationForm />
+        <div className="generation-container">
+            <GenerationFormWithRouter />
         </div>
     );
 }

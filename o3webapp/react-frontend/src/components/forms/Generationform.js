@@ -4,12 +4,13 @@ import MonthsButton from '../buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
 import ModelController from '../ModelController/ModelController';
+import { withRouter } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
-const plotTypes = {
-    one: 'plot1',
-    two: 'plot2',
-    three: 'plot3',
-};
+import './Generationform.css'
+
+import configData from '../../config.json'
+
 
 class GenerationForm extends React.Component {
     /**
@@ -18,11 +19,13 @@ class GenerationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            plotType: "tco3_zm",
-            models: [],
-            years: [1970, 2100],
-            months: [1, 2, 3],
-            latitude: [-90, 0],
+            pType: configData.GENERATION_DEFAULTS.PLOT_TYPE,
+            models: configData.GENERATION_DEFAULTS.MODELS,
+            begin: configData.GENERATION_DEFAULTS.BEGIN,
+            end: configData.GENERATION_DEFAULTS.END,
+            month: configData.GENERATION_DEFAULTS.MONTH,
+            lat_min: configData.GENERATION_DEFAULTS.LAT_MIN,
+            lat_max: configData.GENERATION_DEFAULTS.LAT_MAX,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,21 +38,25 @@ class GenerationForm extends React.Component {
         this.handleLatitudeChange = this.handleLatitudeChange.bind(this);
         this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
+        this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
     }
 
 
     handlePlotTypeChange(plotType) {
         console.log(plotType);
         this.setState({
-            plotType: plotType
+            pType: plotType
         })
+        this.saveStateAsCookie();
     }
 
-    handleLatitudeChange(new_latitude) {
-        console.log(new_latitude);
+    handleLatitudeChange(latitude_array) {
+        console.log("Updated Lattitude:", latitude_array);
         this.setState({
-            latitude: new_latitude
+            lat_min: latitude_array[0],
+            lat_max: latitude_array[1],
         })
+        this.saveStateAsCookie();
     }
 
     handleMonthChange(new_months) {
@@ -57,6 +64,7 @@ class GenerationForm extends React.Component {
         this.setState({
             months: new_months
         });
+        this.saveStateAsCookie();
     }
 
     /**
@@ -64,7 +72,8 @@ class GenerationForm extends React.Component {
      * @param {number} year - entered year
      */
     handleLowerYearChange(year) {
-        const oldState = this.state.years;
+        //const oldBegin = this.state.begin;
+        //const oldEnd = this.state.end;
 
 
         /* validate input,
@@ -75,8 +84,9 @@ class GenerationForm extends React.Component {
         */
 
         this.setState({
-            years: [year, oldState[1]]
+            begin: year
         })
+        this.saveStateAsCookie();
     }
 
     /**
@@ -84,7 +94,8 @@ class GenerationForm extends React.Component {
      * @param {number} year - entered year
      */
     handleUpperYearChange(year) {
-        const oldState = this.state.years;
+        //const oldBegin = this.state.begin;
+        //const oldEnd = this.state.end;
 
         /* validate input,
             TODO: Implement
@@ -94,62 +105,103 @@ class GenerationForm extends React.Component {
         */
 
         this.setState({
-            years: [oldState[0], year]
+            end: year
         })
+        this.saveStateAsCookie();
     }
 
+    /**
+     * updates the state with the selcted models. Inserts the object needed for the backend instead of the string
+     * @param model the selected model as string
+     */
     handleModelChange(model) {
         var oldmodels = this.state.models;
 
-        if (oldmodels.includes(model)) {
+        if (oldmodels.find(_model => _model.model === model)) {
             //removes the model from the list
             const index = oldmodels.indexOf(model);
             oldmodels.splice(index, 1);
         } else {
+            //create new model object with no special color and no highlighing
+            const newmodel = {
+                model: model,
+                style: {
+                    color: "#000000",
+                    highlighted: "0",
+                }
+            }
+
             //add model to list
-            oldmodels.push(model);
+            oldmodels.push(newmodel);
         }
 
+        //update state
         this.setState({
             models: oldmodels
         })
+        console.log(this.state.models)
+        this.saveStateAsCookie();
     }
     
 
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
     /**
      * handles the submit of the request
-     *  calls the API with the submitted values and redirects
+     *  saves the submitted values as a cookie and redirects
      * @param event 
      */
     handleSubmit(event) {
-        alert('this was submitted: ' 
-                + "\nPlottype: " + this.state.plotType
-                + "\nyears: " + this.state.years[0] + " to " + this.state.years[1]
-                + "\nmonths: " + this.state.months
-                + "\nlatitude:" + this.state.latitude
-                + "\nmodels:" + this.state.models
-                );
         event.preventDefault();
+        this.saveStateAsCookie();
 
-        //convert state to json
-        const currState = this.state;
-        const jsonState = JSON.stringify(currState);
-        console.log(jsonState)
+        //redirect to manipulation site
+        this.props.history.push("/manipulation");
+
+    }
+
+    /**
+     * saves the current state (by this the settings the user selected) as a cookie
+     */
+    saveStateAsCookie() {
+        const cookie = new Cookies()
+        const currDate = new Date();
+        const expDate = new Date().setFullYear(currDate.getFullYear() +1);
+        let currState = this.state;
+
+        // pType: "tco3_zm",
+        //     models: [],
+        //     begin: 1970,
+        //     end: 2100,
+        //     month: [1, 2, 3],
+        //     lat_min: -90,
+        //     lat_max: 0,
+
+
+        let saveState = {
+            pType: currState.pType,
+            models: currState.models,
+            begin: currState.begin.toString(),
+            end: currState.end.toString(),
+            month: currState.month.map(String),
+            lat_min: currState.lat_min.toString(),
+            lat_max: currState.lat_max.toString(),
+            output: "json",
+        }
+        console.log(saveState);
+        //currState['output'] = "json";
+        const jsonState = JSON.stringify(saveState);
+        cookie.set('plotValues', jsonState, {path: '/', maxAge: expDate});
     }
 
     /**
      * renders the form
      */
     render() {
-        const years = this.state.years;
-        const months = this.state.months;
-        const latitude = this.state.latitude;
-        const models = this.state.models
+        const { pType, models, begin, end, months, lat_min, lat_max } = this.state;
 
         return (
             <div className="generation-form-wrapper">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="generation-form">
                     <div>
                         <PlotButtonController
                             handleChange={this.handlePlotTypeChange} />
@@ -158,38 +210,38 @@ class GenerationForm extends React.Component {
                     <div>
                         <ModelController
                             handleChange={this.handleModelChange}
-                            selectedModels={models} />
+                            selectedModels={models.map(model => {return model.model})}
+                            plotType={pType} />
                     </div>
     
     
-                    <div>
-                        <YearButton 
-                            year={years[0]}
-                            bound="lower"
-                            handleYearChange={this.handleLowerYearChange} />
-                        <YearButton
-                            year={years[1]}
-                            bound="upper"
-                            handleYearChange={this.handleUpperYearChange} />
+                    <div className="settings-section-wrapper section-wrapper">
+                        <div className="year-section-wrapper section-wrapper">
+                            <p className="section-label">Years to plot</p>
+                            <YearButton 
+                                year={begin}
+                                bound="lower"
+                                handleYearChange={this.handleLowerYearChange} />
+                            <YearButton
+                                year={end}
+                                bound="upper"
+                                handleYearChange={this.handleUpperYearChange} />
+                        </div>
+                            <MonthsButton
+                                months={months}
+                                handleChange={this.handleMonthChange} />
+                        
+                            <LatitudeButton
+                                latitude={[lat_min, lat_max]}
+                                handleChange={this.handleLatitudeChange} />
                     </div>
-                    <br />
-    
-                    <div>
-                        <MonthsButton
-                            months={months}
-                            handleChange={this.handleMonthChange} />
-                    </div>
-                    <div>
-                        <LatitudeButton
-                            latitude={latitude}
-                            handleChange={this.handleLatitudeChange} />
-                    </div>
-                    <br />
-                    <input type='submit' value="Submit" />
+                    <input type='submit' value="Submit" className="submit-button mat-style" />
                 </form>
             </div>
         );
     }
 }
 
-export default GenerationForm;
+const GenerationFormWithRouter = withRouter(GenerationForm)
+
+export default GenerationFormWithRouter;

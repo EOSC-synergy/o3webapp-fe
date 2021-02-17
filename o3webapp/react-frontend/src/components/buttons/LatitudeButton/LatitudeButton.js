@@ -1,4 +1,5 @@
 import React from 'react';
+import './LatitudeButton.css'
 
 /**
  * Represents the latitude selection
@@ -138,7 +139,8 @@ class LatitudeButton extends React.Component {
         const customSelected = this.state.latitude[7].selected;
 
         return (
-            <div className="latitude-button-wrapper">
+            <div className="latitude-button-wrapper section-wrapper">
+                <p className="section-label">Latitude Band</p>
                 <Dropdown 
                 title="Select a Latitude Band!"
                 list={this.state.latitude}
@@ -203,7 +205,7 @@ class Dropdown extends React.Component {
             <div className="dropdown-wrapper">
                 <button
                 type="button"
-                className="dropdown-header"
+                className="dropdown-header mat-style"
                 onClick={this.toggleList}
                 >
                     <div className="dropdown-header-title">
