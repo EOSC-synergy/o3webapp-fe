@@ -231,7 +231,7 @@ class GenerationForm extends React.Component {
                                 latitude={[lat_min, lat_max]}
                                 handleChange={this.handleLatitudeChange} />
                     </div>
-                    <input type='submit' value="Submit" className="submit-button mat-style" />
+                    <input type='submit' value="Submit" className="submit-button mat-style-accent" />
                 </form>
             </div>
         );

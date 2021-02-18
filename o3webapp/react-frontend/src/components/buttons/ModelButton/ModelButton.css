@@ -6,21 +6,50 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
-    align-items: center;
     margin: 10px;
-    padding: 5px;
+    padding: 0px;
     width: 500px;
-    height: 40px;
+    height: 45px;
     cursor: pointer;
-    
-    /*
-    color: white;
-    background-color: rgb(78, 78, 78);
-    border-width: 0;
-    outline: none;
-    border-radius: 2px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6); 
-    */
+}
+
+.model-button-opened {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: top;
+    margin: 10px;
+    padding: 0px;
+    width: 500px;
+    height: 90px;
+    cursor: pointer;
+}
+
+.model-button span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 45px;
+    width: 100%;
+    padding: 5px;
+}
+
+.model-button-opened span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 45px;
+    width: 100%;
+    padding: 5px;
+}
+
+.model-button-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 100%;
 }
 
 .model-button-label{
@@ -44,4 +73,8 @@
 .more-info-button:hover {
     border-radius: 100%;
     background-color: rgb(114, 114, 114);
+}
+
+.model-button-moreInfo {
+    padding-left: 8px;
 }

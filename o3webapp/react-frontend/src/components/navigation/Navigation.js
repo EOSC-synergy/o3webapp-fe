@@ -56,6 +56,8 @@ class Navigation extends Component {
       loggedIn = true
     }
 
+    console.log('User ID: ' + cookies.get('userID'))
+
     this.handleTabClick = this.handleTabClick.bind(this);
     this.loggedOut = this.loggedOut.bind(this);
     this.loginCallback = this.loginCallback.bind(this)
@@ -77,7 +79,6 @@ class Navigation extends Component {
     //Sets the cookie
     const cookies = new Cookies();
     cookies.set('userID', subject_ID, { path: '/' });
-    console.log(cookies.get('userID'))
 
     //Reads the cookie for last path before login
     let previousPath = cookies.get('o3webappPreviousPath')

@@ -8,7 +8,7 @@ class StartGeneratingButton extends Component {
     render() {
         return (
             <li>
-                <Link to='/generation' className="startButton">Start Generating!</Link>
+                <Link to='/generation' className="startButton mat-style-accent">Start Generating!</Link>
             </li>
         )
     }
