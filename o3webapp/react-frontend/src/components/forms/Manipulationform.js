@@ -1,19 +1,23 @@
-import React from 'react';
+import React from 'react'
+import { withRouter, Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+
 import LatitudeButton from '../buttons/LatitudeButton/LatitudeButton';
 import MonthsButton from '../buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
 import ModelController from '../ModelController/ModelController';
-import { withRouter } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 
 import './Generationform.css'
 
 import configData from '../../config.json'
 
 
-class GenerationForm extends React.Component {
-    /**
+
+
+
+class ManipulationForm extends React.Component {
+     /**
      * @constructor
      */
     constructor(props) {
@@ -205,9 +209,11 @@ class GenerationForm extends React.Component {
         return (
             <div className="generation-form-wrapper">
                 <form onSubmit={this.handleSubmit} className="generation-form">
-                        <PlotButtonController
-                            handleChange={this.handlePlotTypeChange} />
-    
+                        
+                        <div className="plot-section-wrapper section-wrapper">
+                            <h1>Selected Plot type: {pType}.
+                            To change the plot type and draw another plot go back to the generation page or click <Link to="/generation"> here</Link></h1>
+                        </div>
                         <ModelController
                             handleChange={this.handleModelChange}
                             selectedModels={models.map(model => {return model.model})}
@@ -241,6 +247,6 @@ class GenerationForm extends React.Component {
     }
 }
 
-const GenerationFormWithRouter = withRouter(GenerationForm)
 
-export default GenerationFormWithRouter;
+const ManipulationFormWithRouter = withRouter(ManipulationForm);
+export default ManipulationFormWithRouter;

@@ -15,7 +15,6 @@ import jwt_decode from "jwt-decode";
 let Tabs = [
   {name: "Home", path: "/"},
   {name: "Plot Generation", path: "/generation"},
-  {name: "Manipulation", path: "/manipulation"}, 
   {name: "About", path: "/about"}
 ]
 

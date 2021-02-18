@@ -3,6 +3,8 @@ import './Manipulation.css';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 
+import ManipulationFormWithRouter from '../../components/forms/Manipulationform'
+
 import configData from '../../config.json'
 
 //url from fake backend for testing local
@@ -43,9 +45,9 @@ class Manipulation extends React.Component {
     render() {
         return (
             <div className="ManipulationPageContainer">
-                <p>Manipulation Page</p>
                 <div id='test-plot' className="bk-root"></div>
-    
+
+                <ManipulationFormWithRouter />
             </div>
         );
     };

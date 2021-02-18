@@ -27,10 +27,8 @@ class ModelController extends React.Component {
 
     componentDidMount() {
         const currplotType = this.props.plotType;
-        console.log(currplotType);
         
         const request_url = model_list_url + '/' + currplotType;
-        console.log(request_url)
         
         //gets the models from the backend
         const requestOptions = {
