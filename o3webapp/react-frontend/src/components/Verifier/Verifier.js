@@ -35,10 +35,10 @@ export function verifyLatitude(lat_min, lat_max) {
 export function verifyYear(begin, end) {
 
     //catch undefined or null numbers
-    if (Number.isNaN(begin)) {
+    if (isNaN(begin)) {
         throw new VerificationError('Please enter a valid start year!');
     }
-    if (Number.isNaN(end)) {
+    if (isNaN(end)) {
         throw new VerificationError('Please enter a valid end year!');
     }
 
@@ -54,6 +54,7 @@ export function verifyYear(begin, end) {
     if (begin >= end) {
         throw new VerificationError("The upper year needs to be bigger than the lower!");
     }
+    return true;
 }
 
 /**
