@@ -210,10 +210,7 @@ class ManipulationForm extends React.Component {
             <div className="generation-form-wrapper">
                 <form onSubmit={this.handleSubmit} className="generation-form">
                         
-                        <div className="plot-section-wrapper section-wrapper">
-                            <h1>Selected Plot type: {pType}.
-                            To change the plot type and draw another plot go back to the generation page or click <Link to="/generation"> here</Link></h1>
-                        </div>
+                       
                         <ModelController
                             handleChange={this.handleModelChange}
                             selectedModels={models.map(model => {return model.model})}
