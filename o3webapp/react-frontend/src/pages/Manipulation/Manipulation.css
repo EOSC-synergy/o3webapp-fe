@@ -20,3 +20,11 @@
     width: 800px;
     padding-top: 50px;
 }
+
+.plot-and-download-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 70%;
+    align-items: center;
+}

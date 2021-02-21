@@ -52,3 +52,7 @@
     justify-content: space-evenly;
 }
 
+.generation-form-wrapper input {
+    color: #ffffff;
+}
+

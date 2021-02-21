@@ -1,5 +1,5 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react'
+import { withRouter, Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import LatitudeButton from '../buttons/LatitudeButton/LatitudeButton';
@@ -7,15 +7,17 @@ import MonthsButton from '../buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../buttons/PlotButton/PlotButtonController';
 import YearButton from '../buttons/YearButton/YearButton'
 import ModelController from '../ModelController/ModelController';
-import * as Verifier from '../Verifier/Verifier'
 
 import './Generationform.css'
 
 import configData from '../../config.json'
 
 
-class GenerationForm extends React.Component {
-    /**
+
+
+
+class ManipulationForm extends React.Component {
+     /**
      * @constructor
      */
     constructor(props) {
@@ -54,16 +56,9 @@ class GenerationForm extends React.Component {
 
     handleLatitudeChange(latitude_array) {
         console.log("Updated Lattitude:", latitude_array);
-        
         var lat_min = (latitude_array[0] !== undefined) ? latitude_array[0] : configData.GENERATION_DEFAULTS.LAT_MIN;
         var lat_max = (latitude_array[1] !== undefined) ? latitude_array[1] : configData.GENERATION_DEFAULTS.LAT_MAX;
-
-        try {
-            Verifier.verifyLatitude(lat_min, lat_max)
-        } catch(error) {
-            console.error(error.message)
-        }
-
+        console.log(lat_min, lat_max)
         this.setState({
             lat_min: lat_min,
             lat_max: lat_max,
@@ -73,17 +68,9 @@ class GenerationForm extends React.Component {
 
     handleMonthChange(new_months) {
         console.log(new_months);
-
-        try {
-            Verifier.verifyMonths(new_months);
-        } catch(error) {
-            console.error(error.message);
-        }
-
         this.setState({
             months: new_months
         });
-
         this.saveStateAsCookie();
     }
 
@@ -102,11 +89,7 @@ class GenerationForm extends React.Component {
             year needs to be a number
             year needs to be in predefined region (1970-2100) or something 
         */
-        try {
-            Verifier.verifyYear(year, this.state.end);
-        } catch(error) {
-            console.error(error.message);
-        }
+
         this.setState({
             begin: year
         })
@@ -127,12 +110,6 @@ class GenerationForm extends React.Component {
             year needs to be a number
             year needs to be in predefined region (1970-2100) or something 
         */
-
-        try {
-            Verifier.verifyYear(this.state.begin, year);
-        } catch(error) {
-            console.error(error.message);
-        }
 
         this.setState({
             end: year
@@ -232,9 +209,8 @@ class GenerationForm extends React.Component {
         return (
             <div className="generation-form-wrapper">
                 <form onSubmit={this.handleSubmit} className="generation-form">
-                        <PlotButtonController
-                            handleChange={this.handlePlotTypeChange} />
-    
+                        
+                       
                         <ModelController
                             handleChange={this.handleModelChange}
                             selectedModels={models.map(model => {return model.model})}
@@ -268,6 +244,6 @@ class GenerationForm extends React.Component {
     }
 }
 
-const GenerationFormWithRouter = withRouter(GenerationForm)
 
-export default GenerationFormWithRouter;
+const ManipulationFormWithRouter = withRouter(ManipulationForm);
+export default ManipulationFormWithRouter;
