@@ -12,6 +12,8 @@ import configData from '../../config.json';
 //url from fake backend for testing local
 const plot_api_url = configData.SERVER_URL + configData.PLOT_PATH;
 
+let loggedIn = false
+
 class Manipulation extends React.Component {
     constructor(props) {
         super(props)
@@ -19,6 +21,14 @@ class Manipulation extends React.Component {
             plot: {
                 pType: configData.GENERATION_DEFAULTS.PLOT_TYPE,
             }
+        }
+
+        //Checks if user is logged in
+        const cookies = new Cookies();
+        if (cookies.get('userID') === undefined) {
+            loggedIn = false
+        } else {
+            loggedIn = true
         }
     }
 
@@ -62,13 +72,13 @@ class Manipulation extends React.Component {
             <div className="ManipulationPageContainer">
                 <div className="plot-and-download-wrapper">
                     <div className="plot-section-wrapper section-wrapper">
-                                <h2>Selected Plot type: {plot.pType}.</h2>
+                                <h2>Selected Plot type: <span className="plot-type">{plot.pType}</span></h2>
                                 <h3>To change the plot type and draw another plot go back to the generation page or click <Link to="/generation" className="mat-style-accent"> here</Link></h3>
                     </div>
 
                     <div id='test-plot' className="bk-root"></div>
 
-                    <DownloadSection plot={plot}/>
+                    <DownloadSection loggedIn={loggedIn} plot={plot}/>
                 </div>
 
                 <ManipulationFormWithRouter />

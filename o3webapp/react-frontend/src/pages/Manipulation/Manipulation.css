@@ -28,6 +28,10 @@
     border-radius: 5px;
 }
 
+.plot-type {
+    color: #fed136;
+}
+
 .plot-section-wrapper {
     color: white
 }

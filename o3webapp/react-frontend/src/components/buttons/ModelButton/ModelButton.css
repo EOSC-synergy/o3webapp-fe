@@ -79,3 +79,30 @@
 .model-button-moreInfo {
     padding-left: 8px;
 }
+
+[data-md-tooltip-model-button] {
+    position: relative;
+  }
+  
+[data-md-tooltip-model-button]:before {
+    content: attr(data-md-tooltip-model-button);
+    position: absolute;
+    bottom: 0px;
+    left: -150%;
+    padding: 8px;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: right;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    width: 50px;
+    font-size: 10px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip-model-button]:hover:before {
+transform: translateX(-50%) scale(1); 
+}
+  

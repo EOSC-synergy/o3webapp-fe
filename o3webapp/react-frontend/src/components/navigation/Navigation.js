@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 
 
 
+
 /** This controls all the Tabs in the Navigation bar
  * @name: Name to be displayed
  * @path: Path to be linked to

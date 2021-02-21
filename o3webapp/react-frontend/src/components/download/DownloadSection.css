@@ -23,3 +23,30 @@
     justify-content: space-evenly;
     width: 100%;
 }
+
+[data-md-tooltip] {
+    position: relative;
+  }
+  
+[data-md-tooltip]:before {
+    content: attr(data-md-tooltip);
+    position: absolute;
+    bottom: 55px;
+    left: 20%;
+    padding: 8px;
+    transform: translateX(0%) scale(0);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: bottom;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    width: 100px;
+    font-size: 11px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip]:hover:before {
+transform: translateX(0%) scale(1); 
+}
+  

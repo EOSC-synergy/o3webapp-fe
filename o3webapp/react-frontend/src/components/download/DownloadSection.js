@@ -48,9 +48,20 @@ export function DownloadSection(props) {
         <div className="download-section">
             <h2>Download the Plot</h2>
             <div className="download-button-wrapper">
-                <button onClick={downloadPNG} className="mat-style-accent download-button">PNG</button>
+
+                {props.loggedIn ? 
+                    <button onClick={downloadPNG} className="mat-style-accent download-button">PNG</button>
+                : 
+                    <button className="mat-style-accent-disabled download-button" data-md-tooltip="Not logged in">PNG</button>
+                }
+
                 <button onClick={downloadPDF} className="mat-style-accent download-button">PDF</button>
-                <button onClick={downloadCSV} className="mat-style-accent download-button">CSV</button>
+
+                {props.loggedIn ? 
+                    <button onClick={downloadCSV} className="mat-style-accent download-button">CSV</button>
+                : 
+                    <button className="mat-style-accent-disabled download-button" data-md-tooltip="Not logged in">CSV</button>
+                }
             </div>
         </div>
     )

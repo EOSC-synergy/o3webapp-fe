@@ -11,6 +11,7 @@ import Manipulation from './pages/Manipulation/Manipulation.js';
 import About from './pages/About/About.js';
 import Home from './pages/Home/Home.js';
 import Navigation from './components/navigation/Navigation.js';
+import CookieConsent from "react-cookie-consent";
 
 
 class App extends Component {
@@ -46,6 +47,12 @@ class App extends Component {
               <Home loginRedirect={false}/>
             </Route>
           </Switch>
+          <CookieConsent
+            style={{ background: "rgb(51, 51, 51, .8)"}}
+            buttonStyle={{ color: "#4e503b", fontSize: "13px", background: "rgb(254, 209, 54)" }}
+            >
+              This website uses cookies to enhance the user experience.
+          </CookieConsent>
       </Router>
     );
   }

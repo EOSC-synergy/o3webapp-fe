@@ -63,7 +63,7 @@ class ModelButton extends React.Component {
                             {title}
                         </p>
                     </span>
-                    <div className="more-info-button" data-md-tooltip="More Info" onClick={this.handleMoreInfoClick}>
+                    <div className="more-info-button" data-md-tooltip-model-button="More Info" onClick={this.handleMoreInfoClick}>
                         {opened ? <IoMdArrowDropup size="23px"/> : <IoMdArrowDropdown size="23px"/>}
                     </div>
                 </div>

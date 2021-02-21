@@ -47,28 +47,14 @@ body, html, #root {
   background-color: #f6bf01;
 }
 
-[data-md-tooltip] {
-  position: relative;
+.mat-style-accent-disabled {
+  font-family: Trebuchet, Arial, sans-serif;
+  color: white;
+  background-color: rgb(131, 131, 131);
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .9);
+  cursor: default;
 }
 
-[data-md-tooltip]:before {
-    content: attr(data-md-tooltip);
-    position: absolute;
-    bottom: 0px;
-    left: -150%;
-    padding: 8px;
-    transform: translateX(-50%) scale(0);
-    transition: transform 0.3s ease-in-out;
-    transform-origin: right;
-    background: #616161e6;
-    color: white;
-    border-radius: 2px;
-    width: 50px;
-    font-size: 10px;
-    font-family: Roboto,sans-serif;
-    font-weight: 400;
-}
-
-[data-md-tooltip]:hover:before {
-  transform: translateX(-50%) scale(1); 
-}
