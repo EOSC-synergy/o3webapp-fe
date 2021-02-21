@@ -29,6 +29,10 @@ class Navigation extends Component {
     let currentPath = window.location.pathname
     let currentTab = Tabs.find(currentTab => currentTab.path === currentPath)
 
+    if (currentPath === '/manipulation') {
+      currentTab = Tabs.find(currentTab => currentTab.path === '/generation')
+    }
+
     //Catch any errors, if path is not matching any tabs, activate home tab
     try {
       this.state = {

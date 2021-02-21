@@ -61,15 +61,14 @@ class Manipulation extends React.Component {
         return (
             <div className="ManipulationPageContainer">
                 <div className="plot-and-download-wrapper">
-                <div id='test-plot' className="bk-root"></div>
+                    <div className="plot-section-wrapper section-wrapper">
+                                <h2>Selected Plot type: {plot.pType}.</h2>
+                                <h3>To change the plot type and draw another plot go back to the generation page or click <Link to="/generation" className="mat-style-accent"> here</Link></h3>
+                    </div>
 
-                <div className="plot-section-wrapper section-wrapper">
-                            <h2>Selected Plot type: {plot.pType}.
-                            To change the plot type and draw another plot go back to the generation page or click <Link to="/generation"> here</Link></h2>
-                </div>
+                    <div id='test-plot' className="bk-root"></div>
 
-
-                <DownloadSection plot={plot}/>
+                    <DownloadSection plot={plot}/>
                 </div>
 
                 <ManipulationFormWithRouter />

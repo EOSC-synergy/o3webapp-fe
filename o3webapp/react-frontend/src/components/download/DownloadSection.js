@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 import configData from './../../config.json'
-
+import './DownloadSection.css'
 
 
 
@@ -45,11 +45,13 @@ export function DownloadSection(props) {
     }
 
     return (
-        <div>
+        <div className="download-section">
             <h2>Download the Plot</h2>
-            <button onClick={downloadPNG} >PNG</button>
-            <button onClick={downloadPDF} >PDF</button>
-            <button onClick={downloadCSV} >CSV</button>
+            <div className="download-button-wrapper">
+                <button onClick={downloadPNG} className="mat-style-accent download-button">PNG</button>
+                <button onClick={downloadPDF} className="mat-style-accent download-button">PDF</button>
+                <button onClick={downloadCSV} className="mat-style-accent download-button">CSV</button>
+            </div>
         </div>
     )
 }
