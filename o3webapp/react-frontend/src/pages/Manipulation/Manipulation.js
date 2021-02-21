@@ -43,9 +43,9 @@ class Manipulation extends React.Component {
     render() {
         return (
             <div className="ManipulationPageContainer">
-                <p>Manipulation Page</p>
-                <div id='test-plot' className="bk-root"></div>
-    
+                <div className="plot-wrapper">
+                    <div id='test-plot' className="bk-root"></div>
+                </div>
             </div>
         );
     };

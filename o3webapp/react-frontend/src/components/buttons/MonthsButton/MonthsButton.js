@@ -127,6 +127,7 @@ class MonthsButton extends React.Component {
 
     render() {
         const customSelected = this.state.season[4].selected;
+        const customMonths = "1, 2, 3"
 
         return (
             <div className="month-button-wrapper section-wrapper">
@@ -140,7 +141,7 @@ class MonthsButton extends React.Component {
                         <fieldset>
                             <legend>Enter Months!</legend>
                             <input
-                                placeholder="1, 2, 3"
+                                defaultValue={customMonths}
                                 onChange={this.handleCustomMonths} />
                         </fieldset>
                     </div>

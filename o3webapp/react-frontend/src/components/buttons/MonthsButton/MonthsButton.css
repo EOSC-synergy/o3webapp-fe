@@ -21,7 +21,11 @@
 
 .custom-input-wrapper > fieldset > input {
     background: transparent;
-    border-width: 0;
+    border: white;
+    line-height: 20px;
+    font-size: 18px;
+    width: 100%;
+    color: white;
 }
 
 .dropdown-header-title {

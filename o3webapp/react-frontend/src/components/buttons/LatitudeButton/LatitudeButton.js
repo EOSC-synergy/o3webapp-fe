@@ -150,7 +150,7 @@ class LatitudeButton extends React.Component {
                         <fieldset>
                             <legend>Enter Latitude!</legend>
                             <input
-                                placeholder="-90, 0"
+                                defaultValue="-90, 0"
                                 onChange={this.handleCustomMonths} />
                         </fieldset>
                     </div>
