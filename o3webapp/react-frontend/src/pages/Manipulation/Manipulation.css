@@ -24,7 +24,8 @@
     background-color: rgb(0, 0, 0, 0.5);
     padding: 20px;
     margin: 20px;
-    width: 70%;
+    width: 96%;
+    height: 82vh;
     border-radius: 5px;
 }
 
@@ -36,8 +37,16 @@
     color: white
 }
 
+.plot-section-wrapper h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .plot-section-wrapper h3 {
     font-weight: normal;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .plot-section-wrapper a {
