@@ -35,7 +35,8 @@ class GenerationForm extends React.Component {
                 lat_max: configData.GENERATION_DEFAULTS.LAT_MAX, 
             },
             availableModels: [],
-            availableSettings: []
+            availableSettings: [],
+            error: []
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,11 +67,14 @@ class GenerationForm extends React.Component {
             headers: { 
                 'Content-Type': 'application/json',
             },
+            timeout: 1000
         };
 
         const requestBody = {
             pType: currplotType
         }
+
+        console.log(request_url, requestOptions, requestBody)
 
         Axios.post(request_url, requestBody, requestOptions)
             //.then(response => console.log(response.data))    
@@ -78,7 +82,7 @@ class GenerationForm extends React.Component {
                 availableModels: response.data.models, 
                 availableSettings: response.data.vars
             }))
-            .catch(console.log);
+            .catch(error => console.error(error));
     }
 
     /**
@@ -108,7 +112,9 @@ class GenerationForm extends React.Component {
         try {
             Verifier.verifyLatitude(lat_min, lat_max)
         } catch(error) {
-            console.error(error.message)
+            this.setState({
+                error: error
+            })
         }
 
         let oldPlot = this.state.plot;
@@ -293,6 +299,9 @@ class GenerationForm extends React.Component {
     render() {
         const { pType, models, begin, end, months, lat_min, lat_max } = this.state.plot;
         const { availableModels, availableSettings } = this.state;
+        console.log("Available settings:", availableSettings)
+        
+        console.log("Available models:", availableModels)
         return (
             <div className="generation-form-wrapper">
                 <form onSubmit={this.handleSubmit} className="generation-form">
