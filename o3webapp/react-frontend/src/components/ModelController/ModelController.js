@@ -1,11 +1,6 @@
 import React from 'react';
 import ModelButton from '../buttons/ModelButton/ModelButton'
-import configData from '../../config.json'
 import './ModelController.css'
-import Axios from 'axios';
-
-//get path from Config file
-const model_list_url = configData.SERVER_URL + configData.MODEL_LIST_PATH;
 
 
 /**
@@ -16,37 +11,12 @@ class ModelController extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            availableModels: [],
             keywords: [],
             searchTerm: '',
         };
 
         this.handleModelButtonClick = this.handleModelButtonClick.bind(this);
         this.modelSearchOnChange = this.modelSearchOnChange.bind(this);
-    }
-
-    componentDidMount() {
-        const currplotType = this.props.plotType;
-        
-        const request_url = model_list_url + '/' + currplotType;
-        
-        //gets the models from the backend
-        const requestOptions = {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                //'Accept': 'application/json' 
-            },
-        };
-
-        const requestBody = {
-            pType: currplotType
-        }
-
-        Axios.post(request_url, requestBody, requestOptions)
-            //.then(response => console.log(response.data))    
-            .then(response => this.setState({ availableModels: response.data.models }))
-            .catch(console.log);
     }
 
     /**
@@ -57,25 +27,24 @@ class ModelController extends React.Component {
         this.props.handleChange(model);
     }
 
+    /**
+     * Update searchTerm on user input
+     * @param event - target that fired the event 
+     */
     modelSearchOnChange(event) {
         this.setState({
             searchTerm: event.target.value,
         })
     }
 
-    removeChip(keyword) {
-
-    }
-
-    addChip(keyword) {
-
-    }
-
+    /**
+     * Renders the ModelController
+     */
     render() {
         //const keywords = this.state.keywords;   //all keywords for chips
         const inputValue = this.state.searchTerm;
 
-        const models = this.state.availableModels;
+        const models = this.props.availableModels;
         const filteredModels = models.filter( (model) => {
             return model.toLowerCase().includes(inputValue.toLowerCase());
         })
