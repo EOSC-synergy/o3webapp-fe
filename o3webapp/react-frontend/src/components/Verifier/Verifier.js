@@ -78,3 +78,11 @@ export function verifyMonths(months) {
         }
     });
 }
+
+
+export function verifyModels(models) {
+    if (models.length === 0) {
+        throw new VerificationError("Please select at least one model!");
+    }
+    return true;
+}

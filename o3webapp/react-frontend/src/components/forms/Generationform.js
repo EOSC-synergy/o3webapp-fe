@@ -67,7 +67,7 @@ class GenerationForm extends React.Component {
             headers: { 
                 'Content-Type': 'application/json',
             },
-            timeout: 1000
+            timeout: 5000
         };
 
         const requestBody = {
@@ -137,7 +137,9 @@ class GenerationForm extends React.Component {
         try {
             Verifier.verifyMonths(new_months);
         } catch(error) {
-            console.error(error.message);
+            this.setState({
+                error: error
+            })
         }
 
         let oldPlot = this.state.plot;
@@ -168,7 +170,9 @@ class GenerationForm extends React.Component {
         try {
             Verifier.verifyYear(year, this.state.plot.end);
         } catch(error) {
-            console.error(error.message);
+            this.setState({
+                error: error
+            })
         }
 
         let oldPlot = this.state.plot
@@ -198,7 +202,9 @@ class GenerationForm extends React.Component {
         try {
             Verifier.verifyYear(this.state.plot.begin, year);
         } catch(error) {
-            console.error(error.message);
+            this.setState({
+                error: error
+            })
         }
 
         let oldPlot = this.state.plot;
@@ -232,6 +238,16 @@ class GenerationForm extends React.Component {
 
             //add model to list
             oldmodels.push(newmodel);
+        }
+
+        //verify that at least one model is selected
+        try {
+            Verifier.verifyLatitude(oldmodels);
+        } catch(error) {
+            // this.setState({
+            //     error: error
+            // })
+            console.error(error.message);
         }
 
         let oldPlot = this.state.plot;
