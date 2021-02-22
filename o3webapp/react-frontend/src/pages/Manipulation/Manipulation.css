@@ -14,6 +14,8 @@
     margin-right: auto;
     width: 100%;
     padding-top: 10px;
+    height: fit-content !important;
+    margin-bottom: 50px;
 }
 
 .plot-and-download-wrapper {
@@ -25,7 +27,7 @@
     padding: 20px;
     margin: 20px;
     width: 96%;
-    height: 82vh;
+    height: fit-content;
     border-radius: 5px;
 }
 
@@ -55,5 +57,6 @@
     background-color: #fed136;
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 
 

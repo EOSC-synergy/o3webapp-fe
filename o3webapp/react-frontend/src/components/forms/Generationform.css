@@ -11,6 +11,7 @@
     font-size: 25px;
     font-weight: 500;
     line-height: 50px;
+    color: white !important;
     cursor: pointer;
     background-color: rgb(254, 209, 54);
     margin: 10px;
@@ -53,7 +54,7 @@
 }
 
 .generation-form-wrapper input {
-    color: #ffffff;
+    color: black;
 }
 
 .generation-form-wrapper {

@@ -1,0 +1,58 @@
+.bk {
+    background-color: transparent !important;
+}
+
+.bk-btn-default {
+    margin: 5px !important;
+    padding: 5px !important;
+}
+
+.bk-btn {
+    font-family: Trebuchet, Arial, sans-serif !important; 
+    text-transform: uppercase !important;
+    color: white !important;
+    font-size: 15px !important;
+    background-color: rgb(131, 131, 131) !important;
+    border-width: 0 !important;
+    outline: none !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .9) !important;
+    cursor: pointer !important;
+    margin: 5px !important;
+    margin-top: 15px !important;
+    height: fit-content !important;
+    padding: 5px !important; 
+}
+
+.bk-btn-success {
+    font-family: Trebuchet, Arial, sans-serif !important; 
+    text-transform: uppercase !important;
+    color: white !important;
+    font-size: 15px !important;
+    background-color: rgb(254, 209, 54) !important;
+    border-width: 0 !important;
+    outline: none !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .9) !important;
+    cursor: pointer !important;
+    margin: 5px !important;
+    margin-top: 15px !important;
+    height: fit-content !important;
+    padding: 5px !important; 
+}
+
+#test-plot > div > div:nth-child(2) > div:nth-child(2) {
+    display: flex !important;
+    position: relative !important;   
+}
+
+#test-plot > div > div:nth-child(2) > div:nth-child(2) div {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+
+}
+
+#test-plot > div > div:nth-child(2) > div:nth-child(2) div div {
+    margin-top: 20px !important;
+}

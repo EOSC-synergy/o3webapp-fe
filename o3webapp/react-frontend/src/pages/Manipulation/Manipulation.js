@@ -1,5 +1,6 @@
 import React from 'react';
 import './Manipulation.css';
+import './BokehStyling.css';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';

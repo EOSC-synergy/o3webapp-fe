@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 5px;
+    margin-top: 25px;
     margin-bottom: 25px;
 }
 
@@ -23,6 +23,10 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+}
+
+.mat-style-accent-disabled {
+    color: rgb(185, 185, 185)
 }
 
 [data-md-tooltip] {
