@@ -7,9 +7,10 @@ import './DownloadSection.css'
 
 export function DownloadSection(props) {
     //calculate request url from defaults and current plot type
-    const request_url = configData.SERVER_URL + configData.DOWNLOAD_PATH + "/" + props.plot.pType;
+    let request_url = configData.SERVER_URL + configData.DOWNLOAD_PATH + "/";
 
     function downloadPDF() {
+        request_url += "pdf";
         console.log("Requesting the pdf for this plot:", props.plot);
         //header
         const headersConfig = {
@@ -25,6 +26,7 @@ export function DownloadSection(props) {
     }
 
     function downloadPNG() {
+        request_url += "png";
         console.log("Requesting the png for this plot:", props.plot);
         //header
         const headersConfig = {

@@ -36,7 +36,25 @@ class GenerationForm extends React.Component {
             },
             availableModels: [],
             availableSettings: [],
-            error: []
+            savedErrors: [
+                {
+                    key: "model",
+                    error: undefined,
+                },
+                {
+                    key: "year",
+                    error: undefined,
+                },
+                {
+                    key: "month",
+                    error: undefined,
+                },
+                {
+                    key: "latitude",
+                    error: undefined,
+                }
+
+            ]
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -74,7 +92,8 @@ class GenerationForm extends React.Component {
             pType: currplotType
         }
 
-        console.log(request_url, requestOptions, requestBody)
+        console.log("Errors:", this.state.errors)
+
 
         Axios.post(request_url, requestBody, requestOptions)
             //.then(response => console.log(response.data))    
@@ -113,7 +132,7 @@ class GenerationForm extends React.Component {
             Verifier.verifyLatitude(lat_min, lat_max)
         } catch(error) {
             this.setState({
-                error: error
+                savedErrors: error
             })
         }
 
@@ -138,7 +157,7 @@ class GenerationForm extends React.Component {
             Verifier.verifyMonths(new_months);
         } catch(error) {
             this.setState({
-                error: error
+                savedErrors: error
             })
         }
 
@@ -171,7 +190,7 @@ class GenerationForm extends React.Component {
             Verifier.verifyYear(year, this.state.plot.end);
         } catch(error) {
             this.setState({
-                error: error
+                savedErrors: error
             })
         }
 
@@ -198,12 +217,13 @@ class GenerationForm extends React.Component {
             year needs to be a number
             year needs to be in predefined region (1970-2100) or something 
         */
+       console.log("Verifying uper border", this.state.plot.begin, year);
 
         try {
             Verifier.verifyYear(this.state.plot.begin, year);
         } catch(error) {
             this.setState({
-                error: error
+                savedErrors: error
             })
         }
 
@@ -241,22 +261,26 @@ class GenerationForm extends React.Component {
         }
 
         //verify that at least one model is selected
+
+        const errorArray = this.state.savedErrors
         try {
-            Verifier.verifyLatitude(oldmodels);
+            Verifier.verifyModels(oldmodels);
+            //clear model errors
+            errorArray.find(error => error.key === "model").error = undefined;
         } catch(error) {
-            // this.setState({
-            //     error: error
-            // })
-            console.error(error.message);
+            //add the thrown error 
+            errorArray.find(error => error.key === "model").error = error;          
         }
 
+        console.log(errorArray)
+        //update state
         let oldPlot = this.state.plot;
         oldPlot.models = oldmodels;
-        //update state
+
         this.setState({
-            plot: oldPlot
+            plot: oldPlot,
+            savedErrors: errorArray
         })
-        console.log(this.state.plot.models)
         this.saveStateAsCookie();
     }
     
@@ -270,10 +294,17 @@ class GenerationForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.saveStateAsCookie();
-
-        //redirect to manipulation site
-        this.props.history.push("/manipulation");
-
+        const errors = this.state.savedErrors;
+        const error = errors.find(err => err.error !== undefined);
+        if (error !== undefined) {
+            console.error(error.error.message);
+            alert(error.error.message);
+        } else {
+            console.log("No error found");
+            //redirect to manipulation site
+            this.props.history.push("/manipulation");
+        }
+        
     }
 
     /**
@@ -284,14 +315,6 @@ class GenerationForm extends React.Component {
         const currDate = new Date();
         const expDate = new Date().setFullYear(currDate.getFullYear() +1);
         let currPlot = this.state.plot;
-
-        // pType: "tco3_zm",
-        //     models: [],
-        //     begin: 1970,
-        //     end: 2100,
-        //     month: [1, 2, 3],
-        //     lat_min: -90,
-        //     lat_max: 0,
 
 
         let savePlot = {
@@ -315,9 +338,6 @@ class GenerationForm extends React.Component {
     render() {
         const { pType, models, begin, end, months, lat_min, lat_max } = this.state.plot;
         const { availableModels, availableSettings } = this.state;
-        console.log("Available settings:", availableSettings)
-        
-        console.log("Available models:", availableModels)
         return (
             <div className="generation-form-wrapper">
                 <form onSubmit={this.handleSubmit} className="generation-form">
