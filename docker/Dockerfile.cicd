@@ -16,6 +16,7 @@ ENV DEBIAN_FRONTEND=dialog
 
 RUN npm install react-scripts@4.0.1 -g --silent
 RUN npm install -g eslint eslint-plugin-react@latest eslint@latest
+RUN npm install -g coverage
 
 WORKDIR /
 

@@ -13,12 +13,19 @@ sqa_criteria:
         commands: 
         - cd /o3webapp-fe-testing/o3webapp-fe
         - npm install && eslint ./
-  qc_test:
+  qc_coverage:
     repos:
       o3webapp-fe:
         container: o3webapp-fe-testing
         commands:
         - cd /o3webapp-fe-testing/o3webapp-fe
-        - CI=true npm test -- --verbose
+        - npm test -- --verbose
+  qc_security:
+    repos:
+      o3webapp-fe:
+        container: o3webapp-fe-testing
+        commands:
+        - cd /o3webapp-fe-testing/o3webapp-fe
+        - npm audit
 
 timeout: 900
