@@ -12,7 +12,7 @@ sqa_criteria:
         container: o3webapp-fe-testing
         commands: 
         #- bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm install && eslint ./"
-        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm --help"
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm install"
   qc_coverage:
     repos:
       o3webapp-fe:
