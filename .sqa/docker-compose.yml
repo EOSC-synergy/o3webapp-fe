@@ -10,8 +10,8 @@ services:
        source: ./o3webapp-fe
        target: /o3webapp-fe-testing
 
-  o3webapp-fe:
-     build:
-        context: "."
-        dockerfile: "./o3webapp-fe/docker/Dockerfile"
-     image: "o3as/o3webapp-fe:latest"
+#  o3webapp-fe:
+#     build:
+#        context: "."
+#        dockerfile: "./o3webapp-fe/docker/Dockerfile"
+#     image: "o3as/o3webapp-fe:latest"
