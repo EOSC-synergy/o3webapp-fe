@@ -2,7 +2,7 @@ config:
   project_repos:
     o3webapp-fe:
       repo: 'https://git.scc.kit.edu/synergy.o3as/o3webapp-fe.git'
-      branch: moved_branch
+      branch: test
 #environment:
 #  JPL_DOCKERPUSH: "o3webapp"
 sqa_criteria:
@@ -10,9 +10,15 @@ sqa_criteria:
     repos:
       o3webapp-fe:
         container: o3webapp-fe-testing
-  qc_coverage:
+        commands: 
+        - cd /o3webapp-fe-testing/o3webapp-fe
+        - npm install && eslint ./
+  qc_test:
     repos:
       o3webapp-fe:
         container: o3webapp-fe-testing
+        commands:
+        - cd /o3webapp-fe-testing/o3webapp-fe
+        - CI=true npm test -- --verbose
 
 timeout: 900

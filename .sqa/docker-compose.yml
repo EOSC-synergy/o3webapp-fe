@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   o3webapp-fe-testing:
-    image: "indigodatacloud/ci-images:java"
+    image: "o3as/ci-images:react"
     container_name: "o3webapp-fe-testing"
     volumes:
      - type: bind
