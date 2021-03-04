@@ -11,18 +11,18 @@ sqa_criteria:
       o3webapp-fe:
         container: o3webapp-fe-testing
         commands: 
-        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe" && npm install && eslint ./
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm install && eslint ./"
   qc_coverage:
     repos:
       o3webapp-fe:
         container: o3webapp-fe-testing
         commands:
-        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe" && npm test -- --verbose
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm test -- --verbose"
   qc_security:
     repos:
       o3webapp-fe:
         container: o3webapp-fe-testing
         commands:
-        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe" && npm audit
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm audit"
 
 timeout: 900
