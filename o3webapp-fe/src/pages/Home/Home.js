@@ -1,9 +1,9 @@
-import { Component } from 'react';
+import React from 'react';
 import './Home.css'
 import StartGeneratingButton from '../../components/buttons/StartGeneratingButton/StartGeneratingButton'
 import { RiArrowDropDownLine } from 'react-icons/ri'
 
-class Home extends Component {
+class Home extends React.Component {
 
     render() {
         return (
