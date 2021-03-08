@@ -1,0 +1,16 @@
+version: "3.6"
+
+services:
+  o3webapp-testing:
+    image: "indigodatacloud/ci-images:python3.6"
+    container_name: "o3webapp-testing"
+    volumes:
+     - type: bind
+       source: ./o3webapp
+       target: /o3webapp-testing
+
+  o3webapp:
+     build:
+        context: "."
+        dockerfile: "./o3webapp/docker/Dockerfile"
+     image: "o3as/o3webapp:latest"

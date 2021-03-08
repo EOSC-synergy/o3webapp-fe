@@ -1,0 +1,28 @@
+.startButton {
+    border-radius: 3px;
+    background-color: #fed136;
+    padding: 30px 40px;
+    width: fit-content;
+    text-align: center;
+    vertical-align: middle;
+
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+Link {
+    text-decoration: none;
+}
+
+li {
+    margin: 10px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}

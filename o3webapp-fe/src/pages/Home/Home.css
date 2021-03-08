@@ -1,0 +1,95 @@
+.FirstPageHome {
+    height: 100vh;
+}
+
+.HomePageContainer {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200vh;
+    background-color: #222;
+}
+
+.background-picture {
+    height: 100vh;
+    /* background-image: url("/background-clouds.jpg"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: absolute;
+    top: 0px;
+    width: 100%;
+
+    overflow: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    z-index: 1;
+}
+
+.moreInfoSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(0, 0, 0, 0.4);
+    border-radius: 3px;
+    margin: auto;
+    padding: 3%;
+    color: white;
+    vertical-align: middle;
+}
+
+.SplashScreen h1 {
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-size: 50px;
+    font-weight: 900;
+    color: white;
+}
+
+.SplashScreen h2 {
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.SplashScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(0, 0, 0, 0.4);
+    border-radius: 3px;
+    margin: auto;
+    padding: 3%;
+}
+
+.scrollButton {
+    color:  #fed136;
+    position: absolute;
+    bottom: 20px;
+    cursor: pointer;
+}
+
+.scrollButton:hover {
+    color: #f6bf01;
+}
+
+.moreInfoSection h3 {
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}

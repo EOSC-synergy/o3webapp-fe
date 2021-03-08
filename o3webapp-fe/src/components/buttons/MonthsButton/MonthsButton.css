@@ -1,0 +1,37 @@
+.month-button-wrapper {
+    
+    padding: 20px;
+
+    /*
+    background-color: rgb(0, 0, 0, 0.5);
+    margin: 20px;
+    width: 70%;
+    */
+    border-radius: 20px;
+}
+
+.custom-input-wrapper {
+    padding-top: 10px;
+    margin: auto;
+}
+
+.custom-input-wrapper > fieldset {
+    border-radius: 4px;
+}
+
+.custom-input-wrapper > fieldset > input {
+    background: transparent;
+    border: white;
+    line-height: 20px;
+    font-size: 18px;
+    width: 100%;
+    color: white;
+}
+
+.dropdown-header-title {
+    cursor: pointer;
+}
+
+.dropdown-list-item {
+    cursor: pointer;
+}
