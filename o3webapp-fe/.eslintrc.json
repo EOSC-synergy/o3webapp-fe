@@ -4,8 +4,9 @@
         "es2021": true
     },
     "extends": [
+        "plugin:react/recommended",
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:jest/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -15,7 +16,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jest"
     ],
     "rules": {
     }
