@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './YearButton.css'
 
 class YearButton extends React.Component {
@@ -26,6 +27,11 @@ class YearButton extends React.Component {
             </div>
         );
     }
+}
+YearButton.propTypes = {
+    handleYearChange: PropTypes.func.isRequired,
+    year: PropTypes.number.isRequired,
+    bound: PropTypes.string.isRequired
 }
 
 export default YearButton;

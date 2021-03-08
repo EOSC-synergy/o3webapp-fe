@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 
 import ManipulationFormWithRouter from '../../components/forms/Manipulationform';
-import { DownloadSection } from '../../components/download/DownloadSection';
+import DownloadSection from '../../components/download/DownloadSection';
 
 import configData from '../../config.json';
 
@@ -85,7 +85,7 @@ class Manipulation extends React.Component {
                 <ManipulationFormWithRouter />
             </div>
         );
-    };
+    }
     
 }
 

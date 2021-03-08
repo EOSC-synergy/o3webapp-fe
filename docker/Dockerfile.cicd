@@ -14,8 +14,10 @@ RUN apt update && apt install -y --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
 
-RUN npm install react-scripts@4.0.1 -g --silent
-RUN npm install -g eslint eslint-plugin-react@latest eslint@latest
+#RUN npm install react-scripts@4.0.1 -g --silent
+#RUN npm install -g eslint eslint-plugin-react@latest eslint@latest
+
+#what does coverage do? is it used?
 RUN npm install -g coverage
 
 WORKDIR /

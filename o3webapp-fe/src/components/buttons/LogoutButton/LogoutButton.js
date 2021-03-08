@@ -1,10 +1,12 @@
-import './LogoutButton.css';
 import { MdAccountCircle } from 'react-icons/md'
-import { Component } from 'react';
+import React from 'react';
 import Cookies from 'universal-cookie';
+import PropTypes from 'prop-types';
+
+import './LogoutButton.css';
 
 
-class LogoutButton extends Component {
+class LogoutButton extends React.Component {
 
     constructor(props) {
         super(props);
@@ -37,6 +39,8 @@ class LogoutButton extends Component {
     }
 }
 
-
+LogoutButton.propTypes = {
+    loggedOut: PropTypes.func.isRequired
+}
 
 export default LogoutButton;
