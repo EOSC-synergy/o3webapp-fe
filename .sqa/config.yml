@@ -1,35 +1,30 @@
 config:
   project_repos:
-    o3webapp:
-      repo: 'https://git.scc.kit.edu/synergy.o3as/o3webapp.git'
-      branch: master
-#environment:
-#  JPL_DOCKERPUSH: "o3webapp"
+    o3webapp-fe:
+      repo: 'https://git.scc.kit.edu/synergy.o3as/o3webapp-fe.git'
+      branch: test
+environment:
+  #JPL_DOCKERPUSH: "o3webapp-fe"
+  O3AS_WEBAPP_FE_DOCKER_TAG: "test"
 sqa_criteria:
   qc_style:
     repos:
-      o3webapp:
-        container: o3webapp-testing
-        tox:
-          tox_file: /o3webapp-testing/tox.ini
-          testenv:
-            - pep8
+      o3webapp-fe:
+        container: o3webapp-fe-testing
+        commands: 
+        #- bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm install && eslint ./"
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm install"
   qc_coverage:
     repos:
-      o3webapp:
-        container: o3webapp-testing
-        tox:
-          tox_file: /o3webapp-testing/tox.ini
-          testenv: 
-            - cover
-            - cobertura
+      o3webapp-fe:
+        container: o3webapp-fe-testing
+        commands:
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm test -- --verbose"
   qc_security:
     repos:
-      o3webapp:
-        container: o3webapp-testing
-        tox:
-          tox_file: /o3webapp-testing/tox.ini
-          testenv:
-            - bandit
+      o3webapp-fe:
+        container: o3webapp-fe-testing
+        commands:
+        - bash -c "cd /o3webapp-fe-testing/o3webapp-fe && npm audit"
 
 timeout: 900
