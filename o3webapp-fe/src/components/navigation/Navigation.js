@@ -60,16 +60,24 @@ class Navigation extends Component {
       loggedIn = true
     }
 
-    console.log('User ID: ' + cookies.get('userID'))
+    //console.log('Token: ' + cookies.get('token'))
+    //console.log('User ID: ' + cookies.get('userID'))
+    console.log('Auth Code: ' + cookies.get('authCode'))
 
     this.handleTabClick = this.handleTabClick.bind(this);
     this.loggedOut = this.loggedOut.bind(this);
     this.loginCallback = this.loginCallback.bind(this)
   }
 
+  // IMPLICIT FLOW //
+
+  
+
   /**
    * Function that handles the login callback. It parses the ID token and sets the cookie
    */
+
+  /*
   loginCallback() {
 
     //Token parsing out of the URL
@@ -83,6 +91,36 @@ class Navigation extends Component {
     //Sets the cookie
     const cookies = new Cookies();
     cookies.set('userID', subject_ID, { path: '/' });
+    cookies.set('token', id_token, { path: '/' });
+
+    //Reads the cookie for last path before login
+    let previousPath = cookies.get('o3webappPreviousPath')
+
+    //Redirect to previous Path
+    window.location.href= previousPath;
+
+    //Updates the state of the component
+    this.setState({
+      loggedIn: true
+    })
+  }
+
+  */
+
+  // AUTHORISATION CODE FLOW //
+
+  /**
+   * Function that handles the login callback. It parses the ID token and sets the cookie
+   */
+  loginCallback() {
+
+    //Token parsing out of the URL
+    let currentURL = window.location.href
+    let authCode = currentURL.slice(currentURL.indexOf('code=') + 5)
+
+    //Sets the cookie
+    const cookies = new Cookies();
+    cookies.set('authCode', authCode, { path: '/' });
 
     //Reads the cookie for last path before login
     let previousPath = cookies.get('o3webappPreviousPath')
