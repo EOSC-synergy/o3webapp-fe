@@ -1,6 +1,6 @@
 import './LoginButton.css';
 import { MdAccountCircle } from 'react-icons/md'
-import { Component } from 'react';
+import React from 'react';
 import Cookies from 'universal-cookie';
 
 /*
@@ -23,7 +23,7 @@ const response_mode = 'query'
 let nonce = null
 let requestURL = null
 
-class LoginButton extends Component {
+class LoginButton extends React.Component {
     
     render() {
         return (

@@ -1,5 +1,6 @@
 import React from 'react';
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md'
+import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 import './PlotButtonController.css'
 
@@ -64,6 +65,10 @@ class PlotButtonController extends React.Component {
     }
 }
 
+PlotButtonController.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+}
+
 export default PlotButtonController;
 
 class Radio extends React.Component {
@@ -108,6 +113,11 @@ class Radio extends React.Component {
             </div>
         );
     }
+}
+
+Radio.propTypes = {
+    resetThenSet: PropTypes.func.isRequired,
+    list: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 

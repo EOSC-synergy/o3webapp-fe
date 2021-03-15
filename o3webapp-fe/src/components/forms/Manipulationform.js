@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 
@@ -345,6 +346,9 @@ class ManipulationForm extends React.Component {
     }
 }
 
+ManipulationForm.propTypes = {
+    history: PropTypes.history
+}
 
 const ManipulationFormWithRouter = withRouter(ManipulationForm);
 export default ManipulationFormWithRouter;

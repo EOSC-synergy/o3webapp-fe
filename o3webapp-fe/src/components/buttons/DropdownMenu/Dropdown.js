@@ -1,6 +1,6 @@
-import React from 'react'
-
-import './Dropdown.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Dropdown.css';
 
 class Dropdown extends React.Component {
     constructor(props) {
@@ -73,5 +73,11 @@ class Dropdown extends React.Component {
         );
     }
 }
+
+Dropdown.propTypes = {
+    title: PropTypes.string.isRequired,
+    resetThenSet: PropTypes.func.isRequired,
+    list: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default Dropdown;

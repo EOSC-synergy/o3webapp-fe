@@ -7,7 +7,6 @@ ARG branch=master
 #Create workdir
 WORKDIR /srv
 
-RUN npm install react-scripts@4.0.1 -g --silent
 
 ARG date
 RUN echo ${date} && git clone --depth 1 -b $branch https://git.scc.kit.edu/synergy.o3as/o3webapp-fe.git && \
