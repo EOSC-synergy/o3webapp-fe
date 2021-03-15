@@ -60,9 +60,10 @@ class Navigation extends Component {
       loggedIn = true
     }
 
-    //console.log('Token: ' + cookies.get('token'))
-    //console.log('User ID: ' + cookies.get('userID'))
-    console.log('Auth Code: ' + cookies.get('authCode'))
+    console.log('Token: ' + cookies.get('token'))
+    console.log('User ID: ' + cookies.get('userID'))
+    console.log('URL: ' + cookies.get('url'))
+    //console.log('Auth Code: ' + cookies.get('authCode'))
 
     this.handleTabClick = this.handleTabClick.bind(this);
     this.loggedOut = this.loggedOut.bind(this);
@@ -76,8 +77,6 @@ class Navigation extends Component {
   /**
    * Function that handles the login callback. It parses the ID token and sets the cookie
    */
-
-  /*
   loginCallback() {
 
     //Token parsing out of the URL
@@ -93,6 +92,8 @@ class Navigation extends Component {
     cookies.set('userID', subject_ID, { path: '/' });
     cookies.set('token', id_token, { path: '/' });
 
+    cookies.set('url', currentURL, { path: '/' });
+
     //Reads the cookie for last path before login
     let previousPath = cookies.get('o3webappPreviousPath')
 
@@ -105,13 +106,15 @@ class Navigation extends Component {
     })
   }
 
-  */
+  
 
   // AUTHORISATION CODE FLOW //
 
   /**
    * Function that handles the login callback. It parses the ID token and sets the cookie
    */
+
+  /*
   loginCallback() {
 
     //Token parsing out of the URL
@@ -133,6 +136,8 @@ class Navigation extends Component {
       loggedIn: true
     })
   }
+
+  */
   
   /**
    * Callback function that updates the state with the active tab
