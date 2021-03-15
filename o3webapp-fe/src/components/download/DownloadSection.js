@@ -1,11 +1,13 @@
+import React from 'react';
 import Axios from 'axios';
+import PropTypes from 'prop-types';
 
 import configData from './../../config.json'
 import './DownloadSection.css'
 
 
 
-export function DownloadSection(props) {
+function DownloadSection(props) {
     //calculate request url from defaults and current plot type
     let request_url = configData.SERVER_URL + configData.DOWNLOAD_PATH + "/";
 
@@ -68,3 +70,10 @@ export function DownloadSection(props) {
         </div>
     )
 }
+
+DownloadSection.propTypes = {
+    plot: PropTypes.any.isRequired,
+    loggedIn: PropTypes.bool.isRequired
+}
+
+export default DownloadSection

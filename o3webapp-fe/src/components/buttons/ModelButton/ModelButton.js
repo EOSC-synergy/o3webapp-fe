@@ -1,7 +1,9 @@
-import React from 'react'
-import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
-import './ModelButton.css'
+import React from 'react';
+import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
+import PropTypes from 'prop-types';
+
+import './ModelButton.css';
 
 
 
@@ -77,6 +79,12 @@ class ModelButton extends React.Component {
                 
         )
     }
+}
+
+ModelButton.propTypes = {
+    handleModelClick: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    selected: PropTypes.bool.isRequired
 }
 
 export default ModelButton;
