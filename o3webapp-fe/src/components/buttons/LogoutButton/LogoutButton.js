@@ -19,7 +19,7 @@ class LogoutButton extends Component {
         //Remove the cookie
         const cookies = new Cookies();
         cookies.remove('userID')
-
+        window.location.reload()
         this.props.loggedOut()
     }
 

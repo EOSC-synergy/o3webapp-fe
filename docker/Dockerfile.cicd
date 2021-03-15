@@ -1,0 +1,30 @@
+# base image for node
+FROM node:latest
+
+# Default user
+ARG USER=user
+ARG UID=1001
+
+# Do updates
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && apt install -y --no-install-recommends && \
+# Clean up & back to dialog front end
+    apt autoremove -y && \
+    apt clean -y && \
+    rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=dialog
+
+RUN npm install react-scripts@4.0.1 -g --silent
+RUN npm install -g eslint eslint-plugin-react@latest eslint@latest
+RUN npm install -g coverage
+
+WORKDIR /
+
+# Set LANG environment
+ENV LANG C.UTF-8
+# Need to set the user for Jenkins (default UID is 1001)
+ENV USER ${USER}
+RUN useradd -m ${USER} --uid=${UID} && chmod -R 0777 /home/${USER}
+ENV HOME /home/${USER}
+
+CMD [ "/bin/sleep", "15m" ]
