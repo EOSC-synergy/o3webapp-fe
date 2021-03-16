@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Dropdown from '../DropdownMenu/Dropdown'
 
@@ -166,6 +167,10 @@ class LatitudeButton extends React.Component {
         );
     }
 
+}
+
+LatitudeButton.propTypes = {
+    handleChange: PropTypes.func.isRequired
 }
 
 

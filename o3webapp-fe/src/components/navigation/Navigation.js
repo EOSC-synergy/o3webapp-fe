@@ -2,6 +2,8 @@ import './Navigation.css'
 import NavigationTab from './NavigationTab'
 import LoginButton from '../buttons/LoginButton/LoginButton'
 import LogoutButton from '../buttons/LogoutButton/LogoutButton'
+import React from 'react'
+import PropTypes from 'prop-types';
 import { Component } from 'react'
 import Cookies from 'universal-cookie';
 import jwt_decode from "jwt-decode";
@@ -212,6 +214,10 @@ class Navigation extends Component {
       );
     }
   }
+}
+
+Navigation.propTypes = {
+  loginRedirect: PropTypes.bool.isRequired
 }
 
 export default Navigation;
