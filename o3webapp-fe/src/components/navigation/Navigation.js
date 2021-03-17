@@ -4,7 +4,8 @@ import LoginButton from '../buttons/LoginButton/LoginButton'
 import LogoutButton from '../buttons/LogoutButton/LogoutButton'
 import { Component } from 'react'
 import Cookies from 'universal-cookie';
-import jwt_decode from "jwt-decode";
+import configData from '../../config.json'
+import Axios from 'axios';
 
 
 
@@ -18,8 +19,6 @@ let Tabs = [
   {name: "Plot Generation", path: "/generation"},
   {name: "About", path: "/about"}
 ]
-
-let loggedIn = false
 
 class Navigation extends Component {
 
@@ -54,60 +53,27 @@ class Navigation extends Component {
 
     //Checks if the user is logged in, by checking the cookies
     const cookies = new Cookies();
-    if (cookies.get('userID') === undefined) {
-      loggedIn = false
-    } else {
-      loggedIn = true
-    }
+    let tempActiveTab = this.state.activeTab
 
-    //console.log('Token: ' + cookies.get('token'))
-    //console.log('User ID: ' + cookies.get('userID'))
-    console.log('Auth Code: ' + cookies.get('authCode'))
+    //Sets the state accordingly to the log in status
+    if (cookies.get('egiID') === undefined) {
+      this.state = {
+        activeTab: tempActiveTab,
+        loggedIn: false,
+        userName: undefined
+      }
+    } else {
+      this.state = {
+        activeTab: tempActiveTab,
+        loggedIn: true,
+        userName: cookies.get('userName')
+      }
+    }
 
     this.handleTabClick = this.handleTabClick.bind(this);
     this.loggedOut = this.loggedOut.bind(this);
     this.loginCallback = this.loginCallback.bind(this)
   }
-
-  // IMPLICIT FLOW //
-
-  
-
-  /**
-   * Function that handles the login callback. It parses the ID token and sets the cookie
-   */
-
-  /*
-  loginCallback() {
-
-    //Token parsing out of the URL
-    let currentURL = window.location.href
-    let id_token = currentURL.slice(currentURL.indexOf('#id_token=') + 10)
-
-    //Decode JWT
-    let token_decoded = jwt_decode(id_token)
-    let subject_ID = token_decoded.sub
-
-    //Sets the cookie
-    const cookies = new Cookies();
-    cookies.set('userID', subject_ID, { path: '/' });
-    cookies.set('token', id_token, { path: '/' });
-
-    //Reads the cookie for last path before login
-    let previousPath = cookies.get('o3webappPreviousPath')
-
-    //Redirect to previous Path
-    window.location.href= previousPath;
-
-    //Updates the state of the component
-    this.setState({
-      loggedIn: true
-    })
-  }
-
-  */
-
-  // AUTHORISATION CODE FLOW //
 
   /**
    * Function that handles the login callback. It parses the ID token and sets the cookie
@@ -118,20 +84,55 @@ class Navigation extends Component {
     let currentURL = window.location.href
     let authCode = currentURL.slice(currentURL.indexOf('code=') + 5)
 
-    //Sets the cookie
+    //Sends AuthCode to backend
+    const login_url = configData.SERVER_URL + configData.LOGIN_PATH + '/' + authCode;
+
+    const requestOptions = {
+      headers: { 
+          'Content-Type': 'application/json',
+      },
+      timeout: 5000
+    };
+    
+    //Prepares the Cookies
     const cookies = new Cookies();
-    cookies.set('authCode', authCode, { path: '/' });
 
-    //Reads the cookie for last path before login
-    let previousPath = cookies.get('o3webappPreviousPath')
+    let request = this.callBackendForLogin(authCode)
+    request.then(response => {
+      
+      //Sets the cookies
+      cookies.set('userName', response.data.name, { path: '/' })
+      cookies.set('egiID', response.data.sub, { path: '/' })
+      console.log(response.data)
 
-    //Redirect to previous Path
-    window.location.href= previousPath;
+      console.log('User Name: ' + cookies.get('userName'))
+      console.log('EGI ID: ' + cookies.get('egiID'))
 
-    //Updates the state of the component
-    this.setState({
-      loggedIn: true
+      //Reads the cookie for last path before login
+      let previousPath = cookies.get('o3webappPreviousPath')
+
+      //Redirect to previous Path
+      window.location.href= previousPath;
     })
+    request.catch(error => console.error(error));
+  }
+
+  /**
+   * 
+   * @param {*} authCode 
+   * @returns 
+   */
+  callBackendForLogin(authCode) {
+    const login_url = configData.SERVER_URL + configData.LOGIN_PATH + '/' + authCode;
+
+    const requestOptions = {
+      headers: { 
+          'Content-Type': 'application/json',
+      },
+      timeout: 5000
+    };
+
+    return Axios.get(login_url, requestOptions);
   }
   
   /**
@@ -148,7 +149,6 @@ class Navigation extends Component {
    * Callback function that updates the state when user logs out
    */
   loggedOut() {
-    loggedIn = false
     this.setState({
       loggedIn: false
     })
@@ -165,7 +165,9 @@ class Navigation extends Component {
   }
   
   render() {
-    if (loggedIn) {
+    console.log('Render Logged In: ' + this.state.loggedIn)
+    console.log('Render User Name: ' + this.state.userName)
+    if (this.state.loggedIn) {
       return (
         <nav className="NavBar">
           <ul className="NavBarContainer">
@@ -181,7 +183,7 @@ class Navigation extends Component {
                 />
               )
             })}
-            <LogoutButton loggedOut = {this.loggedOut}/>
+            <LogoutButton loggedOut = {this.loggedOut} name = {this.state.userName}/>
           </ul>
         </nav>
       );
