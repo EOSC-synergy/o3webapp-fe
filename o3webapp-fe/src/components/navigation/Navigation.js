@@ -83,16 +83,6 @@ class Navigation extends Component {
     //Token parsing out of the URL
     let currentURL = window.location.href
     let authCode = currentURL.slice(currentURL.indexOf('code=') + 5)
-
-    //Sends AuthCode to backend
-    const login_url = configData.SERVER_URL + configData.LOGIN_PATH + '/' + authCode;
-
-    const requestOptions = {
-      headers: { 
-          'Content-Type': 'application/json',
-      },
-      timeout: 5000
-    };
     
     //Prepares the Cookies
     const cookies = new Cookies();
@@ -165,8 +155,6 @@ class Navigation extends Component {
   }
   
   render() {
-    console.log('Render Logged In: ' + this.state.loggedIn)
-    console.log('Render User Name: ' + this.state.userName)
     if (this.state.loggedIn) {
       return (
         <nav className="NavBar">

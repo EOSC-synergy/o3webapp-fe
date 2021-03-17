@@ -31,7 +31,6 @@ class LogoutButton extends Component {
     }
 
     render() {
-        const cookies = new Cookies();
         return (
             <li>
                 <div className='NavBarLink' data-md-tooltip="Log Out">
