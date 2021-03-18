@@ -91,8 +91,8 @@ class Navigation extends Component {
     request.then(response => {
       
       //Sets the cookies
-      cookies.set('userName', response.data.name, { path: '/' })
-      cookies.set('egiID', response.data.sub, { path: '/' })
+      cookies.set('userName', response.data.name, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
+      cookies.set('egiID', response.data.sub, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
       console.log(response.data)
 
       console.log('User Name: ' + cookies.get('userName'))
@@ -104,7 +104,16 @@ class Navigation extends Component {
       //Redirect to previous Path
       window.location.href= previousPath;
     })
-    request.catch(error => console.error(error));
+    request.catch(error => {
+      console.error(error)
+      alert("Login Failed due to an internal backend error.\nPlease try again")
+
+      //Reads the cookie for last path before login
+      let previousPath = cookies.get('o3webappPreviousPath')
+
+      //Redirect to previous Path
+      window.location.href= previousPath;
+    });
   }
 
   /**
