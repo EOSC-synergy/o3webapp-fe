@@ -26,7 +26,7 @@ class Manipulation extends React.Component {
 
         //Checks if user is logged in
         const cookies = new Cookies();
-        if (cookies.get('userID') === undefined) {
+        if (cookies.get('egiID') === undefined) {
             loggedIn = false
         } else {
             loggedIn = true
