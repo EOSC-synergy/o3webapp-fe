@@ -4,12 +4,6 @@ import React from 'react';
 import Cookies from 'universal-cookie';
 import configData from '../../../config.json'
 
-const egi_endpoint = 'https://aai-dev.egi.eu/oidc/authorize'
-const client_id = 'o3webapp'
-const redirect_uri = 'http://localhost:3000/redirect_url'
-const scope = 'openid'
-const response_type = 'id_token'
-const response_mode = 'query'
 let nonce = null
 
 class LoginButton extends React.Component {
