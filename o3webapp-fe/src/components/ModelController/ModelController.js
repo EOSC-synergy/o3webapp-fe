@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import ModelButton from '../buttons/ModelButton/ModelButton'
 import './ModelController.css'
 
@@ -72,6 +74,12 @@ class ModelController extends React.Component {
             </div>
         );
     }
+}
+
+ModelController.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    availableModels: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    selectedModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }
 
 export default ModelController;

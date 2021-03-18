@@ -17,10 +17,11 @@ second one for the currently choosen card/setting.
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import Dropdown from '../DropdownMenu/Dropdown'
+import Dropdown from '../DropdownMenu/Dropdown';
 
-import './MonthsButton.css'
+import './MonthsButton.css';
 
 class MonthsButton extends React.Component {
     constructor(props) {
@@ -153,6 +154,8 @@ class MonthsButton extends React.Component {
 
 }
 
-
+MonthsButton.propTypes = {
+    handleChange: PropTypes.func.isRequired
+}
 
 export default MonthsButton;

@@ -1,7 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
+//import PropTypes from 'prop-types';
 
 import LatitudeButton from '../buttons/LatitudeButton/LatitudeButton';
 import MonthsButton from '../buttons/MonthsButton/MonthsButton';
@@ -383,6 +385,10 @@ class GenerationForm extends React.Component {
             </div>
         );
     }
+}
+
+GenerationForm.propTypes = {
+    history: PropTypes.history
 }
 
 // create form that has access to the router and with that history to allow pushing to another url (here /manipulation)

@@ -2,6 +2,8 @@ import './Navigation.css'
 import NavigationTab from './NavigationTab'
 import LoginButton from '../buttons/LoginButton/LoginButton'
 import LogoutButton from '../buttons/LogoutButton/LogoutButton'
+import React from 'react'
+import PropTypes from 'prop-types';
 import { Component } from 'react'
 import Cookies from 'universal-cookie';
 import configData from '../../config.json'
@@ -117,9 +119,9 @@ class Navigation extends Component {
   }
 
   /**
-   * 
-   * @param {*} authCode 
-   * @returns 
+   * Calls the backed to continue the Login Flow
+   * @param authCode Authentication Code
+   * @returns Returns the Axios Promise object
    */
   callBackendForLogin(authCode) {
     const login_url = configData.SERVER_URL + configData.LOGIN_PATH + '/' + authCode;
@@ -206,6 +208,10 @@ class Navigation extends Component {
       );
     }
   }
+}
+
+Navigation.propTypes = {
+  loginRedirect: PropTypes.bool.isRequired
 }
 
 export default Navigation;
