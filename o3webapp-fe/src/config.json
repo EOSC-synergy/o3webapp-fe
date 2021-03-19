@@ -39,7 +39,7 @@
     "OIDC_SETTINGS": {
         "EGI_ENDPOINT": "https://aai-dev.egi.eu/oidc/authorize",
         "CLIENT_ID": "o3webapp",
-        "REDIRECT_URI": "http://localhost:3000/redirect_url",
+        "REDIRECT_URI": "/redirect_url",
         "SCOPE": "openid%20profile%20email",
         "RESPONSE_TYPE": "code",
         "RESPONSE_MODE": "query"
