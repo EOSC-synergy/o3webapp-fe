@@ -58,7 +58,7 @@ function buildRequestURL() {
 
     return configData.OIDC_SETTINGS.EGI_ENDPOINT + 
     '?client_id=' + configData.OIDC_SETTINGS.CLIENT_ID +
-    '&redirect_uri=' + configData.OIDC_SETTINGS.REDIRECT_URI +
+    '&redirect_uri=' + window.location.origin + configData.OIDC_SETTINGS.REDIRECT_URI +
     '&scope=' + configData.OIDC_SETTINGS.SCOPE +
     '&response_type=' + configData.OIDC_SETTINGS.RESPONSE_TYPE +
     '&response_mode=' + configData.OIDC_SETTINGS.RESPONSE_MODE +
