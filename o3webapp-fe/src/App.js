@@ -29,7 +29,7 @@ class App extends Component {
         <Switch>
           <Route path='/generation' >
             <Navigation key='/generation' loginRedirect={false}/>
-            <Generation />
+            <GenerationPageWithRouter />
           </Route>
           <Route path='/manipulation'>
             <Navigation key='/manipulation' loginRedirect={false}/>
