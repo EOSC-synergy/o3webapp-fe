@@ -11,6 +11,12 @@ class LogoutButton extends React.Component {
     constructor(props) {
         super(props);
 
+        //Read user name from Cookies
+        const cookies = new Cookies();
+        this.state = {
+            userName : cookies.get('userName')
+        }
+
         this.handleLogOut = this.handleLogOut.bind(this);
     }
 
@@ -20,17 +26,18 @@ class LogoutButton extends React.Component {
     handleLogOut() {
         //Remove the cookie
         const cookies = new Cookies();
-        cookies.remove('userID')
-
+        cookies.remove('egiID')
+        cookies.remove('userName')
+        window.location.reload()
         this.props.loggedOut()
     }
 
     render() {
         return (
             <li>
-                <div className='NavBarLink'>
+                <div className='NavBarLink' data-md-tooltip="Log Out">
                     <a className='LoginButton' onClick={() => this.handleLogOut()}>
-                        <p>Logout</p> 
+                        <p>{this.state.userName}</p> 
                         <i><MdAccountCircle size="30px"/></i>
                     </a>
                 </div>

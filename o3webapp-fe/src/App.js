@@ -27,16 +27,16 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route path='/generation'>
-            <Navigation key='/generation'/>
-            <GenerationPageWithRouter />
+          <Route path='/generation' >
+            <Navigation key='/generation' loginRedirect={false}/>
+            <Generation />
           </Route>
           <Route path='/manipulation'>
-            <Navigation key='/manipulation'/>
+            <Navigation key='/manipulation' loginRedirect={false}/>
             <Manipulation />
           </Route>
           <Route path="/about">
-            <Navigation key='/about'/>
+            <Navigation key='/about' loginRedirect={false}/>
             <About />
           </Route>
           <Route path='/redirect_url'>
@@ -44,7 +44,7 @@ class App extends Component {
             <Home loginRedirect={true}/>
           </Route>
           <Route path='/'>
-            <Navigation key='/'/>
+            <Navigation key='/' loginRedirect={false}/>
             <Home loginRedirect={false}/>
           </Route>
         </Switch>

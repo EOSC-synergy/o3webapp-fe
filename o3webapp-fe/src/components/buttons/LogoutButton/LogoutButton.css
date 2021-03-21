@@ -8,3 +8,29 @@ i {
 .LoginButton {
     cursor: pointer;
 }
+
+[data-md-tooltip] {
+    position: relative;
+  }
+  
+[data-md-tooltip]:before {
+    content: attr(data-md-tooltip);
+    position: absolute;
+    bottom: -37px;
+    left: 25%;
+    padding: 8px;
+    transform: translateX(0%) scale(0);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: top;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    width: fit-content;
+    font-size: 11px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip]:hover:before {
+transform: translateX(0%) scale(1); 
+}
