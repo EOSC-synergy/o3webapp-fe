@@ -31,9 +31,26 @@ function DownloadSection(props) {
 
         Axios.post(request_url, request_body, headersConfig)
             .then(request => console.log(request.data));    //! only for testing
+
+        
+
+        //Find bokeh save button
+        let element = document.getElementsByClassName('bk bk-toolbar-button bk-tool-icon-save')[0]
+        console.log(element)
+
+        //Create mouse click and release events
+        var evt1 = document.createEvent('MouseEvents')
+        var evt2 = document.createEvent('MouseEvents')
+        evt1.initMouseEvent('mousedown', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        evt2.initMouseEvent('mouseup', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+        //Dispatch events on save button
+        element.dispatchEvent(evt1)
+        element.dispatchEvent(evt2)
     }
 
     function downloadPNG() {
+        /*
         request_url += "png";
         console.log("Requesting the png for this plot:", props.plot);
         //header
@@ -47,6 +64,21 @@ function DownloadSection(props) {
 
         Axios.post(request_url, request_body, headersConfig)
             .then(request => console.log(request.data));    //! only for testing
+        */
+        
+        //Find bokeh save button
+        let element = document.getElementsByClassName('bk bk-toolbar-button bk-tool-icon-save')[0]
+        console.log(element)
+
+        //Create mouse click and release events
+        var evt1 = document.createEvent('MouseEvents')
+        var evt2 = document.createEvent('MouseEvents')
+        evt1.initMouseEvent('mousedown', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        evt2.initMouseEvent('mouseup', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+        //Dispatch events on save button
+        element.dispatchEvent(evt1)
+        element.dispatchEvent(evt2)
     }
 
     function downloadCSV() {
