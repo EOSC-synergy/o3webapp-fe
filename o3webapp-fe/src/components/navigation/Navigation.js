@@ -124,7 +124,15 @@ class Navigation extends Component {
    * @returns Returns the Axios Promise object
    */
   callBackendForLogin(authCode) {
-    const login_url = configData.SERVER_URL + configData.LOGIN_PATH + '/' + authCode;
+
+    let server_url = process.env.REACT_APP_SERVER_URL;
+    if (server_url === undefined) {
+        console.log("No URL specified for backend, taking default url");
+        server_url = configData.SERVER_URL;
+        console.log(server_url);
+    }
+
+    const login_url = server_url + configData.LOGIN_PATH + '/' + authCode;
 
     const requestOptions = {
       headers: { 
