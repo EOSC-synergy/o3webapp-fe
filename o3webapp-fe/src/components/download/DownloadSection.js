@@ -9,7 +9,13 @@ import './DownloadSection.css'
 
 function DownloadSection(props) {
     //calculate request url from defaults and current plot type
-    let request_url = configData.SERVER_URL + configData.DOWNLOAD_PATH + "/";
+    let server_url = process.env.REACT_APP_SERVER_URL;
+    if (server_url === undefined) {
+        console.log("No URL specified for backend, taking default url");
+        server_url = configData.SERVER_URL;
+        console.log(server_url);
+    }
+    let request_url = server_url + configData.DOWNLOAD_PATH + "/";
 
     function downloadPDF() {
         request_url += "pdf";
