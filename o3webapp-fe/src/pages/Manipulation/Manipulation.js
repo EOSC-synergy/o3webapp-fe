@@ -74,6 +74,13 @@ class Manipulation extends React.Component {
         //After bokeh module has loaded in, find buttons to add tooltips
         setTimeout(function() {
 
+            //Header Buttons
+            let header_element = document.getElementsByClassName('mmt_header')[0]
+            let elements = header_element.childNodes[0].childNodes
+            for (let e of elements) {
+                e.setAttribute('data-md-tooltip-header', 'Generate')
+            }
+
             //Title Buttons
             let title_elements = document.getElementsByClassName('mmt_title')
             for (let e of title_elements) {
