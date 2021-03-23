@@ -83,6 +83,37 @@
     width: fit-content !important;
 }
 
+.bk-input-group {
+    font-family: Trebuchet, Arial, sans-serif !important; 
+    text-transform: uppercase !important;
+    color: white !important;
+    position: relative !important;
+    top: 20px !important;
+    font-size: 15px !important;
+    background-color: rgb(56, 56, 56) !important;
+    outline: none !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .9) !important;
+    cursor: pointer !important;
+    margin-bottom: 5px !important;
+    height: fit-content !important;
+    width: 400px;
+    padding: 12px !important; 
+}
+
+.bk-slider-title {
+    margin-bottom: 10px !important;
+}
+
+.bk-slider-value {
+    font-size: 18px !important;
+    color: rgb(254, 209, 54) !important;
+}
+
+.noUi-connect {
+    background-color: rgb(254, 209, 54) !important;
+}
+
 [data-md-tooltip-title][data-md-tooltip-title] {
     position: relative;
   }
