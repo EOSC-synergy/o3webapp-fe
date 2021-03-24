@@ -16,6 +16,9 @@ import configData from '../../config.json'
 
 import './Generation.css'
 
+
+const BACKEND_SERVER_URL = getApiUrlFromEnv();
+
 class GenerationPage extends React.Component {
 
     /**
@@ -77,7 +80,7 @@ class GenerationPage extends React.Component {
      */
     componentDidMount() {
         const currplotType = this.state.plot.pType;
-        const model_list_url = configData.SERVER_URL + configData.MODEL_LIST_PATH;
+        const model_list_url = BACKEND_SERVER_URL + configData.MODEL_LIST_PATH;
         const request_url = model_list_url + '/' + currplotType;
 
         //gets the models from the backend
@@ -91,8 +94,6 @@ class GenerationPage extends React.Component {
         const requestBody = {
             pType: currplotType
         }
-
-        console.log("Errors:", this.state.savedErrors)
 
 
         Axios.post(request_url, requestBody, requestOptions)
@@ -109,7 +110,6 @@ class GenerationPage extends React.Component {
      * @param {String} plotType - new plotType
      */
     handlePlotTypeChange(plotType) {
-        console.log(plotType);
         let oldPlot = this.state.plot
         oldPlot.pType = plotType
         this.setState({
@@ -125,8 +125,6 @@ class GenerationPage extends React.Component {
      * @param {Number[]} latitude_array - new latitude range
      */
     handleLatitudeChange(latitude_array) {
-        console.log("Verifying Lattitude:", latitude_array);
-
         const errorArray = this.state.savedErrors;
         
         var lat_min = (latitude_array[0] !== undefined) ? latitude_array[0] : configData.GENERATION_DEFAULTS.LAT_MIN;
@@ -156,8 +154,6 @@ class GenerationPage extends React.Component {
      * @param {Number[]} new_months - new selected months 
      */
     handleMonthChange(new_months) {
-        console.log("Verifying months ", new_months);
-
         const errorArray = this.state.savedErrors;
 
         try {
@@ -184,8 +180,6 @@ class GenerationPage extends React.Component {
      * @param {Number} year - new lower year border
      */
     handleLowerYearChange(year) {
-        console.log("Verifying lower border", year, this.state.plot.end);
-
         //save error array from state to allow manipulation
         const errorArray = this.state.savedErrors
 
@@ -219,8 +213,6 @@ class GenerationPage extends React.Component {
      * @param {number} year - entered year
      */
     handleUpperYearChange(year) {
-        console.log("Verifying upper border", this.state.plot.begin, year);
-
         //save error array from state to allow manipulation
         const errorArray = this.state.savedErrors
 
@@ -306,14 +298,12 @@ class GenerationPage extends React.Component {
     /**
      * handles the submit of the request
      *  saves the submitted values as a cookie and redirects
-     * @param event 
+     * @param event - the button that triggered the event
      */
     handleSubmit(event) {
         event.preventDefault();
         this.saveStateAsCookie();
-        console.log("State", this.state);
         const errors = this.state.savedErrors;
-        console.log(errors);
         const error = errors.find(err => err.error !== undefined);
         if (error !== undefined) {
             console.error(error.error.message);
@@ -346,7 +336,6 @@ class GenerationPage extends React.Component {
             lat_max: currPlot.lat_max.toString(),
             output: "json",
         }
-        console.log("Saving plot:", savePlot);
         const jsonPlot = JSON.stringify(savePlot);
         cookie.set('plotValues', jsonPlot, {path: '/', maxAge: expDate});
     }
@@ -410,3 +399,21 @@ GenerationPage.propTypes = {
 //allow history.push by wrapping in withRouter
 const GenerationPageWithRouter = withRouter(GenerationPage);
 export default GenerationPageWithRouter;
+
+
+/**
+ * Grabs the url from the backend server from the env if set, 
+ *  else defaults to the config
+ * @returns {String} - the url of the backend server
+ */
+function getApiUrlFromEnv() {
+    //read the env variable
+    let server_url = process.env.REACT_APP_SERVER_URL;
+    //if the variable is null fall back to default from config
+    if (server_url === undefined) {
+        console.log("No URL specified for backend, taking default url");
+        server_url = configData.SERVER_URL;
+        console.log(server_url);
+    }
+    return server_url;
+}
