@@ -7,7 +7,7 @@ import {
   // Link,
 } from 'react-router-dom';
 import GenerationPageWithRouter from './pages/Generation/Generation.js';
-import Manipulation from './pages/Manipulation/Manipulation.js';
+import ManipulationPage from './pages/Manipulation/Manipulation.js';
 import About from './pages/About/About.js';
 import Home from './pages/Home/Home.js';
 import Navigation from './components/navigation/Navigation.js';
@@ -33,7 +33,7 @@ class App extends Component {
           </Route>
           <Route path='/manipulation'>
             <Navigation key='/manipulation' loginRedirect={false}/>
-            <Manipulation />
+            <ManipulationPage />
           </Route>
           <Route path="/about">
             <Navigation key='/about' loginRedirect={false}/>

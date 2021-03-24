@@ -1,96 +1,107 @@
 import React from 'react';
-import './Manipulation.css';
-import './BokehStyling.css';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
 
 import LatitudeButton from '../../components/buttons/LatitudeButton/LatitudeButton';
 import MonthsButton from '../../components/buttons/MonthsButton/MonthsButton';
 import YearButton from '../../components/buttons/YearButton/YearButton'
 import ModelController from '../../components/ModelController/ModelController';
-import * as Verifier from '../../components/Verifier/Verifier';
-
-//import ManipulationFormWithRouter from '../../components/forms/Manipulationform';
 import DownloadSection from '../../components/download/DownloadSection';
 
+import * as Verifier from '../../components/Verifier/Verifier';
+import * as URL_Utility from '../../utility/Url_from_env';
 import configData from '../../config.json';
 
+import './Manipulation.css';
+import './BokehStyling.css';
 
-let server_url = process.env.REACT_APP_SERVER_URL;
-        if (server_url === undefined) {
-            console.log("No URL specified for backend, taking default url");
-            server_url = configData.SERVER_URL;
-            console.log(server_url);
-        }
-        console.log(server_url);
-const plot_api_url = server_url + configData.PLOT_PATH;
 
+const BACKEND_SERVER_URL = URL_Utility.getApiUrlFromEnv();
 let loggedIn = false
 
-class Manipulation extends React.Component {
+/**
+ * Main Manipulation Page
+ * wraps the bokeh plot, requests it and lets the user update it
+ */
+class ManipulationPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            availableModels: [],
-            availableSettings: [],
-            error: []
-        }
 
-        // this.handleSubmit = this.handleSubmit.bind(this);
+        let availableModels = [];
+        let availableSettings = [];
+        let savedErrors = [
+            {
+                key: "model",
+                error: undefined,
+            },
+            {
+                key: "year",
+                error: undefined,
+            },
+            {
+                key: "month",
+                error: undefined,
+            },
+            {
+                key: "latitude",
+                error: undefined,
+            }
+        ];
 
-        // this.handleLowerYearChange = this.handleLowerYearChange.bind(this);
-        // this.handleUpperYearChange = this.handleUpperYearChange.bind(this);
-        // this.handleMonthChange = this.handleMonthChange.bind(this);
-        // this.handleLatitudeChange = this.handleLatitudeChange.bind(this);
-        // this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
-        // this.handleModelChange = this.handleModelChange.bind(this);
-        // this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
+        
 
 
         //Checks if user is logged in
         const cookies = new Cookies();
         if (cookies.get('egiID') === undefined) {
-            loggedIn = false
+            loggedIn = false;
         } else {
-            loggedIn = true
+            loggedIn = true;
         }
 
-        //grap the plot from the cookie and store it
+        //grap the plot from the cookie
         let plotFromCookie;
+        let plot;
         try {
-            plotFromCookie = this.getPlotValuesFromCookie();
-            this.state = {
-                plot: plotFromCookie
-            }
+            plotFromCookie = this.getPlotValuesFromCookie('plotValues');
+            plot = plotFromCookie;
         } catch (error) {
             //TODO add default behaviour, should it send the user back? Get a plot with default values?
             alert(error.message);
-            this.state = {
-                plot: {
-                    pType: configData.GENERATION_DEFAULTS.BEGIN
-                }
-            }
+                plot = {
+                    pType: configData.GENERATION_DEFAULTS.BEGIN //! Begin cant be right here
+                };
         }
-        console.log(plotFromCookie);
+
+        //store all needed values
+        this.state = {
+            availableModels: availableModels,
+            availableSettings: availableSettings,
+            savedErrors: savedErrors,
+            plot: plot
+        };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.handleLowerYearChange = this.handleLowerYearChange.bind(this);
+        this.handleUpperYearChange = this.handleUpperYearChange.bind(this);
+        this.handleMonthChange = this.handleMonthChange.bind(this);
+        this.handleLatitudeChange = this.handleLatitudeChange.bind(this);
+        this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
+        this.handleModelChange = this.handleModelChange.bind(this);
+        this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
     }
 
     componentDidMount() {
-       this.fetchPlotFromApi();
+        this.fetchPlotFromApi();
 
-       //grap models from backend
-       const currplotType = this.state.plot.pType;
-        let server_url = process.env.REACT_APP_SERVER_URL;
-        if (server_url === undefined) {
-            console.log("No URL specified for backend, taking default url");
-            server_url = configData.SERVER_URL;
-            console.log(server_url);
-        }
-        console.log(server_url);
-        const model_list_url = server_url + configData.MODEL_LIST_PATH;
-        const request_url = model_list_url + '/' + currplotType;
+        //TODO refractor in own method (also in generation)
+        //* START REFRACTOR
+        //grap models from backend
+        const currplotType = this.state.plot.pType;
+        
+        const request_url = BACKEND_SERVER_URL + configData.MODEL_LIST_PATH + '/' + currplotType;
 
         //gets the models from the backend
         const requestOptions = {
@@ -103,7 +114,6 @@ class Manipulation extends React.Component {
         const requestBody = {
             pType: currplotType
         }
-
         console.log(request_url, requestOptions, requestBody)
 
         Axios.post(request_url, requestBody, requestOptions)
@@ -113,10 +123,15 @@ class Manipulation extends React.Component {
                 availableSettings: response.data.vars
             }))
             .catch(error => console.error(error));
+
+        //* END REFRACTOR
     }
 
+    /**
+     * updates the state with the new plotType
+     * @param {String} plotType - new plotType
+     */
     handlePlotTypeChange(plotType) {
-        console.log(plotType);
         let oldPlot = this.state.plot
         oldPlot.pType = plotType
         this.setState({
@@ -130,16 +145,17 @@ class Manipulation extends React.Component {
      * @param {Number[]} latitude_array - new latitude range
      */
      handleLatitudeChange(latitude_array) {
-        console.log("Updated Lattitude:", latitude_array);
+        const errorArray = this.state.savedErrors;
+
         var lat_min = (latitude_array[0] !== undefined) ? latitude_array[0] : configData.GENERATION_DEFAULTS.LAT_MIN;
         var lat_max = (latitude_array[1] !== undefined) ? latitude_array[1] : configData.GENERATION_DEFAULTS.LAT_MAX;
         
         try {
             Verifier.verifyLatitude(lat_min, lat_max)
+            errorArray.find(error => error.key === "latitude").error = undefined;
         } catch(error) {
-            this.setState({
-                error: error
-            })
+            console.error(error.message);
+            errorArray.find(error => error.key === "month").error = error;
         }
 
         let oldPlot = this.state.plot;
@@ -147,7 +163,8 @@ class Manipulation extends React.Component {
         oldPlot.lat_max = lat_max;
 
         this.setState({
-            plot: oldPlot
+            plot: oldPlot,
+            savedErrors: errorArray
         })
         this.saveStateAsCookie();
     }
@@ -157,19 +174,22 @@ class Manipulation extends React.Component {
      * @param {Number[]} new_months - new selected months 
      */
      handleMonthChange(new_months) {
-        console.log(new_months);
+        const errorArray = this.state.savedErrors;
 
         try {
             Verifier.verifyMonths(new_months);
+            errorArray.find(error => error.key === "month").error = undefined;
         } catch(error) {
             console.error(error.message);
+            errorArray.find(error => error.key === "month").error = error;
         }
 
         let oldPlot = this.state.plot;
         oldPlot.month = new_months;
 
         this.setState({
-            plot: oldPlot
+            plot: oldPlot,
+            savedErrors: errorArray
         });
 
         this.saveStateAsCookie();
@@ -180,27 +200,26 @@ class Manipulation extends React.Component {
      * @param {Number} year - new lower year border
      */
      handleLowerYearChange(year) {
-        //const oldBegin = this.state.begin;
-        //const oldEnd = this.state.end;
+        //save error array from state to allow manipulation
+        const errorArray = this.state.savedErrors
 
-
-        /* validate input,
-            TODO: implement
-            year needs to be smaller than upper entry
-            year needs to be a number
-            year needs to be in predefined region (1970-2100) or something 
-        */
         try {
             Verifier.verifyYear(year, this.state.plot.end);
+            //clear model errors if no error was found
+            errorArray.find(error => error.key === "year").error = undefined;
         } catch(error) {
+            //log and add the thrown error 
             console.error(error.message);
+            errorArray.find(error => error.key === "year").error = error; 
         }
 
         let oldPlot = this.state.plot
         oldPlot.begin = year
 
         this.setState({
-            plot: oldPlot
+            plot: oldPlot,
+            savedErrors: errorArray
+
         })
         this.saveStateAsCookie();
     }
@@ -210,26 +229,23 @@ class Manipulation extends React.Component {
      * @param {number} year - entered year
      */
      handleUpperYearChange(year) {
-        //const oldBegin = this.state.begin;
-        //const oldEnd = this.state.end;
-
-        /* validate input,
-            TODO: Implement
-            year needs to be bigger than lower entry
-            year needs to be a number
-            year needs to be in predefined region (1970-2100) or something 
-        */
+        //save error array from state to allow manipulation
+        const errorArray = this.state.savedErrors
 
         try {
             Verifier.verifyYear(this.state.plot.begin, year);
+            //clear model errors if no error was found
+            errorArray.find(error => error.key === "year").error = undefined;
         } catch(error) {
             console.error(error.message);
+            errorArray.find(error => error.key === "year").error = error;
         }
 
         let oldPlot = this.state.plot;
         oldPlot.end = year;
         this.setState({
-            plot: oldPlot
+            plot: oldPlot,
+            savedErrors: errorArray
         })
         this.saveStateAsCookie();
     }
@@ -259,13 +275,27 @@ class Manipulation extends React.Component {
             oldmodels.push(newmodel);
         }
 
+        //verify that at least one model is selected
+
+        const errorArray = this.state.savedErrors
+        try {
+            Verifier.verifyModels(oldmodels);
+            //clear model errors
+            errorArray.find(error => error.key === "model").error = undefined;
+        } catch(error) {
+            //log and add the thrown error 
+            console.error(error.message);
+            errorArray.find(error => error.key === "model").error = error;          
+        }
+
         let oldPlot = this.state.plot;
         oldPlot.models = oldmodels;
         //update state
         this.setState({
-            plot: oldPlot
+            plot: oldPlot,
+            savedErrors: errorArray
+
         })
-        console.log(this.state.plot.models)
         this.saveStateAsCookie();
     }
 
@@ -279,8 +309,16 @@ class Manipulation extends React.Component {
         event.preventDefault();
         this.saveStateAsCookie();
 
-        //redirect to manipulation site
-        this.props.history.push("/manipulation");
+        const errors = this.state.savedErrors;
+        const error = errors.find(err => err.error !== undefined);
+        if (error !== undefined) {
+            console.error(error.error.message);
+            alert(error.error.message);
+        } else {
+            console.log("No error found");
+            //redirect to manipulation site
+            window.location.reload();
+        }
 
     }
 
@@ -293,14 +331,6 @@ class Manipulation extends React.Component {
         const expDate = new Date().setFullYear(currDate.getFullYear() +1);
         let currPlot = this.state.plot;
 
-        // pType: "tco3_zm",
-        //     models: [],
-        //     begin: 1970,
-        //     end: 2100,
-        //     month: [1, 2, 3],
-        //     lat_min: -90,
-        //     lat_max: 0,
-
 
         let savePlot = {
             pType: currPlot.pType,
@@ -312,23 +342,22 @@ class Manipulation extends React.Component {
             lat_max: currPlot.lat_max.toString(),
             output: "json",
         }
-        console.log("Saving plot:", savePlot);
         const jsonPlot = JSON.stringify(savePlot);
         cookie.set('plotValues', jsonPlot, {path: '/', maxAge: expDate});
     }
 
+    //TODO rework so it just returns the cookie in all cases and you can just specify the name
     /**
      * Reads the stored plot from the cookie
      * @returns plotCookie - the selected plot read from the cookie
      */
-    getPlotValuesFromCookie() {
+    getPlotValuesFromCookie(cookieName) {
         const cookie = new Cookies();
-        const plotCookie = cookie.get('plotValues');
+        const plotCookie = cookie.get(cookieName);
 
         if (plotCookie === null || plotCookie === undefined) {
             throw new Error("Could not parse cookie");
         } else {
-            console.log("Cookie was successfully read, plot is: ", plotCookie);
             return plotCookie;
         }
     }
@@ -339,17 +368,13 @@ class Manipulation extends React.Component {
     fetchPlotFromApi() {
         //receives the plot from the api and inserts the plot
         const { plot }= this.state
-        console.log("Requesting this plot: ", plot);
-
-        console.log('fetching from api');
         const headersConfig = {
             headers: {
                 'Content-Type': 'application/json',
             }
         };
 
-        const request_url = plot_api_url + "/" + plot.pType;
-        console.log(request_url);
+        const request_url = BACKEND_SERVER_URL + configData.PLOT_PATH + "/" + plot.pType;
         Axios.post(request_url, plot, headersConfig)
             .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'));
     }
@@ -357,9 +382,6 @@ class Manipulation extends React.Component {
     render() {
         const { pType, models, begin, end, months, lat_min, lat_max } = this.state.plot;
         const { availableModels, availableSettings } = this.state;
-        console.log("Available settings:", availableSettings)
-        
-        console.log("Available models:", availableModels)
 
 
         const plot = this.state.plot ;
@@ -425,8 +447,4 @@ class Manipulation extends React.Component {
     
 }
 
-Manipulation.propTypes = {
-    history: PropTypes.history
-}
-
-export default Manipulation;
+export default ManipulationPage;

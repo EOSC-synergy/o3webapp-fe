@@ -121,6 +121,7 @@ class GenerationPage extends React.Component {
         this.saveStateAsCookie();
 
         //TODO readd logic to reload page on plot change and show correct plot type and models
+        //TODO also in Manipulation
     }
 
     /**
