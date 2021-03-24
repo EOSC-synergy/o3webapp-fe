@@ -10,14 +10,16 @@ import MonthsButton from '../../components/buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../../components/buttons/PlotButton/PlotButtonController';
 import YearButton from '../../components/buttons/YearButton/YearButton'
 import ModelController from '../../components/ModelController/ModelController';
-import * as Verifier from '../../components/Verifier/Verifier'
+
+import * as Verifier from '../../components/Verifier/Verifier';
+import * as URL_Utility from '../../utility/Url_from_env';
 
 import configData from '../../config.json'
 
 import './Generation.css'
 
 
-const BACKEND_SERVER_URL = getApiUrlFromEnv();
+const BACKEND_SERVER_URL = URL_Utility.getApiUrlFromEnv();
 
 class GenerationPage extends React.Component {
 
@@ -399,21 +401,3 @@ GenerationPage.propTypes = {
 //allow history.push by wrapping in withRouter
 const GenerationPageWithRouter = withRouter(GenerationPage);
 export default GenerationPageWithRouter;
-
-
-/**
- * Grabs the url from the backend server from the env if set, 
- *  else defaults to the config
- * @returns {String} - the url of the backend server
- */
-function getApiUrlFromEnv() {
-    //read the env variable
-    let server_url = process.env.REACT_APP_SERVER_URL;
-    //if the variable is null fall back to default from config
-    if (server_url === undefined) {
-        console.log("No URL specified for backend, taking default url");
-        server_url = configData.SERVER_URL;
-        console.log(server_url);
-    }
-    return server_url;
-}
