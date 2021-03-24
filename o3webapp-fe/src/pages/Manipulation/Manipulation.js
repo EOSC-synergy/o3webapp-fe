@@ -399,8 +399,8 @@ class ManipulationPage extends React.Component {
                     <DownloadSection loggedIn={loggedIn} plot={plot}/>
                 </div>
 
-                <div className="generation-form-wrapper">
-                <form onSubmit={this.handleSubmit} className="generation-form">
+                <div className="manipulation-form-wrapper">
+                <form onSubmit={this.handleSubmit} className="manipulation-form">
                         
                        
                     {availableSettings.some(setting => setting.name === "model") &&
