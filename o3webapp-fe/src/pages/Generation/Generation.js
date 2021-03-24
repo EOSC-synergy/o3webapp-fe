@@ -1,26 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Cookies from 'universal-cookie';
 import Axios from 'axios';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { withRouter } from 'react-router';
+import Cookies from 'universal-cookie';
 
-//import GenerationFormWithRouter from '../../components/forms/Generationform'
 import LatitudeButton from '../../components/buttons/LatitudeButton/LatitudeButton';
 import MonthsButton from '../../components/buttons/MonthsButton/MonthsButton';
 import PlotButtonController from '../../components/buttons/PlotButton/PlotButtonController';
-import YearButton from '../../components/buttons/YearButton/YearButton'
+import YearButton from '../../components/buttons/YearButton/YearButton';
 import ModelController from '../../components/ModelController/ModelController';
 
 import * as Verifier from '../../components/Verifier/Verifier';
+import configData from '../../config.json';
 import * as URL_Utility from '../../utility/Url_from_env';
 
-import configData from '../../config.json'
-
-import './Generation.css'
-
+import './Generation.css';
 
 const BACKEND_SERVER_URL = URL_Utility.getApiUrlFromEnv();
 
+/**
+ * Main Generation Page
+ * wraps all buttons and features needed to let the user request a plot
+ */
 class GenerationPage extends React.Component {
 
     /**
