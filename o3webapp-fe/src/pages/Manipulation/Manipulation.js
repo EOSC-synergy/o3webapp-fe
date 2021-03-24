@@ -10,8 +10,15 @@ import DownloadSection from '../../components/download/DownloadSection';
 
 import configData from '../../config.json';
 
-//url from fake backend for testing local
-const plot_api_url = configData.SERVER_URL + configData.PLOT_PATH;
+
+let server_url = process.env.REACT_APP_SERVER_URL;
+        if (server_url === undefined) {
+            console.log("No URL specified for backend, taking default url");
+            server_url = configData.SERVER_URL;
+            console.log(server_url);
+        }
+        console.log(server_url);
+const plot_api_url = server_url + configData.PLOT_PATH;
 
 let loggedIn = false
 
@@ -26,7 +33,7 @@ class Manipulation extends React.Component {
 
         //Checks if user is logged in
         const cookies = new Cookies();
-        if (cookies.get('userID') === undefined) {
+        if (cookies.get('egiID') === undefined) {
             loggedIn = false
         } else {
             loggedIn = true
@@ -57,6 +64,7 @@ class Manipulation extends React.Component {
                 'Content-Type': 'application/json',
             }
         }
+        
         const request_url = plot_api_url + "/" + plotCookie.pType;
         console.log(request_url)
         Axios.post(request_url, plotCookie, headersConfig)

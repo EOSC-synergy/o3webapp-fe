@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  backend:
+    image: o3as/o3webapp-be
+    restart: unless-stopped
+    environment:
+      - FLASK_APP=o3webapp_be.backend.back_end.py # backend
+      - FLASK_RUN_HOST=0.0.0.0
+      - FRONTEND_SERVER_URL=http://o3web.test.fedcloud.eu
+#   build example using Dockefile from the local folder (check the path!)
+    build: 
+       context: ./o3webapp-be
+       dockerfile: docker/Dockerfile
+       args:
+         branch: backend # test
+#   build example from the git repository (default branch)
+#    build: 
+#       context: https://git.scc.kit.edu/synergy.o3as/o3webapp-be.git
+#       dockerfile: docker/Dockerfile
+    ports:
+      - target: 5000
+        published: 5000
+#    secrets:
+#      - egi_auth
+
+
+  frontend:
+    image: o3as/o3webapp-fe
+    restart: unless-stopped
+#   build example using Dockerfile from the local folder (check the path!)
+    build:
+      context: ./o3webapp-fe
+      dockerfile: docker/Dockerfile
+#   build example from the git repository (default branch)
+#    build: 
+#       context: https://git.scc.kit.edu/synergy.o3as/o3webapp-fe.git
+#       dockerfile: docker/Dockerfile
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_SERVER_URL=http://o3web.test.fedcloud.eu:5000
+    ports:
+      - target: 3000
+        published: 80
+      - target: 3000
+        published: 3000
+#   example on how to mount a folder in the container
+#    volumes:
+#      - ./:/srv/o3webapp-fe/
+#
+#secrets:
+#   egi_auth:
+#     file: o3webapp-be/egi_auth.txt

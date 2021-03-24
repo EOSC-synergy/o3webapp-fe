@@ -3,6 +3,7 @@
     "MODEL_LIST_PATH": "/model_list",
     "PLOT_PATH": "/plot",
     "DOWNLOAD_PATH": "/download",
+    "LOGIN_PATH": "/login",
     "GENERATION_DEFAULTS": {
         "PLOT_TYPE": "tco3_zm",
         "MODELS": [
@@ -33,5 +34,14 @@
         "MONTH": [1,2,3],
         "LAT_MIN": -90,
         "LAT_MAX": 0
+    },
+    "LOGIN_COOKIE_MAX_AGE": 86400,
+    "OIDC_SETTINGS": {
+        "EGI_ENDPOINT": "https://aai-dev.egi.eu/oidc/authorize",
+        "CLIENT_ID": "o3webapp",
+        "REDIRECT_URI": "/redirect_url",
+        "SCOPE": "openid%20profile%20email",
+        "RESPONSE_TYPE": "code",
+        "RESPONSE_MODE": "query"
     }
 }
