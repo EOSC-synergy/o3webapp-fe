@@ -10,7 +10,7 @@ import PlotButtonController from '../../components/buttons/PlotButton/PlotButton
 import YearButton from '../../components/buttons/YearButton/YearButton';
 import ModelController from '../../components/ModelController/ModelController';
 
-import * as Verifier from '../../components/Verifier/Verifier';
+import * as Verifier from '../../utility/Verifier/Verifier';
 import configData from '../../config.json';
 import * as URL_Utility from '../../utility/Url_from_env';
 
@@ -82,13 +82,20 @@ class GenerationPage extends React.Component {
      * and settings and saves it as state
      */
     componentDidMount() {
+        this.fetchModelsFromApi();
+    }
+
+    /**
+     * reads the models form the api for the current plot type
+     */
+     fetchModelsFromApi() {
         const currplotType = this.state.plot.pType;
-        const model_list_url = BACKEND_SERVER_URL + configData.MODEL_LIST_PATH;
-        const request_url = model_list_url + '/' + currplotType;
+
+        const request_url = BACKEND_SERVER_URL + configData.MODEL_LIST_PATH + '/' + currplotType;
 
         //gets the models from the backend
         const requestOptions = {
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
             },
             timeout: 5000
@@ -96,13 +103,12 @@ class GenerationPage extends React.Component {
 
         const requestBody = {
             pType: currplotType
-        }
-
+        };
 
         Axios.post(request_url, requestBody, requestOptions)
             //.then(response => console.log(response.data))    
-            .then(response => this.setState({ 
-                availableModels: response.data.models, 
+            .then(response => this.setState({
+                availableModels: response.data.models,
                 availableSettings: response.data.vars
             }))
             .catch(error => console.error(error));

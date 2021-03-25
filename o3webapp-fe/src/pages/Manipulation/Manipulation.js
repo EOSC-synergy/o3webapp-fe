@@ -9,7 +9,7 @@ import YearButton from '../../components/buttons/YearButton/YearButton'
 import ModelController from '../../components/ModelController/ModelController';
 import DownloadSection from '../../components/download/DownloadSection';
 
-import * as Verifier from '../../components/Verifier/Verifier';
+import * as Verifier from '../../utility/Verifier/Verifier';
 import * as URL_Utility from '../../utility/Url_from_env';
 import configData from '../../config.json';
 
@@ -49,23 +49,14 @@ class ManipulationPage extends React.Component {
             }
         ];
 
-        
-
-
-        //Checks if user is logged in
-        const cookies = new Cookies();
-        if (cookies.get('egiID') === undefined) {
-            loggedIn = false;
-        } else {
-            loggedIn = true;
-        }
+        const loggedInCookieValue = this.getValuesFromCookie('egiID');
+        const loggedIn = loggedInCookieValue ? true : false;
+        console.log(loggedIn);
 
         //grap the plot from the cookie
-        let plotFromCookie;
         let plot;
         try {
-            plotFromCookie = this.getPlotValuesFromCookie('plotValues');
-            plot = plotFromCookie;
+            plot = this.getValuesFromCookie('plotValues');
         } catch (error) {
             //TODO add default behaviour, should it send the user back? Get a plot with default values?
             alert(error.message);
@@ -96,16 +87,32 @@ class ManipulationPage extends React.Component {
     componentDidMount() {
         this.fetchPlotFromApi();
 
-        //TODO refractor in own method (also in generation)
-        //* START REFRACTOR
-        //grap models from backend
+        this.fetchModelsFromApi();
+    }
+
+    //TODO rework so it just returns the cookie in all cases and you can just specify the name
+    /**
+     * Reads the stored plot from the cookie
+     * @throws if no cookie with the specified name was found
+     * @returns cookieValue - the selected plot read from the cookie
+     */
+     getValuesFromCookie(cookieName) {
+        const cookie = new Cookies();
+        const cookieValue = cookie.get(cookieName);
+        return cookieValue;
+    }
+
+    /**
+     * reads the models form the api for the current plot type
+     */
+    fetchModelsFromApi() {
         const currplotType = this.state.plot.pType;
-        
+
         const request_url = BACKEND_SERVER_URL + configData.MODEL_LIST_PATH + '/' + currplotType;
 
         //gets the models from the backend
         const requestOptions = {
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
             },
             timeout: 5000
@@ -113,18 +120,15 @@ class ManipulationPage extends React.Component {
 
         const requestBody = {
             pType: currplotType
-        }
-        console.log(request_url, requestOptions, requestBody)
+        };
 
         Axios.post(request_url, requestBody, requestOptions)
             //.then(response => console.log(response.data))    
-            .then(response => this.setState({ 
-                availableModels: response.data.models, 
+            .then(response => this.setState({
+                availableModels: response.data.models,
                 availableSettings: response.data.vars
             }))
             .catch(error => console.error(error));
-
-        //* END REFRACTOR
     }
 
     /**
@@ -346,21 +350,6 @@ class ManipulationPage extends React.Component {
         cookie.set('plotValues', jsonPlot, {path: '/', maxAge: expDate});
     }
 
-    //TODO rework so it just returns the cookie in all cases and you can just specify the name
-    /**
-     * Reads the stored plot from the cookie
-     * @returns plotCookie - the selected plot read from the cookie
-     */
-    getPlotValuesFromCookie(cookieName) {
-        const cookie = new Cookies();
-        const plotCookie = cookie.get(cookieName);
-
-        if (plotCookie === null || plotCookie === undefined) {
-            throw new Error("Could not parse cookie");
-        } else {
-            return plotCookie;
-        }
-    }
 
     /**
      * Access the Api to get and embed the current plot as a bokeh object
