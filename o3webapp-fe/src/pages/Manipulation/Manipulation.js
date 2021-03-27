@@ -18,7 +18,7 @@ import './BokehStyling.css';
 
 
 const BACKEND_SERVER_URL = URL_Utility.getApiUrlFromEnv();
-let loggedIn = false
+//let loggedIn = false
 
 /**
  * Main Manipulation Page
@@ -70,7 +70,8 @@ class ManipulationPage extends React.Component {
             availableModels: availableModels,
             availableSettings: availableSettings,
             savedErrors: savedErrors,
-            plot: plot
+            plot: plot,
+            loggedIn
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -385,7 +386,7 @@ class ManipulationPage extends React.Component {
 
                     <div id='test-plot' className="bk-root"></div>
 
-                    <DownloadSection loggedIn={loggedIn} plot={plot}/>
+                    <DownloadSection loggedIn={this.state.loggedIn} plot={plot}/>
                 </div>
 
                 <div className="manipulation-form-wrapper">
