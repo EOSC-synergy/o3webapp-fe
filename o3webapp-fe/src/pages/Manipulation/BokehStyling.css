@@ -82,3 +82,87 @@
     height: fit-content !important;
     width: fit-content !important;
 }
+
+[data-md-tooltip-title][data-md-tooltip-title] {
+    position: relative;
+  }
+  
+[data-md-tooltip-title][data-md-tooltip-title]:before {
+    content: attr(data-md-tooltip-title);
+    position: absolute;
+    bottom: 20px;
+    left: 5px;
+    padding: 8px;
+    transform: translateX(0%) scale(0);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: bottom;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    width: fit-content;
+    height: fit-content;
+    line-height: 10px;
+    font-size: 14px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip-title][data-md-tooltip-title]:hover:before {
+transform: translateX(0%) scale(1); 
+}
+
+[data-md-tooltip-model][data-md-tooltip-model] {
+    position: relative;
+  }
+  
+[data-md-tooltip-model][data-md-tooltip-model]:before {
+    content: attr(data-md-tooltip-model);
+    position: absolute;
+    bottom: 40px;
+    right: 5px;
+    padding: 8px;
+    transform: translateX(0%) scale(0);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: bottom;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    width: fit-content;
+    height: fit-content;
+    line-height: 10px;
+    font-size: 14px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip-model][data-md-tooltip-model]:hover:before {
+transform: translateX(0%) scale(1); 
+}
+
+[data-md-tooltip-del][data-md-tooltip-del] {
+    position: relative;
+  }
+  
+[data-md-tooltip-del][data-md-tooltip-del]:before {
+    content: attr(data-md-tooltip-del);
+    position: absolute;
+    bottom: 20px;
+    left: 5px;
+    padding: 8px;
+    transform: translateX(0%) scale(0);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: bottom;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    width: fit-content;
+    height: fit-content;
+    line-height: 10px;
+    font-size: 14px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+
+[data-md-tooltip-del][data-md-tooltip-del]:hover:before {
+transform: translateX(0%) scale(1); 
+}
