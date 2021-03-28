@@ -2,7 +2,7 @@
 #FROM node:15.10.0-alpine3.10
 FROM node:latest
 
-ARG branch=master
+ARG branch=test
 
 #Create workdir
 WORKDIR /srv
