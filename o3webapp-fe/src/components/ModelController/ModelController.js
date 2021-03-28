@@ -40,6 +40,13 @@ class ModelController extends React.Component {
     }
 
     /**
+     * Handles selecting all models
+     */
+     handleSelectAll() {
+        //TODO
+    }
+
+    /**
      * Renders the ModelController
      */
     render() {
@@ -60,6 +67,7 @@ class ModelController extends React.Component {
                     <label htmlFor="search">Enter a keyword</label>
                     <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>
                 </div>
+                <div className="select-all-button mat-style" onClick={this.handleSelectAll()}>Select All</div>
 
                 <div className="model-button-section-wrapper">
                     {filteredModels.map((model, i) => (
