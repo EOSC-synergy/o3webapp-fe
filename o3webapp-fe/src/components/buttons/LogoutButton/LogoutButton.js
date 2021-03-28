@@ -36,7 +36,7 @@ class LogoutButton extends React.Component {
         return (
             <li>
                 <div className='NavBarLink' data-md-tooltip="Log Out">
-                    <a className='LoginButton' onClick={() => this.handleLogOut()}>
+                    <a className='LoginButton' id='logoutButton' onClick={() => this.handleLogOut()}>
                         <p>{this.state.userName}</p> 
                         <i><MdAccountCircle size="30px"/></i>
                     </a>

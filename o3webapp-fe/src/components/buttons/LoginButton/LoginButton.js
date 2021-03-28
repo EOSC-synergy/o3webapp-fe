@@ -12,7 +12,7 @@ class LoginButton extends React.Component {
         return (
             <li>
                 <div className='NavBarLink'>
-                    <a className='LoginButton' onClick={startLogin}>
+                    <a className='LoginButton' id='loginButton' onClick={startLogin}>
                         <p>Login</p> 
                         <i><MdAccountCircle size="30px"/></i>
                     </a>
