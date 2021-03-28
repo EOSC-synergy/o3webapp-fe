@@ -8,7 +8,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className="HomePageContainer">
-                <div className="FirstPageHome">
+                <div className="FirstPageHome" id="FirstPageHome">
                     <div className='background-picture' style={{ backgroundImage: "url(/background-clouds.jpg)"}}>
                         <div className="SplashScreen">
                             <h1>o3as WebApp</h1>

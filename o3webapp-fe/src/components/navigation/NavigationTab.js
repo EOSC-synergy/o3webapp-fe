@@ -9,11 +9,20 @@ import './NavigationTab.css'
 class NavigationTab extends Component {
 
     render() {
-        return (
-            <li className={this.props.state}>
-                <Link to={this.props.pageLink} className='NavBarLink' onClick={() => this.props.handleClick(this.props.name)}>{this.props.name} </Link>
-            </li>
-        )
+        if(this.props.pageLink == '/about') {
+            return (
+                <li className={this.props.state}>
+                    <a href="/#moreInfoSection" className='NavBarLink' onClick={() => this.props.handleClick(this.props.name)}>{this.props.name} </a>
+                </li>
+            )
+        } else {
+            return (
+                <li className={this.props.state}>
+                    <Link to={this.props.pageLink} className='NavBarLink' onClick={() => this.props.handleClick(this.props.name)}>{this.props.name} </Link>
+                </li>
+            )
+        }
+
     }
 }
 
