@@ -93,7 +93,7 @@ class Navigation extends Component {
     request.then(response => {
       
       if (response.data.sub == "") {
-        alert("Login Failed due to an internal backend error.\nPlease try again later.")
+        alert("Login Failed due to an invalid backend response.\nPlease try again later.")
       } else {
         //Sets the cookies
         cookies.set('userName', response.data.name, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
