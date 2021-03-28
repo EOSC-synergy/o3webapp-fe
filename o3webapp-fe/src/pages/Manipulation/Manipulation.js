@@ -292,16 +292,8 @@ class ManipulationPage extends React.Component {
             console.error(error.message);
             errorArray.find(error => error.key === "model").error = error;          
         }
-
-        let oldPlot = this.state.plot;
-        oldPlot.models = oldmodels;
-        //update state
-        this.setState({
-            plot: oldPlot,
-            savedErrors: errorArray
-
-        })
-        this.saveStateAsCookie();
+        const jsonPlot = JSON.stringify(savePlot);
+        cookie.set('plotValues', jsonPlot, {path: '/', maxAge: expDate});
     }
 
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
@@ -367,35 +359,6 @@ class ManipulationPage extends React.Component {
         const request_url = BACKEND_SERVER_URL + configData.PLOT_PATH + "/" + plot.pType;
         Axios.post(request_url, plot, headersConfig)
             .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'));
-
-
-        //After bokeh module has loaded in, find buttons to add tooltips
-        setTimeout(function() {
-
-            //Title Buttons
-            let title_elements = document.getElementsByClassName('mmt_title')
-            for (let e of title_elements) {
-                if (e.childNodes[0].childNodes[0].classList.contains('bk-btn-success')) {
-                    e.setAttribute('data-md-tooltip-title', 'Deselect')
-                } else {
-                    e.setAttribute('data-md-tooltip-title', 'Select')
-                }
-            }
-
-            //Delete Buttons
-            let del_elements = document.getElementsByClassName('mmt_del')
-            for (let e of del_elements) {
-                e.setAttribute('data-md-tooltip-del', 'Delete')
-            }
-
-            //Model Buttons
-            let model_elements = document.getElementsByClassName('mmt')
-            for (let e of model_elements) {
-                e.setAttribute('data-md-tooltip-model', 'Remove')
-            }
-            
-        }.bind(this), 7000)
-
     }
 
     render() {
