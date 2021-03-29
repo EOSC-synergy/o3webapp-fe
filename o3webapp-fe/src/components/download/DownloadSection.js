@@ -18,7 +18,7 @@ function DownloadSection(props) {
     let request_url = server_url + configData.DOWNLOAD_PATH + "/";
 
     function downloadPDF() {
-        request_url += "pdf";
+        request_url = request_url + "pdf";
         console.log("Requesting the pdf for this plot:", props.plot);
         //header
         const headersConfig = {
