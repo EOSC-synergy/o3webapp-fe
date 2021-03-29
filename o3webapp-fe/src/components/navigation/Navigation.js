@@ -92,13 +92,17 @@ class Navigation extends Component {
     let request = this.callBackendForLogin(authCode)
     request.then(response => {
       
-      //Sets the cookies
-      cookies.set('userName', response.data.name, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
-      cookies.set('egiID', response.data.sub, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
-      console.log(response.data)
+      if (response.data.sub == "") {
+        alert("Login Failed due to an invalid backend response.\nPlease try again later.")
+      } else {
+        //Sets the cookies
+        cookies.set('userName', response.data.name, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
+        cookies.set('egiID', response.data.sub, { path: '/', maxAge: configData.LOGIN_COOKIE_MAX_AGE})
+        console.log(response.data)
 
-      console.log('User Name: ' + cookies.get('userName'))
-      console.log('EGI ID: ' + cookies.get('egiID'))
+        console.log('User Name: ' + cookies.get('userName'))
+        console.log('EGI ID: ' + cookies.get('egiID'))
+      }
 
       //Reads the cookie for last path before login
       let previousPath = cookies.get('o3webappPreviousPath')
@@ -108,7 +112,7 @@ class Navigation extends Component {
     })
     request.catch(error => {
       console.error(error)
-      alert("Login Failed due to an internal backend error.\nPlease try again")
+      alert("Login Failed due to an internal backend error.\nPlease try again later.")
 
       //Reads the cookie for last path before login
       let previousPath = cookies.get('o3webappPreviousPath')
@@ -195,25 +199,51 @@ class Navigation extends Component {
         </nav>
       );
     } else {
-      return (
-        <nav className="NavBar">
-          <ul className="NavBarContainer">
+      if (this.props.loginRedirect) {
+        return (
+          <nav className="NavBar">
+            <ul className="NavBarContainer">
 
-            {Tabs.map((element, index) => {
-              return (
-                <NavigationTab 
-                key={index}
-                name={element.name}
-                pageLink={element.path}
-                state={this.getActiveState(element.name)}
-                handleClick = {this.handleTabClick}
-                />
-              )
-            })}
-            <LoginButton/>
-          </ul>
-        </nav>
-      );
+              {Tabs.map((element, index) => {
+                return (
+                  <NavigationTab 
+                  key={index}
+                  name={element.name}
+                  pageLink={element.path}
+                  state={this.getActiveState(element.name)}
+                  handleClick = {this.handleTabClick}
+                  />
+                )
+              })}
+              <LoginButton/>
+            </ul>
+            <div className="login-loading-container mat-style">
+              <span>Logging in...</span>
+              <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+          </nav>
+        );
+      } else {
+        return (
+          <nav className="NavBar">
+            <ul className="NavBarContainer">
+
+              {Tabs.map((element, index) => {
+                return (
+                  <NavigationTab 
+                  key={index}
+                  name={element.name}
+                  pageLink={element.path}
+                  state={this.getActiveState(element.name)}
+                  handleClick = {this.handleTabClick}
+                  />
+                )
+              })}
+              <LoginButton/>
+            </ul>
+          </nav>
+        );
+      }
     }
   }
 }

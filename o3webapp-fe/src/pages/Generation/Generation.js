@@ -394,7 +394,7 @@ class GenerationPage extends React.Component {
                                     handleChange={this.handleLatitudeChange} />
                             }
                     </div>
-                    <input type='submit' value="Submit" className="submit-button mat-style-accent" />
+                    <input type='submit' value="Submit" id='submitButton' className="submit-button mat-style-accent" />
                 </form>
             </div>
             </div>
