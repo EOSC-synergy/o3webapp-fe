@@ -199,25 +199,51 @@ class Navigation extends Component {
         </nav>
       );
     } else {
-      return (
-        <nav className="NavBar">
-          <ul className="NavBarContainer">
+      if (this.props.loginRedirect) {
+        return (
+          <nav className="NavBar">
+            <ul className="NavBarContainer">
 
-            {Tabs.map((element, index) => {
-              return (
-                <NavigationTab 
-                key={index}
-                name={element.name}
-                pageLink={element.path}
-                state={this.getActiveState(element.name)}
-                handleClick = {this.handleTabClick}
-                />
-              )
-            })}
-            <LoginButton/>
-          </ul>
-        </nav>
-      );
+              {Tabs.map((element, index) => {
+                return (
+                  <NavigationTab 
+                  key={index}
+                  name={element.name}
+                  pageLink={element.path}
+                  state={this.getActiveState(element.name)}
+                  handleClick = {this.handleTabClick}
+                  />
+                )
+              })}
+              <LoginButton/>
+            </ul>
+            <div className="login-loading-container mat-style">
+              <span>Logging in...</span>
+              <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+          </nav>
+        );
+      } else {
+        return (
+          <nav className="NavBar">
+            <ul className="NavBarContainer">
+
+              {Tabs.map((element, index) => {
+                return (
+                  <NavigationTab 
+                  key={index}
+                  name={element.name}
+                  pageLink={element.path}
+                  state={this.getActiveState(element.name)}
+                  handleClick = {this.handleTabClick}
+                  />
+                )
+              })}
+              <LoginButton/>
+            </ul>
+          </nav>
+        );
+      }
     }
   }
 }
