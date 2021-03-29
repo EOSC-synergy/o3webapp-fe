@@ -18,6 +18,7 @@ function DownloadSection(props) {
     let request_url = server_url + configData.DOWNLOAD_PATH + "/";
 
     function downloadPDF() {
+        request_url = server_url + configData.DOWNLOAD_PATH + "/";
         request_url += "pdf";
         console.log("Requesting the pdf for this plot:", props.plot);
         //header
@@ -29,8 +30,16 @@ function DownloadSection(props) {
         var request_body = props.plot;
         request_body.output = "pdf";
 
+        const FileDownload = require("js-file-download");
+
         Axios.post(request_url, request_body, headersConfig)
-            .then(request => console.log(request));    //! only for testing
+            .then(({ data }) => {
+                FileDownload(data, "plot1.pdf");
+                console.log(data)
+            })    //! only for testing
+            .catch(error => {
+                console.error(error)
+            })
 
         //window.open(server_url + '/download/pdf')
     }
