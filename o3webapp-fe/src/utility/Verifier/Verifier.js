@@ -69,7 +69,7 @@ export function verifyMonths(months) {
 
 
     months.forEach(month => {
-        if (Number.isInteger(month)) {
+        if (!Number.isInteger(month)) {
             throw new VerificationError("Please enter a valid month");
         }
 
