@@ -29,15 +29,15 @@
     color: rgb(185, 185, 185)
 }
 
-[data-md-tooltip] {
+[data-md-tooltip][data-md-tooltip] {
     position: relative;
   }
   
-[data-md-tooltip]:before {
+[data-md-tooltip][data-md-tooltip]:before {
     content: attr(data-md-tooltip);
     position: absolute;
-    bottom: 55px;
-    left: 20%;
+    bottom: 60px;
+    left: 25%;
     padding: 8px;
     transform: translateX(0%) scale(0);
     transition: transform 0.1s ease-in-out;
@@ -45,13 +45,15 @@
     background: #616161e6;
     color: white;
     border-radius: 2px;
-    width: 100px;
-    font-size: 11px;
+    width: fit-content;
+    height: fit-content;
+    line-height: 10px;
+    font-size: 14px;
     font-family: Roboto,sans-serif;
     font-weight: 400;
 }
 
-[data-md-tooltip]:hover:before {
+[data-md-tooltip][data-md-tooltip]:hover:before {
 transform: translateX(0%) scale(1); 
 }
   
