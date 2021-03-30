@@ -371,34 +371,39 @@ class ManipulationPage extends React.Component {
         //After bokeh module has loaded in, find buttons to add tooltips
         setTimeout(function() {
 
-            //Header Buttons
-            let header_element = document.getElementsByClassName('mmt_header')[0]
-            let elements = header_element.childNodes[0].childNodes
-            for (let e of elements) {
-                e.setAttribute('data-md-tooltip-header', 'Generate')
-            }
-
-            //Title Buttons
-            let title_elements = document.getElementsByClassName('mmt_title')
-            for (let e of title_elements) {
-                if (e.childNodes[0].childNodes[0].classList.contains('bk-btn-success')) {
-                    e.setAttribute('data-md-tooltip-title', 'Deselect')
-                } else {
-                    e.setAttribute('data-md-tooltip-title', 'Select')
+            try {
+                //Header Buttons
+                let header_element = document.getElementsByClassName('mmt_header')[0]
+                let elements = header_element.childNodes[0].childNodes
+                for (let e of elements) {
+                    e.setAttribute('data-md-tooltip-header', 'Generate')
                 }
-            }
 
-            //Delete Buttons
-            let del_elements = document.getElementsByClassName('mmt_del')
-            for (let e of del_elements) {
-                e.setAttribute('data-md-tooltip-del', 'Delete')
-            }
+                //Title Buttons
+                let title_elements = document.getElementsByClassName('mmt_title')
+                for (let e of title_elements) {
+                    if (e.childNodes[0].childNodes[0].classList.contains('bk-btn-success')) {
+                        e.setAttribute('data-md-tooltip-title', 'Deselect')
+                    } else {
+                        e.setAttribute('data-md-tooltip-title', 'Select')
+                    }
+                }
 
-            //Model Buttons
-            let model_elements = document.getElementsByClassName('mmt')
-            for (let e of model_elements) {
-                e.setAttribute('data-md-tooltip-model', 'Remove')
+                //Delete Buttons
+                let del_elements = document.getElementsByClassName('mmt_del')
+                for (let e of del_elements) {
+                    e.setAttribute('data-md-tooltip-del', 'Delete')
+                }
+
+                //Model Buttons
+                let model_elements = document.getElementsByClassName('mmt')
+                for (let e of model_elements) {
+                    e.setAttribute('data-md-tooltip-model', 'Remove')
+                }
+            } catch (error) {
+                console.log("Bokeh failed to load")
             }
+            
             
         }.bind(this), 7000)
 
