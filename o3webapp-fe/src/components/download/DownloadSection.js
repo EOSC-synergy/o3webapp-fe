@@ -44,9 +44,9 @@ function DownloadSection(props) {
             .catch(error => {
                 console.error(error)
             })
-
-        //window.open(server_url + '/download/pdf')
     }
+
+
 
     function downloadPNG() {
         //Find bokeh save button
@@ -65,8 +65,32 @@ function DownloadSection(props) {
     }
 
     function downloadCSV() {
-        // TODO implement
-        //window.open(server_url + '/download/csv')
+        request_url = server_url + configData.DOWNLOAD_PATH + "/";
+        request_url += "csv";
+        console.log("Requesting the csv for this plot:", props.plot);
+
+        //header
+        const headersConfig = {
+            responseType: 'arraybuffer',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        var request_body = props.plot;
+        request_body.output = "csv";
+
+        Axios.post(request_url, request_body, headersConfig)
+            .then(request => {
+                const url = window.URL.createObjectURL(new Blob([request.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'frontend plot.csv');
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     return (
