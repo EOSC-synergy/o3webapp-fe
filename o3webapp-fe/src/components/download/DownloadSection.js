@@ -2,6 +2,8 @@ import React from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 
+import download from 'downloadjs'
+
 import configData from './../../config.json'
 import './DownloadSection.css'
 
@@ -30,12 +32,25 @@ function DownloadSection(props) {
         var request_body = props.plot;
         request_body.output = "pdf";
 
-        const FileDownload = require("js-file-download");
+        //const FileDownload = require("js-file-download");
 
         Axios.post(request_url, request_body, headersConfig)
-            .then(({ data }) => {
-                FileDownload(data, "plot1.pdf");
-                console.log(data)
+            .then(request => {
+                //FileDownload(request.data, "plot1.pdf");
+
+                const content = request.headers['content-type'];
+                download(request.data, "frontend plot.pdf", content)
+                //console.log(request.data.slice(request.data.indexOf('>>stream') + 8).split("endstream")[0])
+
+                /*
+                var a = document.createElement("a");
+                var blob = new Blob(request.blob, {type: "octet/stream"}),
+                url = window.URL.createObjectURL(blob);
+                a.href = url;
+                a.download = "plot1.pdf";
+                a.click();
+                window.URL.revokeObjectURL(url);
+                */
             })    //! only for testing
             .catch(error => {
                 console.error(error)
