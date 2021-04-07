@@ -2,8 +2,6 @@ import React from 'react';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 
-import download from 'downloadjs'
-
 import configData from './../../config.json'
 import './DownloadSection.css'
 
@@ -23,8 +21,10 @@ function DownloadSection(props) {
         request_url = server_url + configData.DOWNLOAD_PATH + "/";
         request_url += "pdf";
         console.log("Requesting the pdf for this plot:", props.plot);
+
         //header
         const headersConfig = {
+            responseType: 'arraybuffer',
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -32,26 +32,15 @@ function DownloadSection(props) {
         var request_body = props.plot;
         request_body.output = "pdf";
 
-        //const FileDownload = require("js-file-download");
-
         Axios.post(request_url, request_body, headersConfig)
             .then(request => {
-                //FileDownload(request.data, "plot1.pdf");
-
-                const content = request.headers['content-type'];
-                download(request.data, "frontend plot.pdf", content)
-                //console.log(request.data.slice(request.data.indexOf('>>stream') + 8).split("endstream")[0])
-
-                /*
-                var a = document.createElement("a");
-                var blob = new Blob(request.blob, {type: "octet/stream"}),
-                url = window.URL.createObjectURL(blob);
-                a.href = url;
-                a.download = "plot1.pdf";
-                a.click();
-                window.URL.revokeObjectURL(url);
-                */
-            })    //! only for testing
+                const url = window.URL.createObjectURL(new Blob([request.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'frontend plot.pdf');
+                document.body.appendChild(link);
+                link.click();
+            })
             .catch(error => {
                 console.error(error)
             })
