@@ -45,9 +45,9 @@ class Dropdown extends React.Component {
         return(
             <div className="dropdown-wrapper">
                 <button
-                type="button"
-                className="dropdown-header mat-style"
-                onClick={this.toggleList}
+                    type="button"
+                    className="dropdown-header mat-style"
+                    onClick={this.toggleList}
                 >
                     <div className="dropdown-header-title">
                         {headerTitle}
