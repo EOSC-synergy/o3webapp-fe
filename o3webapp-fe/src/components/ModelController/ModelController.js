@@ -19,6 +19,7 @@ class ModelController extends React.Component {
 
         this.handleModelButtonClick = this.handleModelButtonClick.bind(this);
         this.modelSearchOnChange = this.modelSearchOnChange.bind(this);
+        this.handleSelectAll = this.handleSelectAll.bind(this);
     }
 
     /**
@@ -44,6 +45,15 @@ class ModelController extends React.Component {
      */
      handleSelectAll() {
         //TODO
+        var currentKeywords = this.state.searchTerm;
+        const models = this.props.availableModels;
+        const filteredModels = models.filter( (model) => {
+            return model.toLowerCase().includes(currentKeywords.toLowerCase());
+        })
+        // filteredModels.forEach(model => {
+        //     this.handleModelButtonClick(model);
+        // })
+        this.props.selectAll(filteredModels)
     }
 
     /**
@@ -67,7 +77,7 @@ class ModelController extends React.Component {
                     <label htmlFor="search">Enter a keyword</label>
                     <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>
                 </div>
-                <div className="select-all-button mat-style" onClick={this.handleSelectAll()}>Select All</div>
+                <div className="select-all-button mat-style" onClick={this.handleSelectAll}>Select All</div>
 
                 <div className="model-button-section-wrapper">
                     {filteredModels.map((model, i) => (
@@ -86,6 +96,7 @@ class ModelController extends React.Component {
 
 ModelController.propTypes = {
     handleChange: PropTypes.func.isRequired,
+    selectAll: PropTypes.func.isRequired,
     availableModels: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     selectedModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }

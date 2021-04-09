@@ -74,6 +74,7 @@ class GenerationPage extends React.Component {
         this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
         this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
+        this.selectAll = this.selectAll.bind(this);
     }
 
     /**
@@ -302,6 +303,17 @@ class GenerationPage extends React.Component {
         })
         this.saveStateAsCookie();
     }
+
+    selectAll(models) {
+        var oldmodels = this.state.plot.models;
+        console.log(oldmodels);
+        models.forEach(model => {
+            if (!oldmodels.find(_model => _model.model === model)) {
+                console.log("found a model that is not selected", model);
+                this.handleModelChange(model);
+            }
+        });
+    }
     
 
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
@@ -362,6 +374,7 @@ class GenerationPage extends React.Component {
                     {availableSettings.some(setting => setting.name === "model") &&
                         <ModelController
                             handleChange={this.handleModelChange}
+                            selectAll={this.selectAll}
                             selectedModels={models.map(model => {return model.model})}
                             availableModels={availableModels}
                             plotType={pType} />
