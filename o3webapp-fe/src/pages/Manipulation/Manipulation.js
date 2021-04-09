@@ -292,8 +292,16 @@ class ManipulationPage extends React.Component {
             console.error(error.message);
             errorArray.find(error => error.key === "model").error = error;          
         }
-        const jsonPlot = JSON.stringify(savePlot);
-        cookie.set('plotValues', jsonPlot, {path: '/', maxAge: expDate});
+
+        let oldPlot = this.state.plot;
+        oldPlot.models = oldmodels;
+        //update state
+        this.setState({
+            plot: oldPlot,
+            savedErrors: errorArray
+
+        })
+        this.saveStateAsCookie();
     }
 
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case

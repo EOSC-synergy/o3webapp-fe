@@ -9,12 +9,12 @@ i {
     cursor: pointer;
 }
 
-[data-md-tooltip] {
+[data-md-tooltip-logout] {
     position: relative;
   }
   
-[data-md-tooltip]:before {
-    content: attr(data-md-tooltip);
+[data-md-tooltip-logout]:before {
+    content: attr(data-md-tooltip-logout);
     position: absolute;
     bottom: -37px;
     left: 25%;
@@ -31,6 +31,6 @@ i {
     font-weight: 400;
 }
 
-[data-md-tooltip]:hover:before {
+[data-md-tooltip-logout]:hover:before {
 transform: translateX(0%) scale(1); 
 }
