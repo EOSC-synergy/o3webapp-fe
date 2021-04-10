@@ -15,6 +15,7 @@ import configData from '../../config.json';
 import * as URL_Utility from '../../utility/Url_from_env';
 
 import './Generation.css';
+import VerificationError from '../../utility/Verifier/VerificationError';
 
 const BACKEND_SERVER_URL = URL_Utility.getApiUrlFromEnv();
 
@@ -75,6 +76,7 @@ class GenerationPage extends React.Component {
         this.handleModelChange = this.handleModelChange.bind(this);
         this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
         this.selectAll = this.selectAll.bind(this);
+        this.deselectAll = this.deselectAll.bind(this);
     }
 
     /**
@@ -314,6 +316,17 @@ class GenerationPage extends React.Component {
             }
         });
     }
+
+    deselectAll() {
+        var plot = this.state.plot;
+        plot.models = [];
+        const errorArray = this.state.savedErrors;
+        errorArray.find(error => error.key === "model").error = new VerificationError("Please select at least one model!");
+        this.setState({
+            plot,
+            savedErrors: errorArray 
+        })
+    }
     
 
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
@@ -375,6 +388,7 @@ class GenerationPage extends React.Component {
                         <ModelController
                             handleChange={this.handleModelChange}
                             selectAll={this.selectAll}
+                            deselectAll={this.deselectAll}
                             selectedModels={models.map(model => {return model.model})}
                             availableModels={availableModels}
                             plotType={pType} />

@@ -50,10 +50,11 @@ class ModelController extends React.Component {
         const filteredModels = models.filter( (model) => {
             return model.toLowerCase().includes(currentKeywords.toLowerCase());
         })
-        // filteredModels.forEach(model => {
-        //     this.handleModelButtonClick(model);
-        // })
-        this.props.selectAll(filteredModels)
+        this.props.selectAll(filteredModels);
+    }
+
+    handleDeselectAll() {
+        this.props.deselectAll();
     }
 
     /**
