@@ -53,19 +53,3 @@ test('check if months validation works', () => {
     expect(() => { Verifier.verifyMonths(["hello", 1, 12])}).toThrow(new VerificationError("Please enter a valid month"));
     expect(() => { Verifier.verifyMonths([1,2, "hello"])}).toThrow(new VerificationError("Please enter a valid month"));
 })
-
-// const mockUpModel = [
-//     {
-//         model: "CCMI_TEST",
-//         style: {
-//             color: "#000000",
-//             highlighted: "0",
-//         }
-//     }
-// ]
-
-// test('check if models validation works', () => {
-//     expect(Verifier.verifyModels(mockUpModel)).toBe(true);
-
-//     expect(Verifier.verifyModels()).toThrow(new VerificationError("Please select at least one model!"));
-// })

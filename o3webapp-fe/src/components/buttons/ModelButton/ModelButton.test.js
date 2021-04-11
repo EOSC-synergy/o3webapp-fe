@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import ModelButton from './ModelButton';
 
 describe('ModelButton Component', () => {
-    it('It should render without errors', () => {
+    it('should render without errors', () => {
         const component = shallow(<ModelButton title={"model-title"} handleModelClick={() => {}} selected={true} />);
         const wrapper = component.find('.model-button-title-wrapper');
         expect(wrapper.length).toBe(1);
