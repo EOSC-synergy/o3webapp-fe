@@ -2,32 +2,24 @@ import React from 'react';
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
+import * as configData from '../../../config.json';
 import './PlotButtonController.css'
 
 class PlotButtonController extends React.Component {
     constructor(props) {
         super(props);
+        let active = this.props.active;
+        let plotTypes = configData.PLOT_DEFAULT_AVAILABLE
+        plotTypes.forEach(plotType => {
+            if (plotType.type === active) {
+                plotType.selected = true;
+            } else {
+                plotType.selected = false;
+            }
+        })
+        console.log(plotTypes, active);
         this.state = {
-            plotTypes: [
-                {
-                    id: 0,
-                    type: "tco3_zm",
-                    selected: true,
-                    key: "plotTypes",
-                },
-                {
-                    id: 1,
-                    type: "tco3_return",
-                    selected: false,
-                    key: "plotTypes",
-                },
-                {
-                    id: 2,
-                    type: "vmro3_zm",
-                    selected: false,
-                    key: "plotTypes",
-                }
-            ]
+            plotTypes
         };
     
         this.resetThenSet = this.resetThenSet.bind(this);
@@ -67,6 +59,7 @@ class PlotButtonController extends React.Component {
 
 PlotButtonController.propTypes = {
     handleChange: PropTypes.func.isRequired,
+    active: PropTypes.string.isRequired
 }
 
 export default PlotButtonController;
@@ -119,42 +112,3 @@ Radio.propTypes = {
     resetThenSet: PropTypes.func.isRequired,
     list: PropTypes.arrayOf(PropTypes.object).isRequired
 }
-
-
-/*  
-code for a basic radio button, no styling of any kind
-
-
-<label>
-                    <input 
-                        name='plotType'
-                        type='radio'
-                        value="plot1"
-                        checked={this.state.plotType === "plot1" }
-                        onChange={this.handleInputChange}
-                    />
-                    {plotTypes["one"]}
-                </label>
-                <br />
-                <label>
-                    <input 
-                        name='plotType'
-                        type='radio'
-                        value="plot2"
-                        checked={this.state.plotType === "plot2" }
-                        onChange={this.handleInputChange}
-                    />
-                    {plotTypes["two"]}
-                </label>
-                <br />
-                <label>
-                    <input 
-                        name='plotType'
-                        type='radio'
-                        value="plot3"
-                        checked={this.state.plotType === "plot3" }
-                        onChange={this.handleInputChange}
-                    />
-                    {plotTypes["three"]}
-                </label>
-                */
