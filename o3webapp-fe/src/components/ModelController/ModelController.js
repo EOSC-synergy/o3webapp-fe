@@ -53,7 +53,7 @@ class ModelController extends React.Component {
         this.props.selectAll(filteredModels);
     }
 
-    handleDeselectAll() {
+    handleDeselectAll = () => {
         this.props.deselectAll();
     }
 
@@ -78,8 +78,11 @@ class ModelController extends React.Component {
                     <label htmlFor="search">Enter a keyword</label>
                     <input type="text" value={inputValue} onChange={this.modelSearchOnChange}></input>
                 </div>
-                <div className="select-all-button mat-style" onClick={this.handleSelectAll}>Select All</div>
-
+                <div className="select-container">
+                    <div className="select-all-button mat-style" onClick={this.handleSelectAll}>Select All</div>
+                    <div className="deselect-all-button mat-style" onClick={this.handleDeselectAll}>Deselect All</div>
+                </div>
+               
                 <div className="model-button-section-wrapper">
                     {filteredModels.map((model, i) => (
                         <ModelButton 
@@ -98,6 +101,7 @@ class ModelController extends React.Component {
 ModelController.propTypes = {
     handleChange: PropTypes.func.isRequired,
     selectAll: PropTypes.func.isRequired,
+    deselectAll: PropTypes.func.isRequired,
     availableModels: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     selectedModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }
