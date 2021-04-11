@@ -20,7 +20,8 @@ class ModelButton extends React.Component {
         this.state = {
             opened: false,
             className: "model-button mat-style",
-            info_display: "No info available"
+            info_display: "Loading...",
+            hasBeenOpenedBefore: false
         }
 
         this.handleModelClick = this.handleModelClick.bind(this)
@@ -38,10 +39,17 @@ class ModelButton extends React.Component {
     /**
      * updates the state by passing it to the callback of the parent element
      */
-    handleMoreInfoClick() {
+    async handleMoreInfoClick() {
         this.toggleOpenedState();
-        //console.log(this.fetchModelInfoFromApi()?.model);
-        const info_object = this.fetchModelInfoFromApi();
+
+        //quit early if info has already been fetched
+        var { hasBeenOpenedBefore } = this.state
+        if (hasBeenOpenedBefore) {
+            return;
+        }
+
+        //get the info from the api
+        const info_object = await this.fetchModelInfoFromApi();
         var info_display = "";
         if (info_object === null || info_object === undefined || info_object.info === undefined ) {
             console.log("Couldn't fetch info from the api");
@@ -50,7 +58,8 @@ class ModelButton extends React.Component {
             info_display = info_object.info;
         }
         this.setState({
-            info_display
+            info_display,
+            hasBeenOpenedBefore: true
         })
     }
 
@@ -59,7 +68,7 @@ class ModelButton extends React.Component {
      * Fetches the model info from the backend api
      * @returns the model info object from the api
      */
-    fetchModelInfoFromApi() {
+    async fetchModelInfoFromApi() {
         const modelName = this.props.title;
 
         const BACKEND_SERVER_URL = URL_Utility.getApiUrlFromEnv();
@@ -78,13 +87,19 @@ class ModelButton extends React.Component {
         // const requestBody = {
         //     pType: currplotType
         // };
-        var output = {};
-
-        Axios.post(request_url, requestOptions)
+        try {
+            let response = await Axios.get(request_url, requestOptions)
+            let output = response.data;
+            return output;
+        } catch (error) {
+            console.error(error.message);
+            return null;
+        }
+        
             //.then(response => console.log(response.data))    
-            .then(response => output = response.data)
-            .catch(error => console.error(error));
-        return output;
+            // .then(response => output = response.data)
+            // .catch(error => console.error(error));
+        
     }
 
 
