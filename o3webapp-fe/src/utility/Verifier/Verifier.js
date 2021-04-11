@@ -9,10 +9,10 @@ import VerificationError from "./VerificationError.js"
 export function verifyLatitude(lat_min, lat_max) {
 
     //catch undefined or null numbers
-    if (lat_min === null || lat_min === undefined) {
+    if (lat_min === null || lat_min === undefined || typeof lat_min === "string" ) {
         throw new VerificationError('Please enter a valid lower border (format:"lower, upper")');
     }
-    if (lat_max === null || lat_max === undefined) {
+    if (lat_max === null || lat_max === undefined || typeof lat_max === "string" ) {
         throw new VerificationError('Please enter a valid upper border (format:"lower, upper")');
     }
 
@@ -25,6 +25,7 @@ export function verifyLatitude(lat_min, lat_max) {
     if (lat_min >= lat_max) {
         throw new VerificationError("Upper Latitude border must be bigger than lower border!");
     }
+    return true;
 }
 
 /**
@@ -67,7 +68,6 @@ export function verifyMonths(months) {
         throw new VerificationError("Please enter at least one valid month!");
     }
 
-
     months.forEach(month => {
         if (!Number.isInteger(month)) {
             throw new VerificationError("Please enter a valid month");
@@ -77,6 +77,7 @@ export function verifyMonths(months) {
             throw new VerificationError("Only 1 to 12 are valid as values for a month");
         }
     });
+    return true;
 }
 
 

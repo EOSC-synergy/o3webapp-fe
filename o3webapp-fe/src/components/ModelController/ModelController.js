@@ -102,7 +102,7 @@ ModelController.propTypes = {
     handleChange: PropTypes.func.isRequired,
     selectAll: PropTypes.func.isRequired,
     deselectAll: PropTypes.func.isRequired,
-    availableModels: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    availableModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     selectedModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }
 
