@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 45px;
+    height: 55px;
     width: 100%;
     padding: 5px;
 }
@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 45px;
+    height: 55px;
     width: 100%;
     padding: 5px;
 }
@@ -78,6 +78,11 @@
 
 .model-button-moreInfo {
     padding-left: 8px;
+    height: 50px;
+}
+
+.model-button-moreInfo p {
+    margin-bottom: 10px;
 }
 
 [data-md-tooltip-model-button] {

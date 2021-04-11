@@ -1,7 +1,7 @@
 import configData from '../config.json'
 
 /**
- * Grabs the url from the backend server from the env if set, 
+ * Grabs the url of the backend server from the env if set, 
  *  else defaults to the config
  * @returns {String} - the url of the backend server
  */
