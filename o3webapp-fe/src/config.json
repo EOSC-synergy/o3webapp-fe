@@ -31,10 +31,102 @@
         ],
         "BEGIN": 1970,
         "END": 2100,
-        "MONTH": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "MONTH": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+        ],
         "LAT_MIN": -90,
         "LAT_MAX": 0
     },
+    "LATITUDE_DEFAULT_DROPDOWN": [
+        {
+            "id": 0,
+            "title": "SH polar",
+            "value": [
+                -90,
+                -60
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 1,
+            "title": "SH mid-latitudes",
+            "value": [
+                -60,
+                -35
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 2,
+            "title": "tropics",
+            "value": [
+                -20,
+                20
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 3,
+            "title": "NH mid-latitudes",
+            "value": [
+                35,
+                60
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 4,
+            "title": "NH polar",
+            "value": [
+                60,
+                90
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 5,
+            "title": "near global",
+            "value": [
+                -60,
+                60
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 6,
+            "title": "global",
+            "value": [
+                -90,
+                90
+            ],
+            "selected": false,
+            "key": "latitude"
+        },
+        {
+            "id": 7,
+            "title": "Custom",
+            "value": [],
+            "selected": false,
+            "key": "latitude"
+        }
+    ],
     "LOGIN_COOKIE_MAX_AGE": 86400,
     "OIDC_SETTINGS": {
         "EGI_ENDPOINT": "https://aai-dev.egi.eu/oidc/authorize",
