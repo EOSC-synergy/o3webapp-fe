@@ -13,6 +13,8 @@ import * as Verifier from '../../utility/Verifier/Verifier';
 import * as URL_Utility from '../../utility/Url_from_env';
 import configData from '../../config.json';
 
+import VerificationError from '../../utility/Verifier/VerificationError'
+
 import './Manipulation.css';
 import './BokehStyling.css';
 
@@ -83,6 +85,8 @@ class ManipulationPage extends React.Component {
         this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
         this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
+        this.deselectAll = this.deselectAll.bind(this);
+        this.selectAll = this.selectAll.bind(this);        
     }
 
     componentDidMount() {
@@ -304,6 +308,28 @@ class ManipulationPage extends React.Component {
         this.saveStateAsCookie();
     }
 
+    selectAll(models) {
+        var oldmodels = this.state.plot.models;
+        console.log(oldmodels);
+        models.forEach(model => {
+            if (!oldmodels.find(_model => _model.model === model)) {
+                console.log("found a model that is not selected", model);
+                this.handleModelChange(model);
+            }
+        });
+    }
+
+    deselectAll() {
+        var plot = this.state.plot;
+        plot.models = [];
+        const errorArray = this.state.savedErrors;
+        errorArray.find(error => error.key === "model").error = new VerificationError("Please select at least one model!");
+        this.setState({
+            plot,
+            savedErrors: errorArray 
+        })
+    }
+
     //TODO we can check here if the user is logged in and submit to a different endpoint if that is the case
     /**
      * handles the submit of the request
@@ -367,46 +393,6 @@ class ManipulationPage extends React.Component {
         const request_url = BACKEND_SERVER_URL + configData.PLOT_PATH + "/" + plot.pType;
         Axios.post(request_url, plot, headersConfig)
             .then(response => window.Bokeh.embed.embed_item(response.data, 'test-plot'));
-
-        //After bokeh module has loaded in, find buttons to add tooltips
-        setTimeout(function() {
-
-            try {
-                //Header Buttons
-                let header_element = document.getElementsByClassName('mmt_header')[0]
-                let elements = header_element.childNodes[0].childNodes
-                for (let e of elements) {
-                    e.setAttribute('data-md-tooltip-header', 'Generate')
-                }
-
-                //Title Buttons
-                let title_elements = document.getElementsByClassName('mmt_title')
-                for (let e of title_elements) {
-                    if (e.childNodes[0].childNodes[0].classList.contains('bk-btn-success')) {
-                        e.setAttribute('data-md-tooltip-title', 'Deselect')
-                    } else {
-                        e.setAttribute('data-md-tooltip-title', 'Select')
-                    }
-                }
-
-                //Delete Buttons
-                let del_elements = document.getElementsByClassName('mmt_del')
-                for (let e of del_elements) {
-                    e.setAttribute('data-md-tooltip-del', 'Delete')
-                }
-
-                //Model Buttons
-                let model_elements = document.getElementsByClassName('mmt')
-                for (let e of model_elements) {
-                    e.setAttribute('data-md-tooltip-model', 'Remove')
-                }
-            } catch (error) {
-                console.log("Bokeh failed to load")
-            }
-            
-            
-        }.bind(this), 7000)
-
     }
 
     render() {
@@ -436,6 +422,8 @@ class ManipulationPage extends React.Component {
                     {availableSettings.some(setting => setting.name === "model") &&
                         <ModelController
                             handleChange={this.handleModelChange}
+                            selectAll={this.selectAll}
+                            deselectAll={this.deselectAll}
                             selectedModels={models.map(model => {return model.model})}
                             availableModels={availableModels}
                             plotType={pType} />
