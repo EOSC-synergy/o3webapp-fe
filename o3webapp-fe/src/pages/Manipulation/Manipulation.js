@@ -13,6 +13,8 @@ import * as Verifier from '../../utility/Verifier/Verifier';
 import * as URL_Utility from '../../utility/Url_from_env';
 import configData from '../../config.json';
 
+import VerificationError from '../../utility/Verifier/VerificationError'
+
 import './Manipulation.css';
 import './BokehStyling.css';
 
@@ -83,6 +85,8 @@ class ManipulationPage extends React.Component {
         this.handlePlotTypeChange = this.handlePlotTypeChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
         this.saveStateAsCookie = this.saveStateAsCookie.bind(this);
+        this.deselectAll = this.deselectAll.bind(this);
+        this.selectAll = this.selectAll.bind(this);        
     }
 
     componentDidMount() {
