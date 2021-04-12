@@ -1,25 +1,8 @@
-/*
-TODO implement button
-
-have 2 states, 
-one for the chosen months, eg [1,2,3] for the first three months of the year
-    this state gets managed by the form, cause its the single source of truth for this
-
-second one for the currently choosen card/setting.
-    available settings are: Spring, Summer, Autumn, Winter and Custom
-    when the user selects custom an input field appears where he can enter custom numbers.
-        this can be controller by checking with an if clause if the current state is custom and only then show this.
-
-    when the user selects anything else the months corresponding to these settings get selected (eg [1,2,3] for Spring)
-
-
-
-*/
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown from '../DropdownMenu/Dropdown';
+import * as configData from '../../../config.json';
 
 import './MonthsButton.css';
 
@@ -27,43 +10,7 @@ class MonthsButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            season: [
-                {
-                    id: 0,
-                    title: "Spring",
-                    value: [3, 4, 5],
-                    selected: false,
-                    key: "season",
-                },
-                {
-                    id: 1,
-                    title: "Summer",
-                    value: [6, 7, 8],
-                    selected: false,
-                    key: "season",
-                },
-                {
-                    id: 2,
-                    title: "Autumn",
-                    value: [9, 10, 11],
-                    selected: false,
-                    key: "season",
-                },
-                {
-                    id: 3,
-                    title: "Winter",
-                    value: [1, 2, 12],
-                    selected: false,
-                    key: "season",
-                },
-                {
-                    id: 4,
-                    title: "Custom",
-                    value: [],
-                    selected: false,
-                    key: "season",
-                },
-            ],
+            season: configData.SEASON_DEFAULT_DROPDOWN,
         };
         this.resetThenSet = this.resetThenSet.bind(this);
         this.handleCustomMonths = this.handleCustomMonths.bind(this);
@@ -129,7 +76,6 @@ class MonthsButton extends React.Component {
 
     render() {
         const customSelected = this.state.season[4].selected;
-        const customMonths = "1, 2, 3"
 
         return (
             <div className="month-button-wrapper section-wrapper">
@@ -143,7 +89,7 @@ class MonthsButton extends React.Component {
                         <fieldset>
                             <legend>Enter Months!</legend>
                             <input
-                                defaultValue={customMonths}
+                                defaultValue="1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"
                                 onChange={this.handleCustomMonths} />
                         </fieldset>
                     </div>

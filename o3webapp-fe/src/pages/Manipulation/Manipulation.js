@@ -90,9 +90,10 @@ class ManipulationPage extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchPlotFromApi();
 
         this.fetchModelsFromApi();
+        
+        this.fetchPlotFromApi();
     }
 
     //TODO rework so it just returns the cookie in all cases and you can just specify the name
