@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Dropdown from '../DropdownMenu/Dropdown'
+import Dropdown from '../DropdownMenu/Dropdown';
+import * as configData from '../../../config.json';
 
 import './LatitudeButton.css'
 
@@ -16,64 +17,7 @@ class LatitudeButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            latitude: [
-                {
-                    id: 0,
-                    title: "SH polar",
-                    value: [-90, -60],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 1,
-                    title: "SH mid-latitudes",
-                    value: [-60, -35],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 2,
-                    title: "tropics",
-                    value: [-20, 20],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 3,
-                    title: "NH mid-latitudes",
-                    value: [35, 60],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 4,
-                    title: "NH polar",
-                    value: [60, 90],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 5,
-                    title: "near global",
-                    value: [-60, 60],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 6,
-                    title: "global",
-                    value: [-90, 90],
-                    selected: false,
-                    key: "latitude",
-                },
-                {
-                    id: 7,
-                    title: "Custom",
-                    value: [],
-                    selected: false,
-                    key: "latitude",
-                },
-            ],
+            latitude: configData.LATITUDE_DEFAULT_DROPDOWN,
         };
         this.resetThenSet = this.resetThenSet.bind(this);
         this.handleCustomMonths = this.handleCustomMonths.bind(this);
@@ -116,10 +60,6 @@ class LatitudeButton extends React.Component {
             return parseInt(item, 10);
         });
 
-        //TODO check if entered values are in allowed range (-90 to 90)
-
-        //TODO check if exactly two numbers have been entered
-
         //check if array only includes numbers
         if (inputNumber.includes(NaN)) {
             //TODO implement some error notification
@@ -127,18 +67,15 @@ class LatitudeButton extends React.Component {
             console.log("Some NaN found")
 
         } else {
-            //! Magic String
             const key = "latitude"
             const temp = [...this.state[key]]
 
-            //! Magic Number
             temp[7].value = inputNumber;
             
             this.setState({
                 [key]: temp
             })
-
-            //! Magic Number
+            
             this.resetThenSet(7, key)
         }
     }
