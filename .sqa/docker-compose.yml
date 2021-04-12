@@ -16,5 +16,5 @@ services:
         dockerfile: "./o3webapp-fe/docker/Dockerfile"
         args:
           branch: ${GIT_BRANCH}
-          date: 1617965350
+          date: 1617965351
      image: "o3as/o3webapp-fe:${O3AS_WEBAPP_FE_DOCKER_TAG}"
