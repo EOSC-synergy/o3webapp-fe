@@ -20,6 +20,7 @@ class ModelController extends React.Component {
         this.handleModelButtonClick = this.handleModelButtonClick.bind(this);
         this.modelSearchOnChange = this.modelSearchOnChange.bind(this);
         this.handleSelectAll = this.handleSelectAll.bind(this);
+        this.handleDeselectAll = this.handleDeselectAll.bind(this);
     }
 
     /**
@@ -53,7 +54,7 @@ class ModelController extends React.Component {
         this.props.selectAll(filteredModels);
     }
 
-    handleDeselectAll = () => {
+    handleDeselectAll() {
         this.props.deselectAll();
     }
 
@@ -100,9 +101,9 @@ class ModelController extends React.Component {
 
 ModelController.propTypes = {
     handleChange: PropTypes.func.isRequired,
+    availableModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     selectAll: PropTypes.func.isRequired,
     deselectAll: PropTypes.func.isRequired,
-    availableModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     selectedModels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 }
 
