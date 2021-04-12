@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Dropdown.css';
 
+/**
+ * Simple Dropdown Menu that allows the user to select a value from the list given as a prop
+ */
 class Dropdown extends React.Component {
     constructor(props) {
         super(props);
