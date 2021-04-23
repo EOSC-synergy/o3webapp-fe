@@ -50,12 +50,13 @@ class ModelButton extends React.Component {
 
         //get the info from the api
         const info_object = await this.fetchModelInfoFromApi();
+        const currpType = 'tco3_zm'; //temporary, vkoz
         var info_display = "";
-        if (info_object === null || info_object === undefined || info_object.info === undefined ) {
-            console.log("Couldn't fetch info from the api");
+        if (info_object === null || info_object === undefined || info_object[currpType].data.attrs.title === undefined ) {
+            console.log("Couldn't fetch info from the api", info_object);
             info_display = "No info available";
         } else {
-            info_display = info_object.info;
+            info_display = info_object[currpType].data.attrs.title + ", " + info_object[currpType].data.attrs.references; //info_object.info;
         }
         this.setState({
             info_display,
