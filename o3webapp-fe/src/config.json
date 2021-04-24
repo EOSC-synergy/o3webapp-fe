@@ -9,14 +9,14 @@
     "PLOT_TYPE": "tco3_zm",
     "MODELS": [
       {
-        "model": "CCMI-1_ACCESS-refC2",
+        "model": "CCMI-1_ACCESS_ACCESS-CCM-refC2",
         "style": {
           "color": "#000000",
           "highlighted": "0"
         }
       },
       {
-        "model": "CCMI-1_CCCma-CMAM-refC2",
+        "model": "CCMI-1_CCCma_CMAM-refC2",
         "style": {
           "color": "#ff0000",
           "highlighted": "0"
